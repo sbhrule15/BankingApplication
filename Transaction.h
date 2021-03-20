@@ -14,6 +14,7 @@ enum TransactionType {
 
 class Transaction {
 protected:
+    static int currId;
     int id;
     std::time_t timestamp;
     std::string name;
@@ -22,7 +23,7 @@ protected:
 
 public:
     // constructor
-    Transaction(int id, std::string name, float amtChange, TransactionType type);
+    Transaction(std::string name, float amtChange, TransactionType type);
 
     // functions
     void printTransaction();

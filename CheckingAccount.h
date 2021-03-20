@@ -12,11 +12,16 @@ class CheckingAccount : public Account {
 protected:
     float minBalance{};
     float maxDeposit{};
+    float maxWithdraw;
 
 public:
     // constructor
-    CheckingAccount(int acctNumber, const std::string &name, float balance, AccountType accountType, float minBalance,
-                    float maxDeposit);
+    CheckingAccount(const std::string &name, float balance);
+
+    // required functions
+    bool deposit(float amt);
+
+    bool withdraw(float amt);
 
     // functions
 
@@ -27,6 +32,7 @@ public:
     float getMaxDeposit() const;
 
     void setMaxDeposit(float maxDeposit);
+
 };
 
 
