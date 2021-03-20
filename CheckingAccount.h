@@ -14,8 +14,19 @@ protected:
     float maxDeposit{};
 
 public:
+    // constructor
     CheckingAccount(int acctNumber, const std::string &name, float balance, AccountType accountType, float minBalance,
                     float maxDeposit);
+
+    // functions
+
+    float getMinBalance() const;
+
+    void setMinBalance(float minBalance);
+
+    float getMaxDeposit() const;
+
+    void setMaxDeposit(float maxDeposit);
 };
 
 

@@ -18,10 +18,13 @@ protected:
     std::time_t timestamp;
     std::string name;
     float amtChange;
+    TransactionType transactionType;
 
 public:
     // constructor
-    Transaction(int id, std::string name, float amtChange);
+    Transaction(int id, std::string name, float amtChange, TransactionType type);
+
+
 };
 
 

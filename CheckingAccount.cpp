@@ -5,5 +5,21 @@
 #include "CheckingAccount.h"
 
 CheckingAccount::CheckingAccount(int acctNumber, const std::string &name, float balance, AccountType accountType,
-                                 float minBalance, float maxDeposit) : Account(acctNumber, name, balance, Checking),
+                                 float minBalance, float maxDeposit) : Account(name, balance, Checking),
                                                                        minBalance(500.0), maxDeposit(10000.0) {}
+
+float CheckingAccount::getMinBalance() const {
+    return minBalance;
+}
+
+void CheckingAccount::setMinBalance(float minBal) {
+    CheckingAccount::minBalance = minBal;
+}
+
+float CheckingAccount::getMaxDeposit() const {
+    return maxDeposit;
+}
+
+void CheckingAccount::setMaxDeposit(float maxDep) {
+    CheckingAccount::maxDeposit = maxDep;
+}

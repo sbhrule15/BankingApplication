@@ -7,5 +7,5 @@
 #include <utility>
 
 // constructor
-Transaction::Transaction(int id, std::string name, float amtChange)
-    : id(id), timestamp(std::time(nullptr)), name(std::move(name)), amtChange(amtChange) {}
+Transaction::Transaction(int id, std::string name, float amtChange, TransactionType type)
+    : id(id), timestamp(std::time(nullptr)), name(std::move(name)), amtChange(amtChange), transactionType(type) {}
