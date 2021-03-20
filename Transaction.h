@@ -24,6 +24,11 @@ public:
     // constructor
     Transaction(int id, std::string name, float amtChange, TransactionType type);
 
+    // functions
+    void printTransaction();
+
+    std::string getTransactionTypeStr();
+
 
 };
 
