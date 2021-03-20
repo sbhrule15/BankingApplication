@@ -10,8 +10,8 @@
 
 class CheckingAccount : public Account {
 protected:
-    float minBalance{};
-    float maxDeposit{};
+    float minBalance;
+    float maxDeposit;
     float maxWithdraw;
 
 public:

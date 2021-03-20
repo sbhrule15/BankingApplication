@@ -6,6 +6,9 @@
 
 #include <utility>
 
+// statics
+int Account::currId;
+
 // Constructor
 Account::Account(std::string name, float balance, AccountType accountType)
 : acctNumber(currId++), name(std::move(name)), balance(balance), accountType(accountType) {}

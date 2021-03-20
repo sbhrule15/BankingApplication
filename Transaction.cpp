@@ -7,6 +7,9 @@
 #include <utility>
 #include <iostream>
 
+// referenced statics
+int Transaction::currId;
+
 // constructor
 Transaction::Transaction(std::string name, float amtChange, TransactionType type)
     : id(currId++), timestamp(std::time(nullptr)), name(std::move(name)), amtChange(amtChange), transactionType(type) {}
