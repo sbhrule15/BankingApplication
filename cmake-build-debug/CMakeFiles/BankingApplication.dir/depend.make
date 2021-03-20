@@ -13,5 +13,7 @@ CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.o: ../Transaction.h
 CMakeFiles/BankingApplication.dir/Transaction.cpp.o: ../Transaction.cpp
 CMakeFiles/BankingApplication.dir/Transaction.cpp.o: ../Transaction.h
 
+CMakeFiles/BankingApplication.dir/main.cpp.o: ../Account.h
+CMakeFiles/BankingApplication.dir/main.cpp.o: ../Transaction.h
 CMakeFiles/BankingApplication.dir/main.cpp.o: ../main.cpp
 
