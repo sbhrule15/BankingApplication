@@ -170,6 +170,60 @@ Account.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Account.cpp.s
 .PHONY : Account.cpp.s
 
+CheckingAccount.o: CheckingAccount.cpp.o
+
+.PHONY : CheckingAccount.o
+
+# target to build an object file
+CheckingAccount.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.o
+.PHONY : CheckingAccount.cpp.o
+
+CheckingAccount.i: CheckingAccount.cpp.i
+
+.PHONY : CheckingAccount.i
+
+# target to preprocess a source file
+CheckingAccount.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.i
+.PHONY : CheckingAccount.cpp.i
+
+CheckingAccount.s: CheckingAccount.cpp.s
+
+.PHONY : CheckingAccount.s
+
+# target to generate assembly for a file
+CheckingAccount.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.s
+.PHONY : CheckingAccount.cpp.s
+
+Transaction.o: Transaction.cpp.o
+
+.PHONY : Transaction.o
+
+# target to build an object file
+Transaction.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Transaction.cpp.o
+.PHONY : Transaction.cpp.o
+
+Transaction.i: Transaction.cpp.i
+
+.PHONY : Transaction.i
+
+# target to preprocess a source file
+Transaction.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Transaction.cpp.i
+.PHONY : Transaction.cpp.i
+
+Transaction.s: Transaction.cpp.s
+
+.PHONY : Transaction.s
+
+# target to generate assembly for a file
+Transaction.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Transaction.cpp.s
+.PHONY : Transaction.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -209,6 +263,12 @@ help:
 	@echo "... Account.o"
 	@echo "... Account.i"
 	@echo "... Account.s"
+	@echo "... CheckingAccount.o"
+	@echo "... CheckingAccount.i"
+	@echo "... CheckingAccount.s"
+	@echo "... Transaction.o"
+	@echo "... Transaction.i"
+	@echo "... Transaction.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

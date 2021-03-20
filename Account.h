@@ -6,6 +6,8 @@
 #define BANKINGAPPLICATION_ACCOUNT_H
 
 #include <string>
+#include <vector>
+#include "Transaction.h"
 
 enum AccountType {
     Checking, Savings
@@ -13,14 +15,16 @@ enum AccountType {
 
 class Account {
 protected:
+    static int currId;
     int acctNumber;
     std::string name;
     float balance;
     AccountType accountType;
+    std::vector<Transaction> transactions;
 
 public:
     // constructor
-    Account(int acctNumber, std::string name, float balance, AccountType accountType);
+    Account(std::string name, float balance, AccountType accountType);
 
     // pure virtual functions
     virtual bool deposit(float amt) = 0;

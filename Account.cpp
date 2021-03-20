@@ -7,8 +7,8 @@
 #include <utility>
 
 // Constructor
-Account::Account(int acctNumber, std::string name, float balance, AccountType accountType) : acctNumber(
-        acctNumber), name(std::move(name)), balance(balance), accountType(accountType) {}
+Account::Account(std::string name, float balance, AccountType accountType)
+: acctNumber(currId++), name(std::move(name)), balance(balance), accountType(accountType) {}
 
 // Functions
 int Account::getAcctNumber() const {
