@@ -26,6 +26,10 @@ public:
     // constructor
     Account(std::string name, float balance, AccountType accountType);
 
+    // virtual functions
+    virtual bool deposit(float amt);
+    virtual bool withdraw(float amt);
+
     // functions
     int getAcctNumber() const;
 

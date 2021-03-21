@@ -69,7 +69,8 @@ static void viewDepositMenu(std::vector<Account> &accounts)
         {
             std::cout << "\nPlease enter the amount to deposit:" << std::endl;
             std::cin >> depAmt;
-            accounts.at(accountSel - 1).deposit();
+            accounts.at(accountSel - 1).deposit(depAmt);
+
             break;
         } else {
             std::cout << "That was an invalid option. Please try again.\n" << std::endl;

@@ -19,9 +19,9 @@ public:
     explicit CheckingAccount(const std::string &name);
 
     // required functions
-    bool deposit(float amt);
+    virtual bool deposit(float amt);
 
-    bool withdraw(float amt);
+    virtual bool withdraw(float amt);
 
 
     // functions

@@ -7,12 +7,9 @@
 #include <utility>
 #include <iostream>
 
-// referenced statics
-int Transaction::currId;
-
 // constructor
-Transaction::Transaction(std::string name, float amtChange, TransactionType type)
-    : id(currId++), timestamp(std::time(nullptr)), name(std::move(name)), amtChange(amtChange), transactionType(type) {}
+Transaction::Transaction(float amtChange, TransactionType type)
+    : id(currId++), timestamp(std::time(nullptr)), amtChange(amtChange), transactionType(type) {}
 
 // functions
 std::string Transaction::getTransactionTypeStr() {
@@ -31,7 +28,6 @@ std::string Transaction::getTransactionTypeStr() {
 void Transaction::printTransaction() {
     std::cout   << "Transaction ID: " << id << "\n"
             << "Timestamp: " << timestamp << "\n"
-            << "Name on Account: " << name << "\n"
             << "Transaction Type: " << getTransactionTypeStr() << "\n"
             << "Amount Change: " << amtChange << "\n"
             << std::endl;

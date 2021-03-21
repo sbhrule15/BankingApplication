@@ -48,3 +48,16 @@ std::string Account::getAccountTypeString() const {
     }
 }
 
+bool Account::deposit(float amt) {
+    balance = balance + amt;
+    return true;
+}
+
+bool Account::withdraw(float amt) {
+    if (amt > balance)
+        return false;
+    else {
+        balance = balance - amt;
+        return true;
+    }
+}

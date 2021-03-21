@@ -24,19 +24,21 @@ void CheckingAccount::setMaxDeposit(float maxDep) {
 }
 
 bool CheckingAccount::deposit(float amt) {
-    if (amt > maxWithdraw){
+    if (amt > maxDeposit){
         return false;
     } else {
         balance = balance + amt;
+        transactions.emplace_back(amt,Deposit);
         return true;
     }
 }
 
 bool CheckingAccount::withdraw(float amt) {
-    if (amt > balance || amt > maxDeposit){
+    if (amt > balance || amt > maxWithdraw){
         return false;
     } else {
         balance = balance - amt;
+        transactions.emplace_back(-amt,Withdrawal);
         return true;
     }
 }

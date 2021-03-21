@@ -17,13 +17,12 @@ protected:
     static int currId;
     int id;
     std::time_t timestamp;
-    std::string name;
     float amtChange;
     TransactionType transactionType;
 
 public:
     // constructor
-    Transaction(std::string name, float amtChange, TransactionType type);
+    Transaction(float amtChange, TransactionType type);
 
     // functions
     void printTransaction();
