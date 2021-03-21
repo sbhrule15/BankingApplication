@@ -65,23 +65,20 @@ static void viewDepositMenu(std::vector<Account> &accounts)
     {
         std::cout << "Please select an account to make a deposit:" << std::endl;
         int accountSel = printMenu(getAccountNames(accounts));
-        if (accountSel < accounts.size() && accountSel > 0)
+        if (accountSel <= accounts.size() && accountSel > 0)
         {
             std::cout << "\nPlease enter the amount to deposit:" << std::endl;
             std::cin >> depAmt;
-            accounts.at(accountSel - 1).deposit(depAmt);
-
+            if (accounts.at(accountSel - 1).deposit(depAmt))
+                std::cout << "\nDeposit successfully processed.\n" << std::endl;
+            else
+                std::cout << "\nDeposit was unsuccessful.\n" << std::endl;
             break;
         } else {
             std::cout << "That was an invalid option. Please try again.\n" << std::endl;
-            // get rid of failure state and delete bad characters
             clearCinGuard();
         }
     }
-
-
-
-
 }
 
 static void viewWithdrawMenu(std::vector<Account> &accounts)

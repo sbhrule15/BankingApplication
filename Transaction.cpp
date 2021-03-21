@@ -7,6 +7,8 @@
 #include <utility>
 #include <iostream>
 
+int Transaction::currId;
+
 // constructor
 Transaction::Transaction(float amtChange, TransactionType type)
     : id(currId++), timestamp(std::time(nullptr)), amtChange(amtChange), transactionType(type) {}
