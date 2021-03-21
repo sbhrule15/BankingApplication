@@ -55,6 +55,7 @@ static int printMenu(std::vector<std::string> options)
 // menu functions
 static void viewDepositMenu(std::vector<Account> &accounts)
 {
+    float depAmt;
     printMenuHeader("MAKE A DEPOSIT");
     if (noAccounts(accounts)){
         std::cout << "\nThere are no accounts to deposit into. Please open an account to deposit money.\n" << std::endl;
@@ -66,7 +67,9 @@ static void viewDepositMenu(std::vector<Account> &accounts)
         int accountSel = printMenu(getAccountNames(accounts));
         if (accountSel < accounts.size() && accountSel > 0)
         {
-
+            std::cout << "\nPlease enter the amount to deposit:" << std::endl;
+            std::cin >> depAmt;
+            accounts.at(accountSel - 1).deposit();
             break;
         } else {
             std::cout << "That was an invalid option. Please try again.\n" << std::endl;
