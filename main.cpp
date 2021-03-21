@@ -3,6 +3,7 @@
 #include <string>
 #include "Account.h"
 #include "CheckingAccount.h"
+#include "SavingsAccount.h"
 
 enum MainMenu {
     MainDeposit= 1, MainWithdraw, MainTransactions, MainOpenAccount, MainCloseAccount, MainQuit
@@ -91,10 +92,10 @@ static void openAccountMenu(std::vector<Account> &accounts) {
         }
     }
 
-    // get account name
+    // clear buffer and get account name
     std::cout << "Please name the account:" << std::endl;
+    std::cin.ignore();
     getline(std::cin, newAcctName);
-    clearCinGuard();
 
     //add to accounts vector
     if (newAcctType == Checking){
