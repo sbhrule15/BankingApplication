@@ -50,6 +50,7 @@ std::string Account::getAccountTypeString() const {
 
 bool Account::deposit(float amt) {
     balance = balance + amt;
+    transactions.emplace_back(amt,Deposit);
     return true;
 }
 
@@ -58,6 +59,7 @@ bool Account::withdraw(float amt) {
         return false;
     else {
         balance = balance - amt;
+        transactions.emplace_back(-amt,Withdrawal);
         return true;
     }
 }

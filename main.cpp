@@ -57,7 +57,8 @@ static void viewDepositMenu(std::vector<Account> &accounts)
 {
     float depAmt;
     printMenuHeader("MAKE A DEPOSIT");
-    if (noAccounts(accounts)){
+    if (noAccounts(accounts))
+    {
         std::cout << "\nThere are no accounts to deposit into. Please open an account to deposit money.\n" << std::endl;
         return;
     }
@@ -83,10 +84,30 @@ static void viewDepositMenu(std::vector<Account> &accounts)
 
 static void viewWithdrawMenu(std::vector<Account> &accounts)
 {
+    float witAmt;
     printMenuHeader("MAKE A WITHDRAWAL");
-    if (noAccounts(accounts)){
+    if (noAccounts(accounts))
+    {
         std::cout << "\nThere are no accounts to withdraw from. Please open an account to withdraw money.\n" << std::endl;
         return;
+    }
+    while (true)
+    {
+        std::cout << "Please select an account to make a deposit:" << std::endl;
+        int accountSel = printMenu(getAccountNames(accounts));
+        if (accountSel <= accounts.size() && accountSel > 0)
+        {
+            std::cout << "\nPlease enter the amount to withdraw:" << std::endl;
+            std::cin >> witAmt;
+            if (accounts.at(accountSel - 1).withdraw(witAmt))
+                std::cout << "\nWithdrawal successfully processed.\n" << std::endl;
+            else
+                std::cout << "\nWithdrawal was unsuccessful.\n" << std::endl;
+            break;
+        } else {
+            std::cout << "That was an invalid option. Please try again.\n" << std::endl;
+            clearCinGuard();
+        }
     }
 }
 
