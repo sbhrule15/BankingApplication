@@ -92,6 +92,12 @@
 		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/CheckingAccount.h">
 			<Option target="BankingApplication"/>
 		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/SavingsAccount.cpp">
+			<Option target="BankingApplication"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/SavingsAccount.h">
+			<Option target="BankingApplication"/>
+		</Unit>
 		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/Transaction.cpp">
 			<Option target="BankingApplication"/>
 		</Unit>

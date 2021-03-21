@@ -2,10 +2,17 @@
 #include <iomanip>
 #include <string>
 #include "Account.h"
+#include "CheckingAccount.h"
 
 enum MainMenu {
     MainDeposit= 1, MainWithdraw, MainTransactions, MainOpenAccount, MainCloseAccount, MainQuit
 };
+
+//utility functions
+static void clearCinGuard(){
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
 
 // print functions
 static void printMenuHeader(std::string text){
@@ -27,18 +34,26 @@ static int printMenu(std::vector<std::string> *options) {
 static bool noAccounts(std::vector<Account> &accounts){
     if (accounts.empty()){
         return true;
-    } else {return false}
+    } else {return false;}
 }
 
 // menu functions
 static void viewDepositMenu(std::vector<Account> &accounts) {
     printMenuHeader("MAKE A DEPOSIT");
-    std::cout << "This part of the application is still in production. Please try again later.\n\n" << std::endl;
+    if (noAccounts(accounts)){
+        std::cout << "\nThere are no accounts to deposit into. Please open an account to deposit money.\n" << std::endl;
+    } else {
+
+    }
 }
 
 static void viewWithdrawMenu(std::vector<Account> &accounts) {
     printMenuHeader("MAKE A WITHDRAWAL");
-    std::cout << "This part of the application is still in production. Please try again later.\n\n" << std::endl;
+    if (noAccounts(accounts)){
+        std::cout << "\nThere are no accounts to deposit into. Please open an account to deposit money.\n" << std::endl;
+    } else {
+
+    }
 }
 
 static void viewTransactionsMenu(std::vector<Account> &accounts) {
@@ -48,12 +63,60 @@ static void viewTransactionsMenu(std::vector<Account> &accounts) {
 
 static void openAccountMenu(std::vector<Account> &accounts) {
     printMenuHeader("OPEN AN ACCOUNT");
-    std::cout << "This part of the application is still in production. Please try again later.\n\n" << std::endl;
+
+    // new account info
+    AccountType newAcctType;
+    std::string newAcctName;
+
+    // menu option validator
+    bool awaitingValid{true};
+
+    // get account type
+    while(awaitingValid){
+        std::cout << "What type of account would you like to open up?\n" << std::endl;
+        int userSel = printMenu(new std::vector<std::string>{"Checking", "Savings"});
+        switch (userSel) {
+            case 1:
+                newAcctType = Checking;
+                awaitingValid = false;
+                break;
+            case 2:
+                newAcctType = Savings;
+                awaitingValid = false;
+                break;
+            default:
+                std::cout << "That was not a valid option. Please choose one of the given options by number.\n" << std::endl;
+                clearCinGuard();
+                break;
+        }
+    }
+
+    // get account name
+    std::cout << "Please name the account:" << std::endl;
+    getline(std::cin, newAcctName);
+    clearCinGuard();
+
+    //add to accounts vector
+    if (newAcctType == Checking){
+        CheckingAccount newCheck(newAcctName);
+        accounts.push_back(newCheck);
+        std::cout << "\nNew Checking account " + newAcctName + " created.\n\n" << std::endl;
+    } else if (newAcctType == Savings){
+        SavingsAccount newSavings(newAcctName);
+        accounts.push_back(newSavings);
+        std::cout << "\nNew Savings account " + newAcctName + " created.\n\n" << std::endl;
+    } else {
+        std::cout << "There was an error creating your account. Please try again later." << std::endl;
+    }
 }
 
 static void closeAccountMenu(std::vector<Account> &accounts) {
     printMenuHeader("CLOSE AN ACCOUNT");
-    std::cout << "This part of the application is still in production. Please try again later.\n\n" << std::endl;
+    if (noAccounts(accounts)){
+        std::cout << "\nThere are no accounts to deposit into. Please open an account to deposit money.\n" << std::endl;
+    } else {
+
+    }
 }
 
 int main(int argc, char* argv[]) {
@@ -90,11 +153,8 @@ int main(int argc, char* argv[]) {
                 goto exit_program;
             default:
                 std::cout << "That was an invalid option. Please try again.\n" << std::endl;
-                // get rid of failure state
-                std::cin.clear();
-
-                // discard 'bad' character(s)
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                // get rid of failure state and delete bad characters
+                clearCinGuard();
         }
     }
     exit_program: ;

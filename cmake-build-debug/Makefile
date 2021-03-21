@@ -197,6 +197,33 @@ CheckingAccount.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.s
 .PHONY : CheckingAccount.cpp.s
 
+SavingsAccount.o: SavingsAccount.cpp.o
+
+.PHONY : SavingsAccount.o
+
+# target to build an object file
+SavingsAccount.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.o
+.PHONY : SavingsAccount.cpp.o
+
+SavingsAccount.i: SavingsAccount.cpp.i
+
+.PHONY : SavingsAccount.i
+
+# target to preprocess a source file
+SavingsAccount.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.i
+.PHONY : SavingsAccount.cpp.i
+
+SavingsAccount.s: SavingsAccount.cpp.s
+
+.PHONY : SavingsAccount.s
+
+# target to generate assembly for a file
+SavingsAccount.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.s
+.PHONY : SavingsAccount.cpp.s
+
 Transaction.o: Transaction.cpp.o
 
 .PHONY : Transaction.o
@@ -266,6 +293,9 @@ help:
 	@echo "... CheckingAccount.o"
 	@echo "... CheckingAccount.i"
 	@echo "... CheckingAccount.s"
+	@echo "... SavingsAccount.o"
+	@echo "... SavingsAccount.i"
+	@echo "... SavingsAccount.s"
 	@echo "... Transaction.o"
 	@echo "... Transaction.i"
 	@echo "... Transaction.s"

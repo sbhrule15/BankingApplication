@@ -4,8 +4,8 @@
 
 #include "CheckingAccount.h"
 
-CheckingAccount::CheckingAccount(const std::string &name, float balance)
-: Account(name, balance, Checking), minBalance(500.0), maxDeposit(10000.0), maxWithdraw(5000.0) {}
+CheckingAccount::CheckingAccount(const std::string &name)
+: Account(name, 0.0, Checking), minBalance(500.0), maxDeposit(10000.0), maxWithdraw(5000.0) {}
 
 float CheckingAccount::getMinBalance() const {
     return minBalance;

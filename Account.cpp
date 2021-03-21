@@ -47,3 +47,4 @@ std::string Account::getAccountTypeString() const {
         return "N/A";
     }
 }
+
