@@ -5,7 +5,7 @@
 #include "CheckingAccount.h"
 #include "SavingsAccount.h"
 
-#include <stdio.h>
+#include <cstdio>
 #include "sqlite3.h"
 
 enum MainMenu {
@@ -33,54 +33,55 @@ static int createDB(const char* dbdir){
     return 0;
 }
 
-static int createTables(const char* dbdir){
-
+static int createTables(const char* dbdir) {
+    //create pointer reference
     sqlite3 *DB;
 
+    // create vector of sql statements to initiate
     std::vector<std::string> sqlCreateTables;
 
     // create accounts string
-    sqlCreateTables.at(0) =
+    sqlCreateTables.push_back(
             "CREATE TABLE IF NOT EXISTS ACCOUNTS("
             "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
             "NAME     TEXT NOT NULL,"
             "BALANCE  REAL NOT NULL,"
-            "ACCOUNTTYPE INTEGER NOT NULL);";
+            "ACCOUNTTYPE INTEGER NOT NULL);"
+            );
+
 
     // create transactions string
-    sqlCreateTables.at(1) =
+    sqlCreateTables.push_back(
             "CREATE TABLE IF NOT EXISTS TRANSACTIONS("
             "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
-            "NAME     TEXT NOT NULL,"
-            "BALANCE  REAL NOT NULL,"
-            "ACCOUNTTYPE INTEGER NOT NULL);";
+            "ACCOUNTID INTEGER NOT NULL,"
+            "TIMESTAMP  DATETIME NOT NULL,"
+            "AMTCHANGE  REAL,"
+            "TRANSACTIONTYPE INTEGER NOT NULL"
+            ");"
+            );
 
-    for (const std::string& sql : sqlCreateTables){
+    for (const std::string &sql : sqlCreateTables) {
         try {
             int exit = 0;
             exit = sqlite3_open(dbdir, &DB);
 
-            char* messageError;
+            char *messageError;
             exit = sqlite3_exec(DB, sql.c_str(), nullptr, nullptr, &messageError);
 
             if (exit != SQLITE_OK) {
                 std::cerr << "Error Create Table" << std::endl;
                 sqlite3_free(messageError);
-            }
-            else
-                std::cout <<  "Table created Successfully" << std::endl;
+            } else
+                std::cout << "Table created Successfully" << std::endl;
             sqlite3_close(DB);
-            return (0);
 
-
-        } catch (const std::exception &e){
+        } catch (const std::exception &e) {
             std::cerr << e.what();
         }
     }
-
-
+    return (0);
 }
-
 
 //utility functions
 static void clearCinGuard() {

@@ -16,6 +16,7 @@ class Transaction {
 protected:
     static int currId;
     int id;
+    int accountId;
     std::time_t timestamp;
     float amtChange;
     TransactionType transactionType;
