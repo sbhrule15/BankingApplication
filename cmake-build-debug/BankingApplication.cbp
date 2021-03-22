@@ -107,6 +107,12 @@
 		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/main.cpp">
 			<Option target="BankingApplication"/>
 		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/sqlite3.c">
+			<Option target="BankingApplication"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/sqlite3.h">
+			<Option target="BankingApplication"/>
+		</Unit>
 		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

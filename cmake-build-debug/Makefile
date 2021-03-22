@@ -278,6 +278,33 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+sqlite3.o: sqlite3.c.o
+
+.PHONY : sqlite3.o
+
+# target to build an object file
+sqlite3.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/sqlite3.c.o
+.PHONY : sqlite3.c.o
+
+sqlite3.i: sqlite3.c.i
+
+.PHONY : sqlite3.i
+
+# target to preprocess a source file
+sqlite3.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/sqlite3.c.i
+.PHONY : sqlite3.c.i
+
+sqlite3.s: sqlite3.c.s
+
+.PHONY : sqlite3.s
+
+# target to generate assembly for a file
+sqlite3.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/sqlite3.c.s
+.PHONY : sqlite3.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -302,6 +329,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... sqlite3.o"
+	@echo "... sqlite3.i"
+	@echo "... sqlite3.s"
 .PHONY : help
 
 

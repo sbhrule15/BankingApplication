@@ -5,26 +5,96 @@
 #include "CheckingAccount.h"
 #include "SavingsAccount.h"
 
+#include <stdio.h>
+#include "sqlite3.h"
+
 enum MainMenu {
-    MainDeposit= 1, MainWithdraw, MainTransactions, MainOpenAccount, MainCloseAccount, MainQuit
+    MainDeposit = 1, MainWithdraw, MainTransactions, MainOpenAccount, MainCloseAccount, MainQuit
 };
 
+// sqlite functions
+static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
+    int i;
+    for(i = 0; i<argc; i++) {
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    }
+    printf("\n");
+    return 0;
+}
+
+static int createDB(const char* dbdir){
+    sqlite3 *DB;
+    int exit = 0;
+
+    exit = sqlite3_open(dbdir, &DB);
+
+    sqlite3_close(DB);
+
+    return 0;
+}
+
+static int createTables(const char* dbdir){
+
+    sqlite3 *DB;
+
+    std::vector<std::string> sqlCreateTables;
+
+    // create accounts string
+    sqlCreateTables.at(0) =
+            "CREATE TABLE IF NOT EXISTS ACCOUNTS("
+            "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "NAME     TEXT NOT NULL,"
+            "BALANCE  REAL NOT NULL,"
+            "ACCOUNTTYPE INTEGER NOT NULL);";
+
+    // create transactions string
+    sqlCreateTables.at(1) =
+            "CREATE TABLE IF NOT EXISTS TRANSACTIONS("
+            "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "NAME     TEXT NOT NULL,"
+            "BALANCE  REAL NOT NULL,"
+            "ACCOUNTTYPE INTEGER NOT NULL);";
+
+    for (const std::string& sql : sqlCreateTables){
+        try {
+            int exit = 0;
+            exit = sqlite3_open(dbdir, &DB);
+
+            char* messageError;
+            exit = sqlite3_exec(DB, sql.c_str(), nullptr, nullptr, &messageError);
+
+            if (exit != SQLITE_OK) {
+                std::cerr << "Error Create Table" << std::endl;
+                sqlite3_free(messageError);
+            }
+            else
+                std::cout <<  "Table created Successfully" << std::endl;
+            sqlite3_close(DB);
+            return (0);
+
+
+        } catch (const std::exception &e){
+            std::cerr << e.what();
+        }
+    }
+
+
+}
+
+
 //utility functions
-static void clearCinGuard()
-{
+static void clearCinGuard() {
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-static bool noAccounts(std::vector<Account> &accounts)
-{
-    if (accounts.empty()){
+static bool noAccounts(std::vector<Account> &accounts) {
+    if (accounts.empty()) {
         return true;
-    } else {return false;}
+    } else { return false; }
 }
 
-static std::vector<std::string> getAccountNames(std::vector<Account> &accounts)
-{
+static std::vector<std::string> getAccountNames(std::vector<Account> &accounts) {
     std::vector<std::string> actstrings;
     actstrings.reserve(accounts.size());
 
@@ -35,16 +105,14 @@ static std::vector<std::string> getAccountNames(std::vector<Account> &accounts)
 }
 
 // print functions
-static void printMenuHeader(std::string text)
-{
-    std::cout <<'|'<< std::setfill('=') << std::setw(80) << text << "====================|\n" << std::endl;
+static void printMenuHeader(std::string text) {
+    std::cout << '|' << std::setfill('=') << std::setw(80) << text << "====================|\n" << std::endl;
 }
 
-static int printMenu(std::vector<std::string> options)
-{
+static int printMenu(std::vector<std::string> options) {
     int userSel;
-    for (int i = 0; i < options.size(); i++){
-        std::cout << "\t" << i+1 << "." << options.at(i) << std::endl;
+    for (int i = 0; i < options.size(); i++) {
+        std::cout << "\t" << i + 1 << "." << options.at(i) << std::endl;
     }
     std::cout << "\nPlease make a selection:" << std::endl;
     std::cin >> userSel;
@@ -53,21 +121,17 @@ static int printMenu(std::vector<std::string> options)
 }
 
 // menu functions
-static void viewDepositMenu(std::vector<Account> &accounts)
-{
+static void viewDepositMenu(std::vector<Account> &accounts) {
     float depAmt;
     printMenuHeader("MAKE A DEPOSIT");
-    if (noAccounts(accounts))
-    {
+    if (noAccounts(accounts)) {
         std::cout << "\nThere are no accounts to deposit into. Please open an account to deposit money.\n" << std::endl;
         return;
     }
-    while (true)
-    {
+    while (true) {
         std::cout << "Please select an account to make a deposit:" << std::endl;
         int accountSel = printMenu(getAccountNames(accounts));
-        if (accountSel <= accounts.size() && accountSel > 0)
-        {
+        if (accountSel <= accounts.size() && accountSel > 0) {
             std::cout << "\nPlease enter the amount to deposit:" << std::endl;
             std::cin >> depAmt;
             if (accounts.at(accountSel - 1).deposit(depAmt))
@@ -82,21 +146,18 @@ static void viewDepositMenu(std::vector<Account> &accounts)
     }
 }
 
-static void viewWithdrawMenu(std::vector<Account> &accounts)
-{
+static void viewWithdrawMenu(std::vector<Account> &accounts) {
     float witAmt;
     printMenuHeader("MAKE A WITHDRAWAL");
-    if (noAccounts(accounts))
-    {
-        std::cout << "\nThere are no accounts to withdraw from. Please open an account to withdraw money.\n" << std::endl;
+    if (noAccounts(accounts)) {
+        std::cout << "\nThere are no accounts to withdraw from. Please open an account to withdraw money.\n"
+                  << std::endl;
         return;
     }
-    while (true)
-    {
+    while (true) {
         std::cout << "Please select an account to make a deposit:" << std::endl;
         int accountSel = printMenu(getAccountNames(accounts));
-        if (accountSel <= accounts.size() && accountSel > 0)
-        {
+        if (accountSel <= accounts.size() && accountSel > 0) {
             std::cout << "\nPlease enter the amount to withdraw:" << std::endl;
             std::cin >> witAmt;
             if (accounts.at(accountSel - 1).withdraw(witAmt))
@@ -111,14 +172,12 @@ static void viewWithdrawMenu(std::vector<Account> &accounts)
     }
 }
 
-static void viewTransactionsMenu(std::vector<Account> &accounts)
-{
+static void viewTransactionsMenu(std::vector<Account> &accounts) {
     printMenuHeader("VIEW TRANSACTIONS");
     std::cout << "This part of the application is still in production. Please try again later.\n\n" << std::endl;
 }
 
-static void openAccountMenu(std::vector<Account> &accounts)
-{
+static void openAccountMenu(std::vector<Account> &accounts) {
     printMenuHeader("OPEN AN ACCOUNT");
 
     // new account info
@@ -129,12 +188,10 @@ static void openAccountMenu(std::vector<Account> &accounts)
     bool awaitingValid{true};
 
     // get account type
-    while(awaitingValid)
-    {
+    while (awaitingValid) {
         std::cout << "What type of account would you like to open up?\n" << std::endl;
         int userSel = printMenu(std::vector<std::string>{"Checking", "Savings"});
-        switch (userSel)
-        {
+        switch (userSel) {
             case 1:
                 newAcctType = Checking;
                 awaitingValid = false;
@@ -144,7 +201,8 @@ static void openAccountMenu(std::vector<Account> &accounts)
                 awaitingValid = false;
                 break;
             default:
-                std::cout << "That was not a valid option. Please choose one of the given options by number.\n" << std::endl;
+                std::cout << "That was not a valid option. Please choose one of the given options by number.\n"
+                          << std::endl;
                 clearCinGuard();
                 break;
         }
@@ -156,38 +214,35 @@ static void openAccountMenu(std::vector<Account> &accounts)
     getline(std::cin, newAcctName);
 
     //add to accounts vector
-    if (newAcctType == Checking)
-    {
+    if (newAcctType == Checking) {
         CheckingAccount newCheck(newAcctName);
         accounts.push_back(newCheck);
         std::cout << "\nNew Checking account " + newAcctName + " created.\n\n" << std::endl;
-    }
-    else if (newAcctType == Savings)
-    {
+    } else if (newAcctType == Savings) {
         SavingsAccount newSavings(newAcctName);
         accounts.push_back(newSavings);
         std::cout << "\nNew Savings account " + newAcctName + " created.\n\n" << std::endl;
-    }
-    else {
+    } else {
         std::cout << "There was an error creating your account. Please try again later." << std::endl;
     }
 }
 
-static void closeAccountMenu(std::vector<Account> &accounts)
-{
+static void closeAccountMenu(std::vector<Account> &accounts) {
     printMenuHeader("CLOSE AN ACCOUNT");
-    if (noAccounts(accounts))
-    {
+    if (noAccounts(accounts)) {
         std::cout << "\nThere are no accounts to deposit into. Please open an account to deposit money.\n" << std::endl;
         return;
     }
-
-
-
 }
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
+    // database connection
+    const char *db = "accountapp.db";
+    // create database, if doesn't exist
+    createDB(db);
+    // create tables, if don't exist
+    createTables(db);
+
     // load vector of accounts - blank for now
     std::vector<Account> accounts;
 
@@ -196,14 +251,13 @@ int main(int argc, char* argv[])
     std::cout << "Welcome to my C++ banking program.\n" << std::endl;
 
     // start program loop
-    while (true)
-    {
+    while (true) {
         printMenuHeader("MAIN MENU");
-        int usrSel = printMenu(std::vector<std::string>{"Deposit","Withdraw","View Transactions","Open Account","Close Account",
-                                                 "Quit Application"});
+        int usrSel = printMenu(
+                std::vector<std::string>{"Deposit", "Withdraw", "View Transactions", "Open Account", "Close Account",
+                                         "Quit Application"});
 
-        switch (usrSel)
-        {
+        switch (usrSel) {
             case MainDeposit:
                 viewDepositMenu(accounts);
                 break;
@@ -227,6 +281,6 @@ int main(int argc, char* argv[])
                 clearCinGuard();
         }
     }
-    exit_program: ;
+    exit_program:;
     std::cout << "\nThank you for using the program. Goodbye.\n" << std::endl;
 }
