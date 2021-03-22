@@ -40,26 +40,39 @@ static int createTables(const char* dbdir) {
     // create vector of sql statements to initiate
     std::vector<std::string> sqlCreateTables;
 
-    // create accounts string
-    sqlCreateTables.push_back(
-            "CREATE TABLE IF NOT EXISTS ACCOUNTS("
-            "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
-            "NAME     TEXT NOT NULL,"
-            "BALANCE  REAL NOT NULL,"
-            "ACCOUNTTYPE INTEGER NOT NULL);"
-            );
+    // create accounts tables
+    sqlCreateTables.emplace_back(
+        "CREATE TABLE IF NOT EXISTS ACCOUNT("
+            "ID         INTEGER PRIMARY KEY AUTOINCREMENT, "
+            "NAME       TEXT NOT NULL,"
+            "BALANCE    REAL NOT NULL"
+        ");"
+    );
+    sqlCreateTables.emplace_back(
+        "CREATE TABLE IF NOT EXISTS CHECKINGACCOUNT("
+            "ACCOUNTID      INTEGER NOT NULL REFERENCES ACCOUNT(ID), "
+            "MINBALANCE     REAL NOT NULL,"
+            "MAXDEPOSIT     REAL NOT NULL,"
+            "MAXWITHDRAW    INTEGER NOT NULL"
+        ");"
+    );
+    sqlCreateTables.emplace_back(
+        "CREATE TABLE IF NOT EXISTS SAVINGSACCOUNT("
+            "ACCOUNTID      INTEGER NOT NULL REFERENCES ACCOUNT(ID), "
+            "INTERESTRATE   REAL NOT NULL"
+        ");"
+    );
 
-
-    // create transactions string
-    sqlCreateTables.push_back(
-            "CREATE TABLE IF NOT EXISTS TRANSACTIONS("
+    // create transactions table
+    sqlCreateTables.emplace_back(
+        "CREATE TABLE IF NOT EXISTS TRANSACTIONLOG("
             "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
-            "ACCOUNTID INTEGER NOT NULL,"
+            "ACCOUNTID  INTEGER NOT NULL REFERENCES ACCOUNT(ID),"
             "TIMESTAMP  DATETIME NOT NULL,"
-            "AMTCHANGE  REAL,"
+            "AMTCHANGE  REAL NOT NULL,"
             "TRANSACTIONTYPE INTEGER NOT NULL"
-            ");"
-            );
+        ");"
+    );
 
     for (const std::string &sql : sqlCreateTables) {
         try {
