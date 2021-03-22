@@ -197,6 +197,33 @@ CheckingAccount.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.s
 .PHONY : CheckingAccount.cpp.s
 
+Db.o: Db.cpp.o
+
+.PHONY : Db.o
+
+# target to build an object file
+Db.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Db.cpp.o
+.PHONY : Db.cpp.o
+
+Db.i: Db.cpp.i
+
+.PHONY : Db.i
+
+# target to preprocess a source file
+Db.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Db.cpp.i
+.PHONY : Db.cpp.i
+
+Db.s: Db.cpp.s
+
+.PHONY : Db.s
+
+# target to generate assembly for a file
+Db.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Db.cpp.s
+.PHONY : Db.cpp.s
+
 SavingsAccount.o: SavingsAccount.cpp.o
 
 .PHONY : SavingsAccount.o
@@ -320,6 +347,9 @@ help:
 	@echo "... CheckingAccount.o"
 	@echo "... CheckingAccount.i"
 	@echo "... CheckingAccount.s"
+	@echo "... Db.o"
+	@echo "... Db.i"
+	@echo "... Db.s"
 	@echo "... SavingsAccount.o"
 	@echo "... SavingsAccount.i"
 	@echo "... SavingsAccount.s"
