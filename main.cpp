@@ -51,7 +51,7 @@ static int printMenu(std::vector<std::string> options) {
 }
 
 // menu functions
-static void viewDepositMenu(std::vector<Account> &accounts) {
+static void viewDepositMenu(std::vector<Account> &accounts, const char *db) {
     float depAmt;
     printMenuHeader("MAKE A DEPOSIT");
     if (noAccounts(accounts)) {
@@ -76,7 +76,7 @@ static void viewDepositMenu(std::vector<Account> &accounts) {
     }
 }
 
-static void viewWithdrawMenu(std::vector<Account> &accounts) {
+static void viewWithdrawMenu(std::vector<Account> &accounts, const char *db) {
     float witAmt;
     printMenuHeader("MAKE A WITHDRAWAL");
     if (noAccounts(accounts)) {
@@ -102,12 +102,12 @@ static void viewWithdrawMenu(std::vector<Account> &accounts) {
     }
 }
 
-static void viewTransactionsMenu(std::vector<Account> &accounts) {
+static void viewTransactionsMenu(std::vector<Account> &accounts, const char *db) {
     printMenuHeader("VIEW TRANSACTIONS");
     std::cout << "This part of the application is still in production. Please try again later.\n\n" << std::endl;
 }
 
-static void openAccountMenu(std::vector<Account> &accounts) {
+static void openAccountMenu(std::vector<Account> &accounts, const char *db) {
     printMenuHeader("OPEN AN ACCOUNT");
 
     // new account info
@@ -145,19 +145,29 @@ static void openAccountMenu(std::vector<Account> &accounts) {
 
     //add to accounts vector
     if (newAcctType == Checking) {
+        // create new checking account
         CheckingAccount newCheck(newAcctName);
-        accounts.push_back(newCheck);
-        std::cout << "\nNew Checking account " + newAcctName + " created.\n\n" << std::endl;
+        // add to database
+        if (db::addCheckingAccount(db, newCheck)){
+            // push to array and confirmation message
+            accounts.push_back(newCheck);
+            std::cout << "\nNew Checking account " + newAcctName + " created.\n\n" << std::endl;
+        }
     } else if (newAcctType == Savings) {
+        // create new savings account
         SavingsAccount newSavings(newAcctName);
-        accounts.push_back(newSavings);
-        std::cout << "\nNew Savings account " + newAcctName + " created.\n\n" << std::endl;
+        // add to database
+        if (db::addSavingsAccount(db, newSavings)){
+            // push to array and confirmation message
+            accounts.push_back(newSavings);
+            std::cout << "\nNew Savings account " + newAcctName + " created.\n\n" << std::endl;
+        }
     } else {
         std::cout << "There was an error creating your account. Please try again later." << std::endl;
     }
 }
 
-static void closeAccountMenu(std::vector<Account> &accounts) {
+static void closeAccountMenu(std::vector<Account> &accounts, const char *db) {
     printMenuHeader("CLOSE AN ACCOUNT");
     if (noAccounts(accounts)) {
         std::cout << "\nThere are no accounts to deposit into. Please open an account to deposit money.\n" << std::endl;
@@ -189,19 +199,19 @@ int main(int argc, char *argv[]) {
 
         switch (usrSel) {
             case MainDeposit:
-                viewDepositMenu(accounts);
+                viewDepositMenu(accounts, db);
                 break;
             case MainWithdraw:
-                viewWithdrawMenu(accounts);
+                viewWithdrawMenu(accounts, db);
                 break;
             case MainTransactions:
-                viewTransactionsMenu(accounts);
+                viewTransactionsMenu(accounts, db);
                 break;
             case MainOpenAccount:
-                openAccountMenu(accounts);
+                openAccountMenu(accounts, db);
                 break;
             case MainCloseAccount:
-                closeAccountMenu(accounts);
+                closeAccountMenu(accounts, db);
                 break;
             case MainQuit:
                 goto exit_program;

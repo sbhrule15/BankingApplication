@@ -9,6 +9,8 @@
 #include "sqlite3.h"
 #include "Account.h"
 #include "Transaction.h"
+#include "CheckingAccount.h"
+#include "SavingsAccount.h"
 
 // namespace for all db executions
 
@@ -19,7 +21,8 @@ namespace db {
     int createTables(const char* dbdir);
 
     // Account Queries
-    Account addAccount(const char* dbdir, AccountType accountType, std::string name);
+    bool addCheckingAccount(const char* dbdir, CheckingAccount a);
+    bool addSavingsAccount(const char* dbdir, SavingsAccount a);
     int deleteAccount(const char* dbdir, int accId);
     float deposit(const char* dbdir, int accId);
     float withdraw(const char* dbdir, int accId);

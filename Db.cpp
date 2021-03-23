@@ -103,9 +103,14 @@ int db::createTables(const char* dbdir) {
 }
 
 // Account entry actions
-Account db::addAccount(const char* dbdir, AccountType accountType, std::string name){
+bool db::addCheckingAccount(const char* dbdir, CheckingAccount a){
 
 }
+
+bool db::addSavingsAccount(const char* dbdir, SavingsAccount a){
+
+}
+
 
 int db::deleteAccount(const char* dbdir, int accId){
 
@@ -154,16 +159,16 @@ static int singleAccountCallback(void *account, int argc, char **argv, char **az
         } else if (azColName[i] == "BALANCE"){
             aBalance = atof(argv[i]);
         } else if (azColName[i] == "MINBALANCE"){
-            aBalance = atof(argv[i]);
+            aMinBalance = atof(argv[i]);
             aType = Checking;
         } else if (azColName[i] == "MAXDEPOSIT"){
-            aBalance = atof(argv[i]);
+            aMaxDeposit = atof(argv[i]);
             aType = Checking;
         } else if (azColName[i] == "MAXWITHDRAW"){
-            aBalance = atof(argv[i]);
+            aMaxWithdraw = atof(argv[i]);
             aType = Checking;
         } else if (azColName[i] == "INTERESTRATE"){
-            aBalance = atof(argv[i]);
+            aInterestRate = atof(argv[i]);
             aType = Savings;
         }
     }
