@@ -7,6 +7,8 @@
 #include <iostream>
 #include "Db.h"
 
+using namespace db;
+
 static int exec(const char* dbdir, sqlite3 *DB, std::string query){
     try {
         int exit = 0;
@@ -36,7 +38,7 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
     return 0;
 }
 
-static int createDB(const char* dbdir){
+int db::createDB(const char* dbdir){
     sqlite3 *DB;
     int exit = 0;
 
@@ -47,7 +49,7 @@ static int createDB(const char* dbdir){
     return 0;
 }
 
-static int createTables(const char* dbdir) {
+int db::createTables(const char* dbdir) {
     //create pointer reference
     sqlite3 *DB;
 

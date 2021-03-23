@@ -13,9 +13,10 @@
 // namespace for all db executions
 
 namespace db {
+
     static int callback(void *NotUsed, int argc, char **argv, char **azColName);
-    static int createDB(const char* dbdir);
-    static int createTables(const char* dbdir);
+    int createDB(const char* dbdir);
+    int createTables(const char* dbdir);
 
     // Account Queries
     static Account addAccount(const char* dbdir, AccountType accountType, std::string name);
