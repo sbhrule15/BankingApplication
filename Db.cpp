@@ -6,9 +6,12 @@
 #include <string>
 #include <iostream>
 #include "Db.h"
+#include "SavingsAccount.h"
+#include "CheckingAccount.h"
 
 using namespace db;
 
+// execution functions
 static int exec(const char* dbdir, sqlite3 *DB, std::string query){
     try {
         int exit = 0;
@@ -29,6 +32,7 @@ static int exec(const char* dbdir, sqlite3 *DB, std::string query){
     }
 }
 
+// callback
 static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
     int i;
     for(i = 0; i<argc; i++) {
@@ -38,6 +42,7 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
     return 0;
 }
 
+// initial starting functions
 int db::createDB(const char* dbdir){
     sqlite3 *DB;
     int exit = 0;
@@ -97,3 +102,112 @@ int db::createTables(const char* dbdir) {
     return (0);
 }
 
+// Account entry actions
+Account db::addAccount(const char* dbdir, AccountType accountType, std::string name){
+
+}
+
+int db::deleteAccount(const char* dbdir, int accId){
+
+}
+
+float db::deposit(const char* dbdir, int accId){
+
+}
+
+float db::withdraw(const char* dbdir, int accId){
+
+}
+
+// Account query actions
+static std::vector<Account> multipleAccountCallback(void *NotUsed, int argc, char **argv, char **azColName){
+
+    for (int i = 0; i < argc; i++){
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    }
+}
+
+static int singleAccountCallback(void *account, int argc, char **argv, char **azColName){
+    // account info
+    int aId{0};
+    std::string aName;
+    float aBalance{0.0};
+    AccountType aType;
+
+    // checking account info
+    float aMaxDeposit = NULL;
+    float aMinBalance = NULL;
+    float aMaxWithdraw = NULL;
+
+    // savings account info
+    float aInterestRate = NULL;
+
+    int i;
+    for(i=0; i<argc; i++){
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+
+        // log into account object
+        if (azColName[i] == "ID"){
+            aId = atoi(argv[i]);
+        } else if (azColName[i] == "NAME"){
+            aName = argv[i];
+        } else if (azColName[i] == "BALANCE"){
+            aBalance = atof(argv[i]);
+        } else if (azColName[i] == "MINBALANCE"){
+            aBalance = atof(argv[i]);
+            aType = Checking;
+        } else if (azColName[i] == "MAXDEPOSIT"){
+            aBalance = atof(argv[i]);
+            aType = Checking;
+        } else if (azColName[i] == "MAXWITHDRAW"){
+            aBalance = atof(argv[i]);
+            aType = Checking;
+        } else if (azColName[i] == "INTERESTRATE"){
+            aBalance = atof(argv[i]);
+            aType = Savings;
+        }
+    }
+
+    if (aType == Savings){
+        account = new SavingsAccount(aName);
+    } else if (aType == Checking) {
+        account = new CheckingAccount(aName);
+    }
+
+    printf("\n");
+    return 0;
+}
+
+Account db::getAccountById(const char* dbdir, int accId){
+    //create pointer reference
+    sqlite3 *DB;
+    std::string stmt =
+            "SELECT * FROM ACCOUNT"
+            "WHERE ID = " + std::to_string(accId) + ";";
+
+    // account ptr
+    void *account;
+
+    try {
+        int exit = 0;
+        exit = sqlite3_open(dbdir, &DB);
+
+        char *messageError;
+        exit = sqlite3_exec(DB, stmt.c_str(), singleAccountCallback, account, &messageError);
+
+        if (exit != SQLITE_OK) {
+            std::cerr << "Error Getting Account" << std::endl;
+            sqlite3_free(messageError);
+        } else
+            std::cout << "GetAccountById Executed Successfully" << std::endl;
+
+        sqlite3_close(DB);
+
+    } catch (const std::exception &e) {
+        std::cerr << e.what();
+    }
+}
+
+std::vector<Account> db::getAllAccounts(const char* dbdir ){
+
+}
