@@ -162,17 +162,9 @@ CheckingAccount db::createCheckingAccount(const std::string& aName){
             double      maxDep      = query.getColumn(5);
             double      maxWith     = query.getColumn(6);
 
-            // Print to console (for now)
-            std::cout << "ID: " << id << "\n"
-                    << "Name: " << name << "\n"
-                    << "Balance: " << balance << "\n"
-                    << "Minimum Balance: " << minBal << "\n"
-                    << "Max Deposit: " << maxDep << "\n"
-                    << "Max Withdrawal: " << maxWith << "\n"
-                    << std::endl;
-
             // Create temp, print out details and push onto vector
             CheckingAccount temp(id,name,balance,minBal,maxDep,maxWith);
+            temp.printAccountDetails();
             checkingAccountsVector.push_back(temp);
         }
 
@@ -274,9 +266,70 @@ std::vector<Account> db::getAllAccounts(){
 }
 
 std::vector<CheckingAccount> db::getAllCheckingAccounts(){
+    try
+    {
+        // open database
+        SQLite::Database    db("data.db", SQLite::OPEN_READWRITE|SQLite::OPEN_CREATE);
+        // select all accounts with join on checking
+        SQLite::Statement   query(db, "SELECT * FROM ACCOUNT INNER JOIN CHECKINGACCOUNT C on ACCOUNT.ID = C.ACCOUNTID;");
+        // create vector to store results (in case more than one, return first)
+        std::vector<CheckingAccount> checkingAccountsVector;
 
+        while (query.executeStep())
+        {
+            // Get typed column values
+            int         id          = query.getColumn(0);
+            const char* name        = query.getColumn(1);
+            double      balance     = query.getColumn(2);
+            double      minBal      = query.getColumn(4);
+            double      maxDep      = query.getColumn(5);
+            double      maxWith     = query.getColumn(6);
+
+            // Create temp, print out details and push onto vector
+            CheckingAccount temp(id,name,balance,minBal,maxDep,maxWith);
+            temp.printAccountDetails();
+            checkingAccountsVector.push_back(temp);
+        }
+
+        // return first account object
+        return checkingAccountsVector;
+    }
+    catch (std::exception& e)
+    {
+        std::cout << "exception: " << e.what() << std::endl;
+    }
 }
 
 std::vector<SavingsAccount> db::getAllSavingsAccounts(){
+    try
+    {
+        // open database
+        SQLite::Database    db("data.db", SQLite::OPEN_READWRITE|SQLite::OPEN_CREATE);
+        // select all accounts with join on savings
+        SQLite::Statement   query(db, "SELECT * FROM ACCOUNT INNER JOIN SAVINGSACCOUNT S on ACCOUNT.ID = S.ACCOUNTID;");
+        // create vector to store results (in case more than one, return first)
+        std::vector<SavingsAccount> savingsAccountsVector;
 
+        // Loop to execute the query step by step, to get rows of result
+        while (query.executeStep())
+        {
+            // Get typed column values
+            int         id          = query.getColumn(0);
+            const char* name        = query.getColumn(1);
+            double      balance     = query.getColumn(2);
+            double      intRate      = query.getColumn(4);
+
+            // Create temp, print details and push onto vector
+            SavingsAccount temp(id,name,balance,intRate);
+            temp.printAccountDetails();
+            savingsAccountsVector.push_back(temp);
+        }
+
+        // return first account object
+        return savingsAccountsVector;
+    }
+    catch (std::exception& e)
+    {
+        std::cout << "exception: " << e.what() << std::endl;
+    }
 }
