@@ -19,7 +19,6 @@ protected:
     std::string name;
     float balance;
     AccountType accountType;
-    std::vector<Transaction> transactions;
 
 public:
     // constructor
@@ -29,20 +28,21 @@ public:
     virtual bool deposit(float amt);
     virtual bool withdraw(float amt);
 
-    // functions
+    // getters
     int getAcctNumber() const;
-
     const std::string &getName() const;
-
-    void setName(const std::string &name);
-
     float getBalance() const;
-
     AccountType getAccountType() const;
-
     std::string getAccountTypeString() const;
+    int getId() const;
 
+    // setters
+    void setName(const std::string &name);
     void setAccountType(AccountType type);
+    void setId(int iD);
+    void setBalance(float b);
+
+    // functions
 
 };
 

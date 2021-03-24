@@ -13,10 +13,21 @@ protected:
     float interestRate;
 public:
     SavingsAccount(const std::string &name, int id);
+    SavingsAccount(int id, const std::string &name, float balance, float intRate);
 
 public:
-    bool deposit(float amt);
-    bool withdraw(float amt);
+    //print functions
+    void printAccountDetails();
+
+    // getters
+    float getInterestRate() const;
+
+    // setters
+    void setInterestRate(float interestRate);
+
+    // functions
+    bool deposit(float amt) override;
+    bool withdraw(float amt) override;
 };
 
 

@@ -15,27 +15,27 @@ protected:
     float maxWithdraw;
 
 public:
-    // constructor
-    explicit CheckingAccount(const std::string &name, const int id);
-
+    // constructors
+    explicit CheckingAccount(const std::string &name, int id);
     CheckingAccount(int id, const std::string &name, float balance, float minBalance,
                     float maxDeposit, float maxWithdraw);
 
-    // required functions
-    virtual bool deposit(float amt);
-
-    virtual bool withdraw(float amt);
-
-
     // functions
+    bool deposit(float amt) override;
+    bool withdraw(float amt) override;
 
+    // print functions
+    void printAccountDetails();
+
+    // getters
     float getMinBalance() const;
-
-    void setMinBalance(float minBalance);
-
     float getMaxDeposit() const;
+    float getMaxWithdraw() const;
 
+    // setters
+    void setMinBalance(float minBalance);
     void setMaxDeposit(float maxDeposit);
+    void setMaxWithdraw(float mw);
 
 };
 

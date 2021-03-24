@@ -45,6 +45,18 @@ std::string Account::getAccountTypeString() const {
     }
 }
 
+void Account::setBalance(float b) {
+    Account::balance = b;
+}
+
+int Account::getId() const {
+    return id;
+}
+
+void Account::setId(int iD) {
+    Account::id = iD;
+}
+
 bool Account::deposit(float amt) {
     balance = balance + amt;
     return true;
@@ -58,3 +70,7 @@ bool Account::withdraw(float amt) {
         return true;
     }
 }
+
+
+
+

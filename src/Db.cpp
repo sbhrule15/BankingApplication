@@ -171,7 +171,7 @@ CheckingAccount db::createCheckingAccount(const std::string& aName){
                     << "Max Withdrawal: " << maxWith << "\n"
                     << std::endl;
 
-            // Create temp and push onto vector
+            // Create temp, print out details and push onto vector
             CheckingAccount temp(id,name,balance,minBal,maxDep,maxWith);
             checkingAccountsVector.push_back(temp);
         }
@@ -196,6 +196,54 @@ SavingsAccount db::createSavingsAccount(std::string aName){
             "INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE) VALUES"
             "(last_insert_rowid(), current_timestamp, 0.00, 2);"
             "END TRANSACTION;";
+    try
+    {
+        SQLite::Database    db("data.db", SQLite::OPEN_READWRITE|SQLite::OPEN_CREATE);
+
+        // Begin transaction
+        SQLite::Transaction transaction(db);
+
+        // insert account
+        int ia = db.exec("INSERT INTO ACCOUNT (NAME) VALUES ('"+ aName +"');");
+        std::cout << "INSERT INTO ACCOUNT query returned " << ia << std::endl;
+        // insert checking account
+        int ic = db.exec("INSERT INTO SAVINGSACCOUNT(ACCOUNTID) VALUES (last_insert_rowid());");
+        std::cout << "INSERT INTO CHECKING ACCOUNT query returned " << ic << std::endl;
+        // insert transaction
+        int it = db.exec("INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE) VALUES(last_insert_rowid(), current_timestamp, 0.00, 2);");
+        std::cout << "SELECT CHECKING ACCOUNT query returned " << it << std::endl;
+
+        // Commit transaction
+        transaction.commit();
+
+        // Select account just made
+        SQLite::Statement   query(db, "SELECT * FROM ACCOUNT INNER JOIN SAVINGSACCOUNT S on ACCOUNT.ID = S.ACCOUNTID WHERE ACCOUNT.NAME = '"+aName+"' ;");
+
+        // create vector to store results (in case more than one, return first)
+        std::vector<SavingsAccount> savingsAccountsVector;
+
+        // Loop to execute the query step by step, to get rows of result
+        while (query.executeStep())
+        {
+            // Get typed column values
+            int         id          = query.getColumn(0);
+            const char* name        = query.getColumn(1);
+            double      balance     = query.getColumn(2);
+            double      intRate      = query.getColumn(4);
+
+            // Create temp, print details and push onto vector
+            SavingsAccount temp(id,name,balance,intRate);
+            temp.printAccountDetails();
+            savingsAccountsVector.push_back(temp);
+        }
+
+        // return first account object
+        return savingsAccountsVector.at(0);
+    }
+    catch (std::exception& e)
+    {
+        std::cout << "exception: " << e.what() << std::endl;
+    }
 
 }
 
@@ -214,34 +262,11 @@ float db::withdraw(const char* dbdir, int accId){
 
 
 Account db::getAccountById(const char* dbdir, int accId){
-    //create pointer reference
-    sqlite3 *DB;
     std::string stmt =
             "SELECT CHECKINGACCOUNT.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, ACCOUNT.ID, NAME, BALANCE, SAVINGSACCOUNT.INTERESTRATE"
             "FROM CHECKINGACCOUNT, SAVINGSACCOUNT, ACCOUNT"
             "WHERE SAVINGSACCOUNT.ACCOUNTID = " + std::to_string(accId) + " OR SAVINGSACCOUNT.ACCOUNTID = "+std::to_string(accId)+";";
 
-    // account ptr
-    void *account;
-
-    try {
-        int exit = 0;
-        exit = sqlite3_open(dbdir, &DB);
-
-        char *messageError;
-        exit = sqlite3_exec(DB, stmt.c_str(), nullptr, nullptr, &messageError);
-
-        if (exit != SQLITE_OK) {
-            std::cerr << "Error Getting Account" << std::endl;
-            sqlite3_free(messageError);
-        } else
-            std::cout << "GetAccountById Executed Successfully" << std::endl;
-
-        sqlite3_close(DB);
-
-    } catch (const std::exception &e) {
-        std::cerr << e.what();
-    }
 }
 
 std::vector<Account> db::getAllAccounts(){

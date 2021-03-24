@@ -2,6 +2,7 @@
 // Created by Joshua Pare on 3/20/21.
 //
 
+#include <iostream>
 #include "CheckingAccount.h"
 
 CheckingAccount::CheckingAccount(const std::string &name, const int id)
@@ -42,4 +43,24 @@ bool CheckingAccount::withdraw(float amt) {
         balance = balance - amt;
         return true;
     }
+}
+
+float CheckingAccount::getMaxWithdraw() const {
+    return maxWithdraw;
+}
+
+void CheckingAccount::setMaxWithdraw(float mw) {
+    CheckingAccount::maxWithdraw = mw;
+}
+
+void CheckingAccount::printAccountDetails() {
+    // Print to console (for now)
+    std::cout << "ID: " << getId() << "\n"
+              << "Name: " << getName() << "\n"
+              << "Balance: " << getBalance() << "\n"
+              << "Minimum Balance: " << getMinBalance() << "\n"
+              << "Max Deposit: " << getMaxDeposit() << "\n"
+              << "Max Withdrawal: " << getMaxWithdraw() << "\n"
+              << std::endl;
+
 }
