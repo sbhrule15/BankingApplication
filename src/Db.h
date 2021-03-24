@@ -16,28 +16,40 @@
 
 namespace db {
 
+    //===========GENERAL DB RELATED============//
     int initDB();
 
-    // Account Queries
+    //===========ACCOUNTS============//
+    // CREATE
     CheckingAccount createCheckingAccount(const std::string& aName);
     SavingsAccount createSavingsAccount(std::string aName);
-    int deleteAccount(const char* dbdir, int accId);
-    float deposit(const char* dbdir, int accId);
-    float withdraw(const char* dbdir, int accId);
-    Account getAccountById(const char* dbdir, int accId);
+
+    // READ
+    Account getAccountById(int accId);
+    std::vector<Account> getAccountsByName(std::string name);
+    std::vector<Account> getAccountsByType(AccountType type);
     std::vector<Account> getAllAccounts();
     std::vector<CheckingAccount> getAllCheckingAccounts();
     std::vector<SavingsAccount> getAllSavingsAccounts();
 
+    // UPDATE
 
-    // Transaction Queries
+    // DESTROY
+
+    //===========TRANSACTIONS============//
+    // CREATE
     int createTransaction(const char* dbdir, float amtChange, TransactionType transactionType);
-    std::vector<Transaction> getAllTransactions(const char* dbdir);
-    std::vector<Transaction> getTransactionsByAccount(const char* dbdir, const int &accountId);
-    std::vector<Transaction> getTransactionsByType(const char* dbdir, TransactionType transactionType);
-    Transaction getTransactionById(const char* dbdir, const int transactionId);
 
-    // Report Queries
+    // READ
+    std::vector<Transaction> getAllTransactions();
+    Transaction getTransactionById(int transactionId);
+    std::vector<Transaction> getTransactionsByAccount(const int &accountId);
+    std::vector<Transaction> getTransactionsByType(TransactionType transactionType);
+
+    // UPDATE
+
+
+    // DESTROY
 
 
 }
