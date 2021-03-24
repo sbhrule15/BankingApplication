@@ -27,7 +27,9 @@ namespace db {
     float deposit(const char* dbdir, int accId);
     float withdraw(const char* dbdir, int accId);
     Account getAccountById(const char* dbdir, int accId);
-    std::vector<Account> getAllAccounts(const char* dbdir );
+    std::vector<Account> getAllAccounts();
+    std::vector<CheckingAccount> getAllCheckingAccounts();
+    std::vector<SavingsAccount> getAllSavingsAccounts();
 
 
     // Transaction Queries

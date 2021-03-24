@@ -390,33 +390,6 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/sqlite3.o: src/sqlite3.c.o
-
-.PHONY : src/sqlite3.o
-
-# target to build an object file
-src/sqlite3.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/sqlite3.c.o
-.PHONY : src/sqlite3.c.o
-
-src/sqlite3.i: src/sqlite3.c.i
-
-.PHONY : src/sqlite3.i
-
-# target to preprocess a source file
-src/sqlite3.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/sqlite3.c.i
-.PHONY : src/sqlite3.c.i
-
-src/sqlite3.s: src/sqlite3.c.s
-
-.PHONY : src/sqlite3.s
-
-# target to generate assembly for a file
-src/sqlite3.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/sqlite3.c.s
-.PHONY : src/sqlite3.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -451,9 +424,6 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/sqlite3.o"
-	@echo "... src/sqlite3.i"
-	@echo "... src/sqlite3.s"
 .PHONY : help
 
 

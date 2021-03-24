@@ -133,16 +133,16 @@ thirdparty/SQLiteCpp/sqlite3/clean: thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqli
 # Target rules for target CMakeFiles/BankingApplication.dir
 
 # All Build rule for target.
-CMakeFiles/BankingApplication.dir/all: thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp.dir/all
 CMakeFiles/BankingApplication.dir/all: thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/all
+CMakeFiles/BankingApplication.dir/all: thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target BankingApplication"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target BankingApplication"
 .PHONY : CMakeFiles/BankingApplication.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/BankingApplication.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles 17
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/BankingApplication.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/BankingApplication.dir/rule
@@ -164,7 +164,7 @@ CMakeFiles/BankingApplication.dir/clean:
 thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp.dir/all: thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/all
 	$(MAKE) $(MAKESILENT) -f thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp.dir/build.make thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp.dir/depend
 	$(MAKE) $(MAKESILENT) -f thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp.dir/build.make thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=9,10,11,12,13,14,15,16 "Built target SQLiteCpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=8,9,10,11,12,13,14,15 "Built target SQLiteCpp"
 .PHONY : thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp.dir/all
 
 # Build rule for subdir invocation for target.
@@ -218,7 +218,7 @@ thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp_cpplint.dir/clean:
 thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/all:
 	$(MAKE) $(MAKESILENT) -f thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/build.make thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/depend
 	$(MAKE) $(MAKESILENT) -f thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/build.make thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=17,18 "Built target sqlite3"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=16,17 "Built target sqlite3"
 .PHONY : thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/all
 
 # Build rule for subdir invocation for target.

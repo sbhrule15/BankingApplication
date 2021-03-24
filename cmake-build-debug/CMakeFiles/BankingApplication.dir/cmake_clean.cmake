@@ -7,10 +7,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o"
   "CMakeFiles/BankingApplication.dir/src/Transaction.cpp.o"
   "CMakeFiles/BankingApplication.dir/src/main.cpp.o"
-  "CMakeFiles/BankingApplication.dir/src/sqlite3.c.o"
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang C CXX)
+foreach(lang CXX)
   include(CMakeFiles/BankingApplication.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()

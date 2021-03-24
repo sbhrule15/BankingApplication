@@ -267,12 +267,6 @@
 		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/main.cpp">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/sqlite3.c">
-			<Option target="BankingApplication"/>
-		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/sqlite3.h">
-			<Option target="BankingApplication"/>
-		</Unit>
 		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/.editorconfig">
 			<Option target="SQLiteCpp"/>
 		</Unit>
