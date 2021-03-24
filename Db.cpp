@@ -12,7 +12,7 @@
 using namespace db;
 
 // execution functions
-static int exec(const char* dbdir, sqlite3 *DB, std::string query){
+static bool exec(const char* dbdir, sqlite3 *DB, std::string query){
     try {
         int exit = 0;
         exit = sqlite3_open(dbdir, &DB);
@@ -23,12 +23,15 @@ static int exec(const char* dbdir, sqlite3 *DB, std::string query){
         if (exit != SQLITE_OK) {
             std::cerr << "Error Executing Query" << std::endl;
             sqlite3_free(messageError);
-        } else
+            sqlite3_close(DB);
+            return false;
+        } else{
             std::cout << "Query Executed Successfully" << std::endl;
-        sqlite3_close(DB);
-
+            return true;
+        }
     } catch (const std::exception &e) {
         std::cerr << e.what();
+        return false;
     }
 }
 
@@ -103,12 +106,26 @@ int db::createTables(const char* dbdir) {
 }
 
 // Account entry actions
-bool db::addCheckingAccount(const char* dbdir, CheckingAccount a){
+bool db::createCheckingAccount(const char* dbdir, CheckingAccount a){
+    sqlite3 *DB;
+    std::string query =
+            "BEGIN TRANSACTION;"
+            "INSERT INTO ACCOUNT (NAME) VALUES ('"+ a.getName() +"');"
+            "INSERT INTO CHECKINGACCOUNT(ACCOUNTID) VALUES (last_insert_rowid());"
+            "END TRANSACTION;";
 
+    return exec(dbdir, DB, query);
 }
 
-bool db::addSavingsAccount(const char* dbdir, SavingsAccount a){
+bool db::createSavingsAccount(const char* dbdir, SavingsAccount a){
+    sqlite3 *DB;
+    std::string query =
+            "BEGIN TRANSACTION;"
+            "INSERT INTO ACCOUNT (NAME) VALUES ('"+ a.getName() +"');"
+            "INSERT INTO SAVINGSACCOUNT(ACCOUNTID) VALUES (last_insert_rowid());"
+            "END TRANSACTION;";
 
+    return exec(dbdir, DB, query);
 }
 
 
@@ -177,6 +194,8 @@ static int singleAccountCallback(void *account, int argc, char **argv, char **az
         account = new SavingsAccount(aName);
     } else if (aType == Checking) {
         account = new CheckingAccount(aName);
+    } else {
+        return 1;
     }
 
     printf("\n");
@@ -187,8 +206,9 @@ Account db::getAccountById(const char* dbdir, int accId){
     //create pointer reference
     sqlite3 *DB;
     std::string stmt =
-            "SELECT * FROM ACCOUNT"
-            "WHERE ID = " + std::to_string(accId) + ";";
+            "SELECT CHECKINGACCOUNT.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, ACCOUNT.ID, NAME, BALANCE, SAVINGSACCOUNT.INTERESTRATE"
+            "FROM CHECKINGACCOUNT, SAVINGSACCOUNT, ACCOUNT"
+            "WHERE SAVINGSACCOUNT.ACCOUNTID = " + std::to_string(accId) + " OR SAVINGSACCOUNT.ACCOUNTID = "+std::to_string(accId)+";";
 
     // account ptr
     void *account;

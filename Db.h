@@ -21,8 +21,8 @@ namespace db {
     int createTables(const char* dbdir);
 
     // Account Queries
-    bool addCheckingAccount(const char* dbdir, CheckingAccount a);
-    bool addSavingsAccount(const char* dbdir, SavingsAccount a);
+    bool createCheckingAccount(const char* dbdir, CheckingAccount a);
+    bool createSavingsAccount(const char* dbdir, SavingsAccount a);
     int deleteAccount(const char* dbdir, int accId);
     float deposit(const char* dbdir, int accId);
     float withdraw(const char* dbdir, int accId);

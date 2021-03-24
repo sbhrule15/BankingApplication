@@ -13,8 +13,10 @@ CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.o: ../CheckingAccount.h
 CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.o: ../Transaction.h
 
 CMakeFiles/BankingApplication.dir/Db.cpp.o: ../Account.h
+CMakeFiles/BankingApplication.dir/Db.cpp.o: ../CheckingAccount.h
 CMakeFiles/BankingApplication.dir/Db.cpp.o: ../Db.cpp
 CMakeFiles/BankingApplication.dir/Db.cpp.o: ../Db.h
+CMakeFiles/BankingApplication.dir/Db.cpp.o: ../SavingsAccount.h
 CMakeFiles/BankingApplication.dir/Db.cpp.o: ../Transaction.h
 CMakeFiles/BankingApplication.dir/Db.cpp.o: ../sqlite3.h
 

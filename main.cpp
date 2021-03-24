@@ -148,19 +148,23 @@ static void openAccountMenu(std::vector<Account> &accounts, const char *db) {
         // create new checking account
         CheckingAccount newCheck(newAcctName);
         // add to database
-        if (db::addCheckingAccount(db, newCheck)){
+        if (db::createCheckingAccount(db, newCheck)){
             // push to array and confirmation message
             accounts.push_back(newCheck);
             std::cout << "\nNew Checking account " + newAcctName + " created.\n\n" << std::endl;
+        } else {
+            std::cout << "There was an error creating your account. Please try again later." << std::endl;
         }
     } else if (newAcctType == Savings) {
         // create new savings account
         SavingsAccount newSavings(newAcctName);
         // add to database
-        if (db::addSavingsAccount(db, newSavings)){
+        if (db::createSavingsAccount(db, newSavings)){
             // push to array and confirmation message
             accounts.push_back(newSavings);
             std::cout << "\nNew Savings account " + newAcctName + " created.\n\n" << std::endl;
+        } else {
+            std::cout << "There was an error creating your account. Please try again later." << std::endl;
         }
     } else {
         std::cout << "There was an error creating your account. Please try again later." << std::endl;
