@@ -177,7 +177,7 @@ SavingsAccount db::createSavingsAccount(std::string aName){
             int         id          = query.getColumn(0);
             const char* name        = query.getColumn(1);
             double      balance     = query.getColumn(2);
-            double      intRate      = query.getColumn(4);
+            double      intRate     = query.getColumn(4);
 
             // Create temp, print details and push onto vector
             SavingsAccount temp(id,name,balance,intRate);
@@ -211,9 +211,48 @@ float db::withdraw(const char* dbdir, int accId){
 
 Account db::getAccountById(const char* dbdir, int accId){
     std::string stmt =
-            "SELECT CHECKINGACCOUNT.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, ACCOUNT.ID, NAME, BALANCE, SAVINGSACCOUNT.INTERESTRATE"
-            "FROM CHECKINGACCOUNT, SAVINGSACCOUNT, ACCOUNT"
-            "WHERE SAVINGSACCOUNT.ACCOUNTID = " + std::to_string(accId) + " OR SAVINGSACCOUNT.ACCOUNTID = "+std::to_string(accId)+";";
+        "SELECT a.ID, NAME, BALANCE, C.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, S.INTERESTRATE FROM ACCOUNT as a"
+        "INNER JOIN CHECKINGACCOUNT C on a.ID = C.ACCOUNTID"
+        "INNER JOIN SAVINGSACCOUNT S on a.ID = S.ACCOUNTID"
+        "WHERE ID = " + std::to_string(accId) + ";";
+    try
+    {
+        // open database
+        SQLite::Database    db("data.db", SQLite::OPEN_READWRITE|SQLite::OPEN_CREATE);
+        // select all accounts with join on checking
+        SQLite::Statement   query(db, stmt);
+        // create vector to store results (in case more than one, return first)
+        std::vector<Account> accountsVector;
+
+        while (query.executeStep())
+        {
+            // Get typed column values
+            int         id          = query.getColumn(0);
+            const char* name        = query.getColumn(1);
+            double      balance     = query.getColumn(2);
+            double      minBal      = query.getColumn(3);
+            double      maxDep      = query.getColumn(4);
+            double      maxWith     = query.getColumn(5);
+            double      intRate     = query.getColumn(6);
+
+            // Create temp, print out details and push onto vector
+            if (intRate == 0){
+                CheckingAccount temp(id,name,balance,minBal,maxDep,maxWith);
+                temp.printAccountDetails();
+                accountsVector.push_back(temp);
+            } else {
+                SavingsAccount temp(id,name,balance,intRate);
+                temp.printAccountDetails();
+                accountsVector.push_back(temp);
+            }
+        }
+        // return first account object
+        return accountsVector.at(0);
+    }
+    catch (std::exception& e)
+    {
+        std::cout << "exception: " << e.what() << std::endl;
+    }
 
 }
 
