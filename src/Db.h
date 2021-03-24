@@ -16,8 +16,6 @@
 
 namespace db {
 
-    static int callback(void *NotUsed, int argc, char **argv, char **azColName);
-    int createDB(const char* dbdir);
     int initDB();
 
     // Account Queries

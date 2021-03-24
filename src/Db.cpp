@@ -15,51 +15,7 @@
 
 using namespace db;
 
-// execution functions
-static bool exec(const char* dbdir, sqlite3 *DB, const std::string& query){
-    try {
-        int exit = 0;
-        exit = sqlite3_open(dbdir, &DB);
-
-        char *messageError;
-        exit = sqlite3_exec(DB, query.c_str(), nullptr, nullptr, &messageError);
-
-        if (exit != SQLITE_OK) {
-            std::cerr << "Error Executing Query" << std::endl;
-            sqlite3_free(messageError);
-            sqlite3_close(DB);
-            return false;
-        } else{
-            std::cout << "Query Executed Successfully" << std::endl;
-            return true;
-        }
-    } catch (const std::exception &e) {
-        std::cerr << e.what();
-        return false;
-    }
-}
-
-// callback
-static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
-    int i;
-    for(i = 0; i<argc; i++) {
-        printf("%s: %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-    printf("\n");
-    return 0;
-}
-
 // initial starting functions
-int db::createDB(const char* dbdir){
-    sqlite3 *DB;
-    int exit = 0;
-
-    exit = sqlite3_open(dbdir, &DB);
-
-    sqlite3_close(DB);
-
-    return 0;
-}
 
 int db::initDB() {
     // create vector of sql statements to initiate
