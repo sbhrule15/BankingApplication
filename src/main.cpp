@@ -51,7 +51,7 @@ static int printMenu(std::vector<std::string> options) {
 // menu functions
 static void viewDepositMenu(std::vector<Account> &accounts) {
     float depAmt;
-    printMenuHeader("MAKE A NEW DEPOSIT");
+    printMenuHeader("MAKE A DEPOSIT");
     if (noAccounts(accounts)) {
         std::cout << "\nThere are no accounts to deposit into. Please open an account to deposit money.\n" << std::endl;
         return;
