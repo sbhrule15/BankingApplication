@@ -50,12 +50,6 @@ SQLiteCpp/Exception.h
 
 ../thirdparty/SQLiteCpp/include/SQLiteCpp/Utils.h
 
-/Users/joshuapare/CLionProjects/BankingApplication/src/Account.cpp
-Account.h
-/Users/joshuapare/CLionProjects/BankingApplication/src/Account.h
-utility
--
-
 /Users/joshuapare/CLionProjects/BankingApplication/src/Account.h
 string
 -
@@ -63,12 +57,6 @@ vector
 -
 Transaction.h
 /Users/joshuapare/CLionProjects/BankingApplication/src/Transaction.h
-
-/Users/joshuapare/CLionProjects/BankingApplication/src/CheckingAccount.cpp
-iostream
--
-CheckingAccount.h
-/Users/joshuapare/CLionProjects/BankingApplication/src/CheckingAccount.h
 
 /Users/joshuapare/CLionProjects/BankingApplication/src/CheckingAccount.h
 Account.h
@@ -103,12 +91,6 @@ Transaction.h
 /Users/joshuapare/CLionProjects/BankingApplication/src/Transaction.h
 CheckingAccount.h
 /Users/joshuapare/CLionProjects/BankingApplication/src/CheckingAccount.h
-SavingsAccount.h
-/Users/joshuapare/CLionProjects/BankingApplication/src/SavingsAccount.h
-
-/Users/joshuapare/CLionProjects/BankingApplication/src/SavingsAccount.cpp
-iostream
--
 SavingsAccount.h
 /Users/joshuapare/CLionProjects/BankingApplication/src/SavingsAccount.h
 
