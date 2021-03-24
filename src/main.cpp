@@ -42,7 +42,7 @@ static int printMenu(std::vector<std::string> options) {
     for (int i = 0; i < options.size(); i++) {
         std::cout << "\t" << i + 1 << "." << options.at(i) << std::endl;
     }
-    std::cout << "\nPlease make a selection:" << std::endl;
+    std::cout << "\nPlease make a selecion:" << std::endl;
     std::cin >> userSel;
     std::cout << "\n";
     return userSel;
