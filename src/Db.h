@@ -18,11 +18,11 @@ namespace db {
 
     static int callback(void *NotUsed, int argc, char **argv, char **azColName);
     int createDB(const char* dbdir);
-    int createTables(const char* dbdir);
+    int initDB();
 
     // Account Queries
-    bool createCheckingAccount(const char* dbdir, CheckingAccount a);
-    bool createSavingsAccount(const char* dbdir, SavingsAccount a);
+    CheckingAccount createCheckingAccount(const std::string& aName);
+    SavingsAccount createSavingsAccount(std::string aName);
     int deleteAccount(const char* dbdir, int accId);
     float deposit(const char* dbdir, int accId);
     float withdraw(const char* dbdir, int accId);

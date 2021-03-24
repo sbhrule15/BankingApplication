@@ -12,7 +12,7 @@ class SavingsAccount : public Account{
 protected:
     float interestRate;
 public:
-    SavingsAccount(const std::string &name);
+    SavingsAccount(const std::string &name, int id);
 
 public:
     bool deposit(float amt);

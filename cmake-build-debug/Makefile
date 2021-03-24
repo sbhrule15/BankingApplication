@@ -76,6 +76,52 @@ CMAKE_BINARY_DIR = /Users/joshuapare/CLionProjects/BankingApplication/cmake-buil
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	"/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	"/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	"/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	"/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	"/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/bin/cmake" -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	"/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/bin/cmake" -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"headers\" \"libraries\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -143,194 +189,233 @@ BankingApplication/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/build
 .PHONY : BankingApplication/fast
 
-Account.o: Account.cpp.o
+#=============================================================================
+# Target rules for targets named SQLiteCpp
 
-.PHONY : Account.o
+# Build rule for target.
+SQLiteCpp: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SQLiteCpp
+.PHONY : SQLiteCpp
 
-# target to build an object file
-Account.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Account.cpp.o
-.PHONY : Account.cpp.o
+# fast build rule for target.
+SQLiteCpp/fast:
+	$(MAKE) $(MAKESILENT) -f thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp.dir/build.make thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp.dir/build
+.PHONY : SQLiteCpp/fast
 
-Account.i: Account.cpp.i
+#=============================================================================
+# Target rules for targets named SQLiteCpp_cpplint
 
-.PHONY : Account.i
+# Build rule for target.
+SQLiteCpp_cpplint: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SQLiteCpp_cpplint
+.PHONY : SQLiteCpp_cpplint
 
-# target to preprocess a source file
-Account.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Account.cpp.i
-.PHONY : Account.cpp.i
+# fast build rule for target.
+SQLiteCpp_cpplint/fast:
+	$(MAKE) $(MAKESILENT) -f thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp_cpplint.dir/build.make thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp_cpplint.dir/build
+.PHONY : SQLiteCpp_cpplint/fast
 
-Account.s: Account.cpp.s
+#=============================================================================
+# Target rules for targets named sqlite3
 
-.PHONY : Account.s
+# Build rule for target.
+sqlite3: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sqlite3
+.PHONY : sqlite3
 
-# target to generate assembly for a file
-Account.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Account.cpp.s
-.PHONY : Account.cpp.s
+# fast build rule for target.
+sqlite3/fast:
+	$(MAKE) $(MAKESILENT) -f thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/build.make thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/build
+.PHONY : sqlite3/fast
 
-CheckingAccount.o: CheckingAccount.cpp.o
+src/Account.o: src/Account.cpp.o
 
-.PHONY : CheckingAccount.o
-
-# target to build an object file
-CheckingAccount.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.o
-.PHONY : CheckingAccount.cpp.o
-
-CheckingAccount.i: CheckingAccount.cpp.i
-
-.PHONY : CheckingAccount.i
-
-# target to preprocess a source file
-CheckingAccount.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.i
-.PHONY : CheckingAccount.cpp.i
-
-CheckingAccount.s: CheckingAccount.cpp.s
-
-.PHONY : CheckingAccount.s
-
-# target to generate assembly for a file
-CheckingAccount.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.s
-.PHONY : CheckingAccount.cpp.s
-
-Db.o: Db.cpp.o
-
-.PHONY : Db.o
+.PHONY : src/Account.o
 
 # target to build an object file
-Db.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Db.cpp.o
-.PHONY : Db.cpp.o
+src/Account.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/Account.cpp.o
+.PHONY : src/Account.cpp.o
 
-Db.i: Db.cpp.i
+src/Account.i: src/Account.cpp.i
 
-.PHONY : Db.i
+.PHONY : src/Account.i
 
 # target to preprocess a source file
-Db.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Db.cpp.i
-.PHONY : Db.cpp.i
+src/Account.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/Account.cpp.i
+.PHONY : src/Account.cpp.i
 
-Db.s: Db.cpp.s
+src/Account.s: src/Account.cpp.s
 
-.PHONY : Db.s
+.PHONY : src/Account.s
 
 # target to generate assembly for a file
-Db.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Db.cpp.s
-.PHONY : Db.cpp.s
+src/Account.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/Account.cpp.s
+.PHONY : src/Account.cpp.s
 
-SavingsAccount.o: SavingsAccount.cpp.o
+src/CheckingAccount.o: src/CheckingAccount.cpp.o
 
-.PHONY : SavingsAccount.o
+.PHONY : src/CheckingAccount.o
 
 # target to build an object file
-SavingsAccount.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.o
-.PHONY : SavingsAccount.cpp.o
+src/CheckingAccount.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o
+.PHONY : src/CheckingAccount.cpp.o
 
-SavingsAccount.i: SavingsAccount.cpp.i
+src/CheckingAccount.i: src/CheckingAccount.cpp.i
 
-.PHONY : SavingsAccount.i
+.PHONY : src/CheckingAccount.i
 
 # target to preprocess a source file
-SavingsAccount.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.i
-.PHONY : SavingsAccount.cpp.i
+src/CheckingAccount.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.i
+.PHONY : src/CheckingAccount.cpp.i
 
-SavingsAccount.s: SavingsAccount.cpp.s
+src/CheckingAccount.s: src/CheckingAccount.cpp.s
 
-.PHONY : SavingsAccount.s
+.PHONY : src/CheckingAccount.s
 
 # target to generate assembly for a file
-SavingsAccount.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.s
-.PHONY : SavingsAccount.cpp.s
+src/CheckingAccount.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.s
+.PHONY : src/CheckingAccount.cpp.s
 
-Transaction.o: Transaction.cpp.o
+src/Db.o: src/Db.cpp.o
 
-.PHONY : Transaction.o
+.PHONY : src/Db.o
 
 # target to build an object file
-Transaction.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Transaction.cpp.o
-.PHONY : Transaction.cpp.o
+src/Db.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/Db.cpp.o
+.PHONY : src/Db.cpp.o
 
-Transaction.i: Transaction.cpp.i
+src/Db.i: src/Db.cpp.i
 
-.PHONY : Transaction.i
+.PHONY : src/Db.i
 
 # target to preprocess a source file
-Transaction.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Transaction.cpp.i
-.PHONY : Transaction.cpp.i
+src/Db.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/Db.cpp.i
+.PHONY : src/Db.cpp.i
 
-Transaction.s: Transaction.cpp.s
+src/Db.s: src/Db.cpp.s
 
-.PHONY : Transaction.s
+.PHONY : src/Db.s
 
 # target to generate assembly for a file
-Transaction.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/Transaction.cpp.s
-.PHONY : Transaction.cpp.s
+src/Db.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/Db.cpp.s
+.PHONY : src/Db.cpp.s
 
-main.o: main.cpp.o
+src/SavingsAccount.o: src/SavingsAccount.cpp.o
 
-.PHONY : main.o
+.PHONY : src/SavingsAccount.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/main.cpp.o
-.PHONY : main.cpp.o
+src/SavingsAccount.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o
+.PHONY : src/SavingsAccount.cpp.o
 
-main.i: main.cpp.i
+src/SavingsAccount.i: src/SavingsAccount.cpp.i
 
-.PHONY : main.i
+.PHONY : src/SavingsAccount.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/SavingsAccount.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.i
+.PHONY : src/SavingsAccount.cpp.i
 
-main.s: main.cpp.s
+src/SavingsAccount.s: src/SavingsAccount.cpp.s
 
-.PHONY : main.s
+.PHONY : src/SavingsAccount.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/SavingsAccount.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.s
+.PHONY : src/SavingsAccount.cpp.s
 
-sqlite3.o: sqlite3.c.o
+src/Transaction.o: src/Transaction.cpp.o
 
-.PHONY : sqlite3.o
+.PHONY : src/Transaction.o
 
 # target to build an object file
-sqlite3.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/sqlite3.c.o
-.PHONY : sqlite3.c.o
+src/Transaction.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/Transaction.cpp.o
+.PHONY : src/Transaction.cpp.o
 
-sqlite3.i: sqlite3.c.i
+src/Transaction.i: src/Transaction.cpp.i
 
-.PHONY : sqlite3.i
+.PHONY : src/Transaction.i
 
 # target to preprocess a source file
-sqlite3.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/sqlite3.c.i
-.PHONY : sqlite3.c.i
+src/Transaction.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/Transaction.cpp.i
+.PHONY : src/Transaction.cpp.i
 
-sqlite3.s: sqlite3.c.s
+src/Transaction.s: src/Transaction.cpp.s
 
-.PHONY : sqlite3.s
+.PHONY : src/Transaction.s
 
 # target to generate assembly for a file
-sqlite3.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/sqlite3.c.s
-.PHONY : sqlite3.c.s
+src/Transaction.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/Transaction.cpp.s
+.PHONY : src/Transaction.cpp.s
+
+src/main.o: src/main.cpp.o
+
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
+
+src/sqlite3.o: src/sqlite3.c.o
+
+.PHONY : src/sqlite3.o
+
+# target to build an object file
+src/sqlite3.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/sqlite3.c.o
+.PHONY : src/sqlite3.c.o
+
+src/sqlite3.i: src/sqlite3.c.i
+
+.PHONY : src/sqlite3.i
+
+# target to preprocess a source file
+src/sqlite3.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/sqlite3.c.i
+.PHONY : src/sqlite3.c.i
+
+src/sqlite3.s: src/sqlite3.c.s
+
+.PHONY : src/sqlite3.s
+
+# target to generate assembly for a file
+src/sqlite3.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/src/sqlite3.c.s
+.PHONY : src/sqlite3.c.s
 
 # Help Target
 help:
@@ -339,29 +424,36 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... SQLiteCpp_cpplint"
 	@echo "... BankingApplication"
-	@echo "... Account.o"
-	@echo "... Account.i"
-	@echo "... Account.s"
-	@echo "... CheckingAccount.o"
-	@echo "... CheckingAccount.i"
-	@echo "... CheckingAccount.s"
-	@echo "... Db.o"
-	@echo "... Db.i"
-	@echo "... Db.s"
-	@echo "... SavingsAccount.o"
-	@echo "... SavingsAccount.i"
-	@echo "... SavingsAccount.s"
-	@echo "... Transaction.o"
-	@echo "... Transaction.i"
-	@echo "... Transaction.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
-	@echo "... sqlite3.o"
-	@echo "... sqlite3.i"
-	@echo "... sqlite3.s"
+	@echo "... SQLiteCpp"
+	@echo "... sqlite3"
+	@echo "... src/Account.o"
+	@echo "... src/Account.i"
+	@echo "... src/Account.s"
+	@echo "... src/CheckingAccount.o"
+	@echo "... src/CheckingAccount.i"
+	@echo "... src/CheckingAccount.s"
+	@echo "... src/Db.o"
+	@echo "... src/Db.i"
+	@echo "... src/Db.s"
+	@echo "... src/SavingsAccount.o"
+	@echo "... src/SavingsAccount.i"
+	@echo "... src/SavingsAccount.s"
+	@echo "... src/Transaction.o"
+	@echo "... src/Transaction.i"
+	@echo "... src/Transaction.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
+	@echo "... src/sqlite3.o"
+	@echo "... src/sqlite3.i"
+	@echo "... src/sqlite3.s"
 .PHONY : help
 
 

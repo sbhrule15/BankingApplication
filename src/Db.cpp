@@ -5,14 +5,18 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <SQLiteCpp/Database.h>
+#include <SQLiteCpp/Transaction.h>
+
 #include "Db.h"
 #include "SavingsAccount.h"
 #include "CheckingAccount.h"
 
+
 using namespace db;
 
 // execution functions
-static bool exec(const char* dbdir, sqlite3 *DB, std::string query){
+static bool exec(const char* dbdir, sqlite3 *DB, const std::string& query){
     try {
         int exit = 0;
         exit = sqlite3_open(dbdir, &DB);
@@ -57,33 +61,30 @@ int db::createDB(const char* dbdir){
     return 0;
 }
 
-int db::createTables(const char* dbdir) {
-    //create pointer reference
-    sqlite3 *DB;
-
+int db::initDB() {
     // create vector of sql statements to initiate
     std::vector<std::string> sqlCreateTables;
 
-    // create accounts tables
+    // create accounts tables statements
     sqlCreateTables.emplace_back(
             "CREATE TABLE IF NOT EXISTS ACCOUNT("
             "ID         INTEGER PRIMARY KEY AUTOINCREMENT, "
             "NAME       TEXT NOT NULL,"
-            "BALANCE    REAL NOT NULL"
+            "BALANCE    REAL NOT NULL DEFAULT 0.00"
             ");"
     );
     sqlCreateTables.emplace_back(
             "CREATE TABLE IF NOT EXISTS CHECKINGACCOUNT("
             "ACCOUNTID      INTEGER NOT NULL REFERENCES ACCOUNT(ID), "
-            "MINBALANCE     REAL NOT NULL,"
-            "MAXDEPOSIT     REAL NOT NULL,"
-            "MAXWITHDRAW    INTEGER NOT NULL"
+            "MINBALANCE     REAL NOT NULL DEFAULT 500.00,"
+            "MAXDEPOSIT     REAL NOT NULL DEFAULT 10000.00,"
+            "MAXWITHDRAW    INTEGER NOT NULL DEFAULT 5000.00"
             ");"
     );
     sqlCreateTables.emplace_back(
             "CREATE TABLE IF NOT EXISTS SAVINGSACCOUNT("
             "ACCOUNTID      INTEGER NOT NULL REFERENCES ACCOUNT(ID), "
-            "INTERESTRATE   REAL NOT NULL"
+            "INTERESTRATE   REAL NOT NULL DEFAULT 0.01"
             ");"
     );
 
@@ -98,34 +99,68 @@ int db::createTables(const char* dbdir) {
             ");"
     );
 
-    for (const std::string &sql : sqlCreateTables) {
-        exec(dbdir, DB, sql);
+    // loop through vector and execute queries
+    try
+    {
+        SQLite::Database    db("data.db", SQLite::OPEN_READWRITE|SQLite::OPEN_CREATE);
+
+        // Begin transaction
+        SQLite::Transaction transaction(db);
+        // Loop through tables creates.
+        for (const std::string &sql : sqlCreateTables) {
+            db.exec(sql);
+        }
+
+        // Commit transaction
+        transaction.commit();
+    }
+    catch (std::exception& e)
+    {
+        std::cout << "exception: " << e.what() << std::endl;
     }
 
     return (0);
 }
 
-// Account entry actions
-bool db::createCheckingAccount(const char* dbdir, CheckingAccount a){
-    sqlite3 *DB;
-    std::string query =
-            "BEGIN TRANSACTION;"
-            "INSERT INTO ACCOUNT (NAME) VALUES ('"+ a.getName() +"');"
-            "INSERT INTO CHECKINGACCOUNT(ACCOUNTID) VALUES (last_insert_rowid());"
-            "END TRANSACTION;";
 
-    return exec(dbdir, DB, query);
+// Account entry actions
+CheckingAccount db::createCheckingAccount(const std::string& aName){
+    try
+    {
+        // Open a database file
+        SQLite::Database    db("data.db");
+
+        // Compile a SQL query, containing one parameter (index 1)
+        SQLite::Statement   query(db, "CREATE TABLE test (id INTEGER PRIMARY KEY, value TEXT)");
+
+        // Loop to execute the query step by step, to get rows of result
+        while (query.executeStep())
+        {
+            // Demonstrate how to get some typed column value
+            int         id      = query.getColumn(0);
+            const char* value   = query.getColumn(1);
+            int         size    = query.getColumn(2);
+
+            std::cout << "row: " << id << ", " << value << ", " << size << std::endl;
+        }
+    }
+    catch (std::exception& e)
+    {
+        std::cout << "exception: " << e.what() << std::endl;
+    }
 }
 
-bool db::createSavingsAccount(const char* dbdir, SavingsAccount a){
-    sqlite3 *DB;
+SavingsAccount db::createSavingsAccount(std::string aName){
+    // query string
     std::string query =
             "BEGIN TRANSACTION;"
-            "INSERT INTO ACCOUNT (NAME) VALUES ('"+ a.getName() +"');"
+            "INSERT INTO ACCOUNT (NAME) VALUES ('"+ aName +"');"
             "INSERT INTO SAVINGSACCOUNT(ACCOUNTID) VALUES (last_insert_rowid());"
+            "SELECT * FROM ACCOUNT INNER JOIN SAVINGSACCOUNT S on ACCOUNT.ID = S.ACCOUNTID WHERE ACCOUNT.ID= last_insert_rowid();"
+            "INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE) VALUES"
+            "(last_insert_rowid(), current_timestamp, 0.00, 2);"
             "END TRANSACTION;";
 
-    return exec(dbdir, DB, query);
 }
 
 
@@ -141,66 +176,6 @@ float db::withdraw(const char* dbdir, int accId){
 
 }
 
-// Account query actions
-static std::vector<Account> multipleAccountCallback(void *NotUsed, int argc, char **argv, char **azColName){
-
-    for (int i = 0; i < argc; i++){
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-}
-
-static int singleAccountCallback(void *account, int argc, char **argv, char **azColName){
-    // account info
-    int aId{0};
-    std::string aName;
-    float aBalance{0.0};
-    AccountType aType;
-
-    // checking account info
-    float aMaxDeposit = NULL;
-    float aMinBalance = NULL;
-    float aMaxWithdraw = NULL;
-
-    // savings account info
-    float aInterestRate = NULL;
-
-    int i;
-    for(i=0; i<argc; i++){
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-
-        // log into account object
-        if (azColName[i] == "ID"){
-            aId = atoi(argv[i]);
-        } else if (azColName[i] == "NAME"){
-            aName = argv[i];
-        } else if (azColName[i] == "BALANCE"){
-            aBalance = atof(argv[i]);
-        } else if (azColName[i] == "MINBALANCE"){
-            aMinBalance = atof(argv[i]);
-            aType = Checking;
-        } else if (azColName[i] == "MAXDEPOSIT"){
-            aMaxDeposit = atof(argv[i]);
-            aType = Checking;
-        } else if (azColName[i] == "MAXWITHDRAW"){
-            aMaxWithdraw = atof(argv[i]);
-            aType = Checking;
-        } else if (azColName[i] == "INTERESTRATE"){
-            aInterestRate = atof(argv[i]);
-            aType = Savings;
-        }
-    }
-
-    if (aType == Savings){
-        account = new SavingsAccount(aName);
-    } else if (aType == Checking) {
-        account = new CheckingAccount(aName);
-    } else {
-        return 1;
-    }
-
-    printf("\n");
-    return 0;
-}
 
 Account db::getAccountById(const char* dbdir, int accId){
     //create pointer reference
@@ -218,7 +193,7 @@ Account db::getAccountById(const char* dbdir, int accId){
         exit = sqlite3_open(dbdir, &DB);
 
         char *messageError;
-        exit = sqlite3_exec(DB, stmt.c_str(), singleAccountCallback, account, &messageError);
+        exit = sqlite3_exec(DB, stmt.c_str(), nullptr, nullptr, &messageError);
 
         if (exit != SQLITE_OK) {
             std::cerr << "Error Getting Account" << std::endl;

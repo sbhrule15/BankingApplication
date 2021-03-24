@@ -16,7 +16,10 @@ protected:
 
 public:
     // constructor
-    explicit CheckingAccount(const std::string &name);
+    explicit CheckingAccount(const std::string &name, const int id);
+
+    CheckingAccount(int id, const std::string &name, float balance, float minBalance,
+                    float maxDeposit, float maxWithdraw);
 
     // required functions
     virtual bool deposit(float amt);

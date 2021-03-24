@@ -9,12 +9,11 @@
 #include <string>
 
 enum TransactionType {
-    Withdrawal, Deposit, AccountCreated, Other
+    Withdrawal = 0, Deposit = 1, AccountCreated = 2, Other = 3
 };
 
 class Transaction {
 protected:
-    static int currId;
     int id;
     int accountId;
     std::time_t timestamp;
@@ -23,7 +22,7 @@ protected:
 
 public:
     // constructor
-    Transaction(float amtChange, TransactionType type);
+    Transaction(int id, float amtChange, TransactionType type, int aId);
 
     // functions
     void printTransaction();

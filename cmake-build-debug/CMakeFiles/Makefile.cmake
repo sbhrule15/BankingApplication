@@ -11,6 +11,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.17.5/CMakeCCompiler.cmake"
   "CMakeFiles/3.17.5/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.17.5/CMakeSystem.cmake"
+  "../thirdparty/SQLiteCpp/CMakeLists.txt"
+  "../thirdparty/SQLiteCpp/cmake/SQLiteCppConfig.cmake.in"
+  "../thirdparty/SQLiteCpp/sqlite3/CMakeLists.txt"
+  "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CMakeCInformation.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CMakeCXXInformation.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
@@ -20,13 +24,22 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CMakeGenericSystem.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CMakeInitializeConfigs.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CMakeLanguageInformation.cmake"
+  "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CMakePackageConfigHelpers.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CMakeSystemSpecificInformation.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CMakeSystemSpecificInitialize.cmake"
+  "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CheckCSourceCompiles.cmake"
+  "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CheckIncludeFile.cmake"
+  "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CheckLibraryExists.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Compiler/AppleClang-C.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Compiler/AppleClang-CXX.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Compiler/Clang.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Compiler/GNU.cmake"
+  "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindPackageHandleStandardArgs.cmake"
+  "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindPackageMessage.cmake"
+  "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindPythonInterp.cmake"
+  "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindThreads.cmake"
+  "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/GNUInstallDirs.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Internal/CMakeCheckCompilerFlag.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Platform/Apple-AppleClang-C.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Platform/Apple-AppleClang-CXX.cmake"
@@ -37,6 +50,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Platform/Darwin.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Platform/UnixPaths.cmake"
   "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/ProcessorCount.cmake"
+  "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/WriteBasicConfigVersionFile.cmake"
   )
 
 # The corresponding makefile is:
@@ -48,9 +62,14 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "thirdparty/SQLiteCpp/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "thirdparty/SQLiteCpp/sqlite3/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/BankingApplication.dir/DependInfo.cmake"
+  "thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp.dir/DependInfo.cmake"
+  "thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp_cpplint.dir/DependInfo.cmake"
+  "thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/DependInfo.cmake"
   )

@@ -5,13 +5,13 @@
 # compile CXX with /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
 C_FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk  
 
-C_DEFINES = 
+C_DEFINES = -DSQLITE_ENABLE_COLUMN_METADATA -DSQLITE_ENABLE_JSON1
 
-C_INCLUDES = 
+C_INCLUDES = -I/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include 
 
 CXX_FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk   -std=gnu++17
 
-CXX_DEFINES = 
+CXX_DEFINES = -DSQLITE_ENABLE_COLUMN_METADATA -DSQLITE_ENABLE_JSON1
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include 
 

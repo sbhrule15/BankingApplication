@@ -12,5 +12,5 @@ bool SavingsAccount::deposit(float amt) {
     return false;
 }
 
-SavingsAccount::SavingsAccount(const std::string &name)
-        : Account(name, 0.0, Savings), interestRate(0.01) {}
+SavingsAccount::SavingsAccount(const std::string &name, const int id)
+        : Account(id, name, 0.0, Savings), interestRate(0.01) {}

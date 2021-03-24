@@ -6,16 +6,13 @@
 
 #include <utility>
 
-// statics
-int Account::currId;
-
 // Constructor
-Account::Account(std::string name, float balance, AccountType accountType)
-: acctNumber(currId++), name(std::move(name)), balance(balance), accountType(accountType) {}
+Account::Account(int id, std::string name, float balance, AccountType accountType)
+: id(id), name(std::move(name)), balance(balance), accountType(accountType) {}
 
 // Functions
 int Account::getAcctNumber() const {
-    return acctNumber;
+    return id;
 }
 
 const std::string &Account::getName() const {
@@ -50,7 +47,6 @@ std::string Account::getAccountTypeString() const {
 
 bool Account::deposit(float amt) {
     balance = balance + amt;
-    transactions.emplace_back(amt,Deposit);
     return true;
 }
 
@@ -59,7 +55,6 @@ bool Account::withdraw(float amt) {
         return false;
     else {
         balance = balance - amt;
-        transactions.emplace_back(-amt,Withdrawal);
         return true;
     }
 }

@@ -3,4 +3,18 @@ project(BankingApplication)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(BankingApplication main.cpp Account.cpp Account.h CheckingAccount.cpp CheckingAccount.h Transaction.cpp Transaction.h SavingsAccount.cpp SavingsAccount.h sqlite3.c sqlite3.h Db.cpp Db.h)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/thirdparty/SQLiteCpp)
+
+include_directories(
+        ${CMAKE_CURRENT_LIST_DIR}/thirdparty/SQLiteCpp/include
+)
+
+add_executable(BankingApplication src/main.cpp src/Account.cpp src/Account.h src/CheckingAccount.cpp src/CheckingAccount.h src/Transaction.cpp src/Transaction.h src/SavingsAccount.cpp src/SavingsAccount.h src/sqlite3.c src/sqlite3.h src/Db.cpp src/Db.h)
+
+target_link_libraries(
+        BankingApplication
+        SQLiteCpp
+        sqlite3
+        pthread
+        dl
+)

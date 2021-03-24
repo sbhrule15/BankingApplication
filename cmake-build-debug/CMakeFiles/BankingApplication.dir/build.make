@@ -77,118 +77,120 @@ include CMakeFiles/BankingApplication.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/BankingApplication.dir/flags.make
 
-CMakeFiles/BankingApplication.dir/main.cpp.o: CMakeFiles/BankingApplication.dir/flags.make
-CMakeFiles/BankingApplication.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/BankingApplication.dir/main.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BankingApplication.dir/main.cpp.o -c /Users/joshuapare/CLionProjects/BankingApplication/main.cpp
+CMakeFiles/BankingApplication.dir/src/main.cpp.o: CMakeFiles/BankingApplication.dir/flags.make
+CMakeFiles/BankingApplication.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/BankingApplication.dir/src/main.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BankingApplication.dir/src/main.cpp.o -c /Users/joshuapare/CLionProjects/BankingApplication/src/main.cpp
 
-CMakeFiles/BankingApplication.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BankingApplication.dir/main.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/main.cpp > CMakeFiles/BankingApplication.dir/main.cpp.i
+CMakeFiles/BankingApplication.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BankingApplication.dir/src/main.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/src/main.cpp > CMakeFiles/BankingApplication.dir/src/main.cpp.i
 
-CMakeFiles/BankingApplication.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BankingApplication.dir/main.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/main.cpp -o CMakeFiles/BankingApplication.dir/main.cpp.s
+CMakeFiles/BankingApplication.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BankingApplication.dir/src/main.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/src/main.cpp -o CMakeFiles/BankingApplication.dir/src/main.cpp.s
 
-CMakeFiles/BankingApplication.dir/Account.cpp.o: CMakeFiles/BankingApplication.dir/flags.make
-CMakeFiles/BankingApplication.dir/Account.cpp.o: ../Account.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/BankingApplication.dir/Account.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BankingApplication.dir/Account.cpp.o -c /Users/joshuapare/CLionProjects/BankingApplication/Account.cpp
+CMakeFiles/BankingApplication.dir/src/Account.cpp.o: CMakeFiles/BankingApplication.dir/flags.make
+CMakeFiles/BankingApplication.dir/src/Account.cpp.o: ../src/Account.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/BankingApplication.dir/src/Account.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BankingApplication.dir/src/Account.cpp.o -c /Users/joshuapare/CLionProjects/BankingApplication/src/Account.cpp
 
-CMakeFiles/BankingApplication.dir/Account.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BankingApplication.dir/Account.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/Account.cpp > CMakeFiles/BankingApplication.dir/Account.cpp.i
+CMakeFiles/BankingApplication.dir/src/Account.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BankingApplication.dir/src/Account.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/src/Account.cpp > CMakeFiles/BankingApplication.dir/src/Account.cpp.i
 
-CMakeFiles/BankingApplication.dir/Account.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BankingApplication.dir/Account.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/Account.cpp -o CMakeFiles/BankingApplication.dir/Account.cpp.s
+CMakeFiles/BankingApplication.dir/src/Account.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BankingApplication.dir/src/Account.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/src/Account.cpp -o CMakeFiles/BankingApplication.dir/src/Account.cpp.s
 
-CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.o: CMakeFiles/BankingApplication.dir/flags.make
-CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.o: ../CheckingAccount.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.o -c /Users/joshuapare/CLionProjects/BankingApplication/CheckingAccount.cpp
+CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o: CMakeFiles/BankingApplication.dir/flags.make
+CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o: ../src/CheckingAccount.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o -c /Users/joshuapare/CLionProjects/BankingApplication/src/CheckingAccount.cpp
 
-CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/CheckingAccount.cpp > CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.i
+CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/src/CheckingAccount.cpp > CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.i
 
-CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/CheckingAccount.cpp -o CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.s
+CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/src/CheckingAccount.cpp -o CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.s
 
-CMakeFiles/BankingApplication.dir/Transaction.cpp.o: CMakeFiles/BankingApplication.dir/flags.make
-CMakeFiles/BankingApplication.dir/Transaction.cpp.o: ../Transaction.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/BankingApplication.dir/Transaction.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BankingApplication.dir/Transaction.cpp.o -c /Users/joshuapare/CLionProjects/BankingApplication/Transaction.cpp
+CMakeFiles/BankingApplication.dir/src/Transaction.cpp.o: CMakeFiles/BankingApplication.dir/flags.make
+CMakeFiles/BankingApplication.dir/src/Transaction.cpp.o: ../src/Transaction.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/BankingApplication.dir/src/Transaction.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BankingApplication.dir/src/Transaction.cpp.o -c /Users/joshuapare/CLionProjects/BankingApplication/src/Transaction.cpp
 
-CMakeFiles/BankingApplication.dir/Transaction.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BankingApplication.dir/Transaction.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/Transaction.cpp > CMakeFiles/BankingApplication.dir/Transaction.cpp.i
+CMakeFiles/BankingApplication.dir/src/Transaction.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BankingApplication.dir/src/Transaction.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/src/Transaction.cpp > CMakeFiles/BankingApplication.dir/src/Transaction.cpp.i
 
-CMakeFiles/BankingApplication.dir/Transaction.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BankingApplication.dir/Transaction.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/Transaction.cpp -o CMakeFiles/BankingApplication.dir/Transaction.cpp.s
+CMakeFiles/BankingApplication.dir/src/Transaction.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BankingApplication.dir/src/Transaction.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/src/Transaction.cpp -o CMakeFiles/BankingApplication.dir/src/Transaction.cpp.s
 
-CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.o: CMakeFiles/BankingApplication.dir/flags.make
-CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.o: ../SavingsAccount.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.o -c /Users/joshuapare/CLionProjects/BankingApplication/SavingsAccount.cpp
+CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o: CMakeFiles/BankingApplication.dir/flags.make
+CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o: ../src/SavingsAccount.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o -c /Users/joshuapare/CLionProjects/BankingApplication/src/SavingsAccount.cpp
 
-CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/SavingsAccount.cpp > CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.i
+CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/src/SavingsAccount.cpp > CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.i
 
-CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/SavingsAccount.cpp -o CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.s
+CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/src/SavingsAccount.cpp -o CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.s
 
-CMakeFiles/BankingApplication.dir/sqlite3.c.o: CMakeFiles/BankingApplication.dir/flags.make
-CMakeFiles/BankingApplication.dir/sqlite3.c.o: ../sqlite3.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/BankingApplication.dir/sqlite3.c.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/BankingApplication.dir/sqlite3.c.o   -c /Users/joshuapare/CLionProjects/BankingApplication/sqlite3.c
+CMakeFiles/BankingApplication.dir/src/sqlite3.c.o: CMakeFiles/BankingApplication.dir/flags.make
+CMakeFiles/BankingApplication.dir/src/sqlite3.c.o: ../src/sqlite3.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/BankingApplication.dir/src/sqlite3.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/BankingApplication.dir/src/sqlite3.c.o   -c /Users/joshuapare/CLionProjects/BankingApplication/src/sqlite3.c
 
-CMakeFiles/BankingApplication.dir/sqlite3.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/BankingApplication.dir/sqlite3.c.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/sqlite3.c > CMakeFiles/BankingApplication.dir/sqlite3.c.i
+CMakeFiles/BankingApplication.dir/src/sqlite3.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/BankingApplication.dir/src/sqlite3.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/src/sqlite3.c > CMakeFiles/BankingApplication.dir/src/sqlite3.c.i
 
-CMakeFiles/BankingApplication.dir/sqlite3.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/BankingApplication.dir/sqlite3.c.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/sqlite3.c -o CMakeFiles/BankingApplication.dir/sqlite3.c.s
+CMakeFiles/BankingApplication.dir/src/sqlite3.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/BankingApplication.dir/src/sqlite3.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/src/sqlite3.c -o CMakeFiles/BankingApplication.dir/src/sqlite3.c.s
 
-CMakeFiles/BankingApplication.dir/Db.cpp.o: CMakeFiles/BankingApplication.dir/flags.make
-CMakeFiles/BankingApplication.dir/Db.cpp.o: ../Db.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/BankingApplication.dir/Db.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BankingApplication.dir/Db.cpp.o -c /Users/joshuapare/CLionProjects/BankingApplication/Db.cpp
+CMakeFiles/BankingApplication.dir/src/Db.cpp.o: CMakeFiles/BankingApplication.dir/flags.make
+CMakeFiles/BankingApplication.dir/src/Db.cpp.o: ../src/Db.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/BankingApplication.dir/src/Db.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/BankingApplication.dir/src/Db.cpp.o -c /Users/joshuapare/CLionProjects/BankingApplication/src/Db.cpp
 
-CMakeFiles/BankingApplication.dir/Db.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BankingApplication.dir/Db.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/Db.cpp > CMakeFiles/BankingApplication.dir/Db.cpp.i
+CMakeFiles/BankingApplication.dir/src/Db.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BankingApplication.dir/src/Db.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/joshuapare/CLionProjects/BankingApplication/src/Db.cpp > CMakeFiles/BankingApplication.dir/src/Db.cpp.i
 
-CMakeFiles/BankingApplication.dir/Db.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BankingApplication.dir/Db.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/Db.cpp -o CMakeFiles/BankingApplication.dir/Db.cpp.s
+CMakeFiles/BankingApplication.dir/src/Db.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BankingApplication.dir/src/Db.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/joshuapare/CLionProjects/BankingApplication/src/Db.cpp -o CMakeFiles/BankingApplication.dir/src/Db.cpp.s
 
 # Object files for target BankingApplication
 BankingApplication_OBJECTS = \
-"CMakeFiles/BankingApplication.dir/main.cpp.o" \
-"CMakeFiles/BankingApplication.dir/Account.cpp.o" \
-"CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.o" \
-"CMakeFiles/BankingApplication.dir/Transaction.cpp.o" \
-"CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.o" \
-"CMakeFiles/BankingApplication.dir/sqlite3.c.o" \
-"CMakeFiles/BankingApplication.dir/Db.cpp.o"
+"CMakeFiles/BankingApplication.dir/src/main.cpp.o" \
+"CMakeFiles/BankingApplication.dir/src/Account.cpp.o" \
+"CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o" \
+"CMakeFiles/BankingApplication.dir/src/Transaction.cpp.o" \
+"CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o" \
+"CMakeFiles/BankingApplication.dir/src/sqlite3.c.o" \
+"CMakeFiles/BankingApplication.dir/src/Db.cpp.o"
 
 # External object files for target BankingApplication
 BankingApplication_EXTERNAL_OBJECTS =
 
-BankingApplication: CMakeFiles/BankingApplication.dir/main.cpp.o
-BankingApplication: CMakeFiles/BankingApplication.dir/Account.cpp.o
-BankingApplication: CMakeFiles/BankingApplication.dir/CheckingAccount.cpp.o
-BankingApplication: CMakeFiles/BankingApplication.dir/Transaction.cpp.o
-BankingApplication: CMakeFiles/BankingApplication.dir/SavingsAccount.cpp.o
-BankingApplication: CMakeFiles/BankingApplication.dir/sqlite3.c.o
-BankingApplication: CMakeFiles/BankingApplication.dir/Db.cpp.o
+BankingApplication: CMakeFiles/BankingApplication.dir/src/main.cpp.o
+BankingApplication: CMakeFiles/BankingApplication.dir/src/Account.cpp.o
+BankingApplication: CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o
+BankingApplication: CMakeFiles/BankingApplication.dir/src/Transaction.cpp.o
+BankingApplication: CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o
+BankingApplication: CMakeFiles/BankingApplication.dir/src/sqlite3.c.o
+BankingApplication: CMakeFiles/BankingApplication.dir/src/Db.cpp.o
 BankingApplication: CMakeFiles/BankingApplication.dir/build.make
+BankingApplication: thirdparty/SQLiteCpp/libSQLiteCpp.a
+BankingApplication: thirdparty/SQLiteCpp/sqlite3/libsqlite3.a
 BankingApplication: CMakeFiles/BankingApplication.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable BankingApplication"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/BankingApplication.dir/link.txt --verbose=$(VERBOSE)

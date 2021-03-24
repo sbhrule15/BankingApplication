@@ -15,8 +15,7 @@ enum AccountType {
 
 class Account {
 protected:
-    static int currId;
-    int acctNumber;
+    int id;
     std::string name;
     float balance;
     AccountType accountType;
@@ -24,7 +23,7 @@ protected:
 
 public:
     // constructor
-    Account(std::string name, float balance, AccountType accountType);
+    Account(int id, std::string name, float balance, AccountType accountType);
 
     // virtual functions
     virtual bool deposit(float amt);

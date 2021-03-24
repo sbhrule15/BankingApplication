@@ -7,11 +7,9 @@
 #include <utility>
 #include <iostream>
 
-int Transaction::currId;
-
 // constructor
-Transaction::Transaction(float amtChange, TransactionType type)
-    : id(currId++), timestamp(std::time(nullptr)), amtChange(amtChange), transactionType(type) {}
+Transaction::Transaction(int id, float amtChange, TransactionType type, int aId)
+    : id(id), accountId(aId), timestamp(std::time(nullptr)), amtChange(amtChange), transactionType(type) {}
 
 // functions
 std::string Transaction::getTransactionTypeStr() {

@@ -5,13 +5,101 @@
 		<Option title="BankingApplication"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\thirdparty\;CMake Files\thirdparty\SQLiteCpp\;CMake Files\thirdparty\SQLiteCpp\cmake\;CMake Files\thirdparty\SQLiteCpp\sqlite3\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
 					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="BankingApplication">
+				<Option output="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/BankingApplication" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DSQLITE_ENABLE_COLUMN_METADATA"/>
+					<Add option="-DSQLITE_ENABLE_JSON1"/>
+					<Add directory="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 BankingApplication"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="BankingApplication/fast">
+				<Option output="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/BankingApplication" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DSQLITE_ENABLE_COLUMN_METADATA"/>
+					<Add option="-DSQLITE_ENABLE_JSON1"/>
+					<Add directory="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 BankingApplication/fast"/>
 					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -37,13 +125,17 @@
 					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="BankingApplication">
-				<Option output="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/BankingApplication" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug"/>
+			<Target title="SQLiteCpp">
+				<Option output="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/libSQLiteCpp.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp"/>
 				<Option object_output="./"/>
-				<Option type="1"/>
+				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add option="-DSQLITE_ENABLE_COLUMN_METADATA"/>
+					<Add option="-DSQLITE_ENABLE_JSON1"/>
+					<Add directory="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/sqlite3"/>
+					<Add directory="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
@@ -52,19 +144,23 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 BankingApplication"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/Makefile&quot;  VERBOSE=1 SQLiteCpp"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="BankingApplication/fast">
-				<Option output="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/BankingApplication" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug"/>
+			<Target title="SQLiteCpp/fast">
+				<Option output="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/libSQLiteCpp.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp"/>
 				<Option object_output="./"/>
-				<Option type="1"/>
+				<Option type="2"/>
 				<Option compiler="gcc"/>
 				<Compiler>
+					<Add option="-DSQLITE_ENABLE_COLUMN_METADATA"/>
+					<Add option="-DSQLITE_ENABLE_JSON1"/>
+					<Add directory="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/sqlite3"/>
+					<Add directory="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
@@ -73,54 +169,235 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 BankingApplication/fast"/>
-					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/Makefile&quot;  VERBOSE=1 SQLiteCpp/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="SQLiteCpp_cpplint">
+				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/Makefile&quot;  VERBOSE=1 SQLiteCpp_cpplint"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sqlite3">
+				<Option output="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/sqlite3/libsqlite3.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/sqlite3"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DSQLITE_ENABLE_COLUMN_METADATA"/>
+					<Add option="-DSQLITE_ENABLE_JSON1"/>
+					<Add directory="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/sqlite3"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/sqlite3/Makefile&quot;  VERBOSE=1 sqlite3"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/sqlite3/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/sqlite3/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/sqlite3/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sqlite3/fast">
+				<Option output="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/sqlite3/libsqlite3.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/sqlite3"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DSQLITE_ENABLE_COLUMN_METADATA"/>
+					<Add option="-DSQLITE_ENABLE_JSON1"/>
+					<Add directory="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/sqlite3"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/sqlite3/Makefile&quot;  VERBOSE=1 sqlite3/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/sqlite3/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/sqlite3/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/thirdparty/SQLiteCpp/sqlite3/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/Account.cpp">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/Account.cpp">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/Account.h">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/Account.h">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/CheckingAccount.cpp">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/CheckingAccount.cpp">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/CheckingAccount.h">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/CheckingAccount.h">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/Db.cpp">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/Db.cpp">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/Db.h">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/Db.h">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/SavingsAccount.cpp">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/SavingsAccount.cpp">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/SavingsAccount.h">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/SavingsAccount.h">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/Transaction.cpp">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/Transaction.cpp">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/Transaction.h">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/Transaction.h">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/main.cpp">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/main.cpp">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/sqlite3.c">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/sqlite3.c">
 			<Option target="BankingApplication"/>
 		</Unit>
-		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/sqlite3.h">
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/src/sqlite3.h">
 			<Option target="BankingApplication"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/.editorconfig">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/.gitbugtraq">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/.github/workflows/build.yml">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/.github/workflows/subdir_example.yml">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/.gitignore">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/.gitmodules">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/.travis.yml">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/CHANGELOG.md">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/Doxyfile">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/LICENSE.txt">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/README.md">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/TODO.txt">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/appveyor.yml">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/build.bat">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/build.sh">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/cmake/FindSQLite3.cmake">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/cmake/SQLiteCppConfig.cmake.in">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/cpplint.py">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include/SQLiteCpp/Assertion.h">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include/SQLiteCpp/Backup.h">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include/SQLiteCpp/Column.h">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include/SQLiteCpp/Database.h">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include/SQLiteCpp/Exception.h">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include/SQLiteCpp/ExecuteMany.h">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include/SQLiteCpp/SQLiteCpp.h">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include/SQLiteCpp/Savepoint.h">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include/SQLiteCpp/Statement.h">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include/SQLiteCpp/Transaction.h">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/include/SQLiteCpp/VariadicBind.h">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/sqlite3/sqlite3.c">
+			<Option target="sqlite3"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/sqlite3/sqlite3.h">
+			<Option target="sqlite3"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/src/Backup.cpp">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/src/Column.cpp">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/src/Database.cpp">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/src/Exception.cpp">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/src/Savepoint.cpp">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/src/Statement.cpp">
+			<Option target="SQLiteCpp"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/src/Transaction.cpp">
+			<Option target="SQLiteCpp"/>
 		</Unit>
 		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\thirdparty\SQLiteCpp\"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/cmake/SQLiteCppConfig.cmake.in">
+			<Option virtualFolder="CMake Files\thirdparty\SQLiteCpp\cmake\"/>
+		</Unit>
+		<Unit filename="/Users/joshuapare/CLionProjects/BankingApplication/thirdparty/SQLiteCpp/sqlite3/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\thirdparty\SQLiteCpp\sqlite3\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

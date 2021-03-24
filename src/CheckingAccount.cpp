@@ -4,8 +4,11 @@
 
 #include "CheckingAccount.h"
 
-CheckingAccount::CheckingAccount(const std::string &name)
-: Account(name, 0.0, Checking), minBalance(500.0), maxDeposit(10000.0), maxWithdraw(5000.0) {}
+CheckingAccount::CheckingAccount(const std::string &name, const int id)
+: Account(id, name, 0.0, Checking), minBalance(500.0), maxDeposit(10000.0), maxWithdraw(5000.0) {}
+
+CheckingAccount::CheckingAccount(int id, const std::string &name, float balance, float minBalance, float maxDeposit, float maxWithdraw)
+: Account(id, name, balance, Checking), minBalance(minBalance), maxDeposit(maxDeposit), maxWithdraw(maxWithdraw) {}
 
 float CheckingAccount::getMinBalance() const {
     return minBalance;
@@ -28,7 +31,6 @@ bool CheckingAccount::deposit(float amt) {
         return false;
     } else {
         balance = balance + amt;
-        transactions.emplace_back(amt,Deposit);
         return true;
     }
 }
@@ -38,7 +40,6 @@ bool CheckingAccount::withdraw(float amt) {
         return false;
     } else {
         balance = balance - amt;
-        transactions.emplace_back(-amt,Withdrawal);
         return true;
     }
 }
