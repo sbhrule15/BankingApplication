@@ -133,8 +133,8 @@ thirdparty/SQLiteCpp/sqlite3/clean: thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqli
 # Target rules for target CMakeFiles/BankingApplication.dir
 
 # All Build rule for target.
-CMakeFiles/BankingApplication.dir/all: thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/all
 CMakeFiles/BankingApplication.dir/all: thirdparty/SQLiteCpp/CMakeFiles/SQLiteCpp.dir/all
+CMakeFiles/BankingApplication.dir/all: thirdparty/SQLiteCpp/sqlite3/CMakeFiles/sqlite3.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/BankingApplication.dir/build.make CMakeFiles/BankingApplication.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/joshuapare/CLionProjects/BankingApplication/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target BankingApplication"
