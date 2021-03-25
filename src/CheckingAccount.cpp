@@ -8,26 +8,26 @@
 CheckingAccount::CheckingAccount(const std::string &name, const int id)
 : Account(id, name, 0.0, Checking), minBalance(500.0), maxDeposit(10000.0), maxWithdraw(5000.0) {}
 
-CheckingAccount::CheckingAccount(int id, const std::string &name, float balance, float minBalance, float maxDeposit, float maxWithdraw)
+CheckingAccount::CheckingAccount(int id, const std::string &name, double balance, double minBalance, double maxDeposit, double maxWithdraw)
 : Account(id, name, balance, Checking), minBalance(minBalance), maxDeposit(maxDeposit), maxWithdraw(maxWithdraw) {}
 
-float CheckingAccount::getMinBalance() const {
+double CheckingAccount::getMinBalance() const {
     return minBalance;
 }
 
-void CheckingAccount::setMinBalance(float minBal) {
+void CheckingAccount::setMinBalance(double minBal) {
     CheckingAccount::minBalance = minBal;
 }
 
-float CheckingAccount::getMaxDeposit() const {
+double CheckingAccount::getMaxDeposit() const {
     return maxDeposit;
 }
 
-void CheckingAccount::setMaxDeposit(float maxDep) {
+void CheckingAccount::setMaxDeposit(double maxDep) {
     CheckingAccount::maxDeposit = maxDep;
 }
 
-bool CheckingAccount::deposit(float amt) {
+bool CheckingAccount::deposit(double amt) {
     if (amt > maxDeposit){
         return false;
     } else {
@@ -36,7 +36,7 @@ bool CheckingAccount::deposit(float amt) {
     }
 }
 
-bool CheckingAccount::withdraw(float amt) {
+bool CheckingAccount::withdraw(double amt) {
     if (amt > balance || amt > maxWithdraw){
         return false;
     } else {
@@ -45,11 +45,11 @@ bool CheckingAccount::withdraw(float amt) {
     }
 }
 
-float CheckingAccount::getMaxWithdraw() const {
+double CheckingAccount::getMaxWithdraw() const {
     return maxWithdraw;
 }
 
-void CheckingAccount::setMaxWithdraw(float mw) {
+void CheckingAccount::setMaxWithdraw(double mw) {
     CheckingAccount::maxWithdraw = mw;
 }
 

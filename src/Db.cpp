@@ -123,10 +123,9 @@ CheckingAccount db::createCheckingAccount(const std::string &aName) {
     catch (std::exception &e) {
         std::cout << "exception: " << e.what() << std::endl;
     }
-
 }
 
-SavingsAccount db::createSavingsAccount(std::string aName) {
+SavingsAccount db::createSavingsAccount(const std::string& aName) {
     try {
         SQLite::Database db("data.db", SQLite::OPEN_READWRITE);
         // Begin transaction
@@ -169,7 +168,7 @@ SavingsAccount db::createSavingsAccount(std::string aName) {
     }
 }
 
-static int updateAccountQuery(std::string stmt, std::string logstmt) {
+static int updateAccountQuery(const std::string& stmt, const std::string& logstmt) {
     try {
         SQLite::Database db("data.db", SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
         SQLite::Transaction transaction(db);
@@ -237,7 +236,7 @@ bool db::withdraw(int accId, float w) {
 }
 
 // Get Accounts Function
-static std::vector<Account> getAccountsQuery(std::string stmt) {
+static std::vector<Account> getAccountsQuery(const std::string& stmt) {
     try {
         // open database
         SQLite::Database db("data.db", SQLite::OPEN_READWRITE);
@@ -285,7 +284,7 @@ Account db::getAccountById(int accId) {
     return getAccountsQuery(stmt).at(0);
 }
 
-std::vector<Account> db::getAccountsByName(std::string name) {
+std::vector<Account> db::getAccountsByName(const std::string& name) {
     std::string stmt =
             "SELECT a.ID, NAME, BALANCE, C.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, S.INTERESTRATE FROM ACCOUNT as a"
             "INNER JOIN CHECKINGACCOUNT C on a.ID = C.ACCOUNTID"

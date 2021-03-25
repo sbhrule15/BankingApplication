@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <map>
 #include "Account.h"
 #include "CheckingAccount.h"
 #include "SavingsAccount.h"
@@ -119,6 +120,7 @@ static void openAccountMenu(std::vector<Account> &accounts) {
     while (awaitingValid) {
         std::cout << "What type of account would you like to open up?\n" << std::endl;
         int userSel = printMenu(std::vector<std::string>{"Checking", "Savings"});
+
         switch (userSel) {
             case 1:
                 newAcctType = Checking;
@@ -180,9 +182,11 @@ static void closeAccountMenu(std::vector<Account> &accounts) {
 int main(int argc, char *argv[]) {
     // create tables, if don't exist
     db::initDB();
-
-    // load vector of accounts - blank for now
-    std::vector<Account> accounts;
+    // load all accounts into map for quick find
+    std::map<int, Account> accounts;
+    for (Account a : db::getAllAccounts()){
+        accounts.emplace(std::make_pair(a.getId(),a));
+    }
 
     // welcome screen
     printMenuHeader("JOSHUA'S BANKING PROGRAM");

@@ -22,11 +22,11 @@ namespace db {
     //===========ACCOUNTS============//
     // CREATE
     CheckingAccount createCheckingAccount(const std::string& aName);
-    SavingsAccount createSavingsAccount(std::string aName);
+    SavingsAccount createSavingsAccount(const std::string& aName);
 
     // READ
     Account getAccountById(int accId);
-    std::vector<Account> getAccountsByName(std::string name);
+    std::vector<Account> getAccountsByName(const std::string& name);
     std::vector<Account> getAccountsByType(AccountType type);
     std::vector<Account> getAllAccounts();
     std::vector<CheckingAccount> getAllCheckingAccounts();

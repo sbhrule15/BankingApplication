@@ -10,32 +10,32 @@
 
 class CheckingAccount : public Account {
 protected:
-    float minBalance;
-    float maxDeposit;
-    float maxWithdraw;
+    double minBalance;
+    double maxDeposit;
+    double maxWithdraw;
 
 public:
     // constructors
     explicit CheckingAccount(const std::string &name, int id);
-    CheckingAccount(int id, const std::string &name, float balance, float minBalance,
-                    float maxDeposit, float maxWithdraw);
+    CheckingAccount(int id, const std::string &name, double balance, double minBalance,
+                    double maxDeposit, double maxWithdraw);
 
     // functions
-    bool deposit(float amt) override;
-    bool withdraw(float amt) override;
+    bool deposit(double amt) override;
+    bool withdraw(double amt) override;
 
     // print functions
     void printAccountDetails();
 
     // getters
-    float getMinBalance() const;
-    float getMaxDeposit() const;
-    float getMaxWithdraw() const;
+    double getMinBalance() const;
+    double getMaxDeposit() const;
+    double getMaxWithdraw() const;
 
     // setters
-    void setMinBalance(float minBalance);
-    void setMaxDeposit(float maxDeposit);
-    void setMaxWithdraw(float mw);
+    void setMinBalance(double minBalance);
+    void setMaxDeposit(double maxDeposit);
+    void setMaxWithdraw(double mw);
 
 };
 

@@ -17,21 +17,21 @@ class Account {
 protected:
     int id;
     std::string name;
-    float balance;
+    double balance;
     AccountType accountType;
 
 public:
     // constructor
-    Account(int id, std::string name, float balance, AccountType accountType);
+    Account(int id, std::string name, double balance, AccountType accountType);
 
     // virtual functions
-    virtual bool deposit(float amt);
-    virtual bool withdraw(float amt);
+    virtual bool deposit(double amt);
+    virtual bool withdraw(double amt);
 
     // getters
     int getAcctNumber() const;
     const std::string &getName() const;
-    float getBalance() const;
+    double getBalance() const;
     AccountType getAccountType() const;
     std::string getAccountTypeString() const;
     int getId() const;
@@ -40,7 +40,7 @@ public:
     void setName(const std::string &name);
     void setAccountType(AccountType type);
     void setId(int iD);
-    void setBalance(float b);
+    void setBalance(double b);
 
     // functions
 

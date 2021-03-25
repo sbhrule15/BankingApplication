@@ -7,7 +7,7 @@
 #include <utility>
 
 // Constructor
-Account::Account(int id, std::string name, float balance, AccountType accountType)
+Account::Account(int id, std::string name, double balance, AccountType accountType)
 : id(id), name(std::move(name)), balance(balance), accountType(accountType) {}
 
 // Functions
@@ -23,7 +23,7 @@ void Account::setName(const std::string &acctName) {
     Account::name = acctName;
 }
 
-float Account::getBalance() const {
+double Account::getBalance() const {
     return balance;
 }
 
@@ -45,7 +45,7 @@ std::string Account::getAccountTypeString() const {
     }
 }
 
-void Account::setBalance(float b) {
+void Account::setBalance(double b) {
     Account::balance = b;
 }
 
@@ -57,12 +57,12 @@ void Account::setId(int iD) {
     Account::id = iD;
 }
 
-bool Account::deposit(float amt) {
+bool Account::deposit(double amt) {
     balance = balance + amt;
     return true;
 }
 
-bool Account::withdraw(float amt) {
+bool Account::withdraw(double amt) {
     if (amt > balance)
         return false;
     else {
@@ -70,7 +70,3 @@ bool Account::withdraw(float amt) {
         return true;
     }
 }
-
-
-
-
