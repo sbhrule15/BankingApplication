@@ -9,7 +9,11 @@
 #include <string>
 
 enum TransactionType {
-    Withdrawal = 0, Deposit = 1, AccountCreated = 2, Other = 3
+    Withdrawal = 0,
+    Deposit = 1,
+    AccountCreated = 2,
+    AccountDeleted = 3,
+    Other = 3
 };
 
 class Transaction {

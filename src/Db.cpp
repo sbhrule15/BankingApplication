@@ -189,7 +189,20 @@ static int updateAccountQuery(std::string stmt, std::string logstmt) {
 }
 
 bool db::deleteAccount(int accId) {
-
+    std::string stmt =
+                "DELETE FROM CHECKINGACCOUNT"
+                "WHERE ACCOUNTID = "+std::to_string(accId)+";"
+                "DELETE FROM SAVINGSACCOUNT"
+                "WHERE ACCOUNTID = "+std::to_string(accId)+";"
+                "DELETE FROM ACCOUNT"
+                "WHERE ID = "+std::to_string(accId)+";";
+    std::string logstmt =
+            "INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE) "
+            "VALUES("+std::to_string(accId)+", current_timestamp, 0, "+std::to_string(AccountDeleted)+");";
+    if (updateAccountQuery(stmt,logstmt) != 0)
+        return true;
+    else
+        return false;
 }
 
 bool db::deposit(int accId, float d) {
