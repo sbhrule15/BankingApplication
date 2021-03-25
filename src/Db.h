@@ -6,7 +6,6 @@
 #define BANKINGAPPLICATION_DB_H
 
 #include <cstdio>
-#include "sqlite3.h"
 #include "Account.h"
 #include "Transaction.h"
 #include "CheckingAccount.h"

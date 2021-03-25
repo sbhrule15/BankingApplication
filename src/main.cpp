@@ -17,18 +17,18 @@ static void clearCinGuard() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-static bool noAccounts(std::vector<Account> &accounts) {
+static bool noAccounts(std::map<int,Account> &accounts) {
     if (accounts.empty()) {
         return true;
     } else { return false; }
 }
 
-static std::vector<std::string> getAccountNames(std::vector<Account> &accounts) {
+static std::vector<std::string> getAccountNames(std::map<int,Account> &accounts) {
     std::vector<std::string> actstrings;
     actstrings.reserve(accounts.size());
 
-    for (const Account &a : accounts)
-        actstrings.push_back(a.getName());
+    for (auto const& [key, val] : accounts)
+        actstrings.push_back(val.getName());
 
     return actstrings;
 }
@@ -50,7 +50,7 @@ static int printMenu(std::vector<std::string> options) {
 }
 
 // menu functions
-static void viewDepositMenu(std::vector<Account> &accounts) {
+static void viewDepositMenu(std::map<int,Account> &accounts) {
     float depAmt;
     printMenuHeader("MAKE A DEPOSIT");
     if (noAccounts(accounts)) {
@@ -75,7 +75,7 @@ static void viewDepositMenu(std::vector<Account> &accounts) {
     }
 }
 
-static void viewWithdrawMenu(std::vector<Account> &accounts) {
+static void viewWithdrawMenu(std::map<int,Account> &accounts) {
     float witAmt;
     printMenuHeader("MAKE A WITHDRAWAL");
     if (noAccounts(accounts)) {
@@ -101,12 +101,12 @@ static void viewWithdrawMenu(std::vector<Account> &accounts) {
     }
 }
 
-static void viewTransactionsMenu(std::vector<Account> &accounts) {
+static void viewTransactionsMenu(std::map<int,Account> &accounts) {
     printMenuHeader("VIEW TRANSACTIONS");
     std::cout << "This part of the application is still in production. Please try again later.\n\n" << std::endl;
 }
 
-static void openAccountMenu(std::vector<Account> &accounts) {
+static void openAccountMenu(std::map<int,Account> &accounts) {
     printMenuHeader("OPEN AN ACCOUNT");
 
     // new account info
@@ -146,9 +146,9 @@ static void openAccountMenu(std::vector<Account> &accounts) {
     //add to accounts vector
     if (newAcctType == Checking) {
         try {
-            // add to db and push returned CheckingAccount object to vector
+            // add to db and push returned CheckingAccount object to map with key as id
             CheckingAccount newCheck = db::createCheckingAccount(newAcctName);
-            accounts.push_back(newCheck);
+            accounts.emplace(std::make_pair(newCheck.getId(),newCheck));
             // confirm message
             std::cout << "\nNew Checking account " + newAcctName + " created.\n\n" << std::endl;
 
@@ -159,7 +159,7 @@ static void openAccountMenu(std::vector<Account> &accounts) {
         try {
             // add to db and push returned SavingsAccount object to vector
             SavingsAccount newSaving = db::createSavingsAccount(newAcctName);
-            accounts.push_back(newSaving);
+            accounts.emplace(std::make_pair(newSaving.getId(),newSaving));
             // confirm message
             std::cout << "\nNew Savings account " + newAcctName + " created.\n\n" << std::endl;
 
@@ -171,7 +171,7 @@ static void openAccountMenu(std::vector<Account> &accounts) {
     }
 }
 
-static void closeAccountMenu(std::vector<Account> &accounts) {
+static void closeAccountMenu(std::map<int,Account> &accounts) {
     printMenuHeader("CLOSE AN ACCOUNT");
     if (noAccounts(accounts)) {
         std::cout << "\nThere are no accounts to deposit into. Please open an account to deposit money.\n" << std::endl;

@@ -9,14 +9,14 @@
 SavingsAccount::SavingsAccount(const std::string &name, const int id)
         : Account(id, name, 0.0, Savings), interestRate(0.01) {}
 
-SavingsAccount::SavingsAccount(int id, const std::string &name, float balance, float intRate)
+SavingsAccount::SavingsAccount(int id, const std::string &name, double balance, double intRate)
         : Account(id, name, balance, Savings), interestRate(intRate) {}
 
-bool SavingsAccount::withdraw(float amt) {
+bool SavingsAccount::withdraw(double amt) {
     return false;
 }
 
-bool SavingsAccount::deposit(float amt) {
+bool SavingsAccount::deposit(double amt) {
     return false;
 }
 
@@ -29,10 +29,10 @@ void SavingsAccount::printAccountDetails() {
 
 }
 
-float SavingsAccount::getInterestRate() const {
+double SavingsAccount::getInterestRate() const {
     return interestRate;
 }
 
-void SavingsAccount::setInterestRate(float interestRate) {
+void SavingsAccount::setInterestRate(double interestRate) {
     SavingsAccount::interestRate = interestRate;
 }

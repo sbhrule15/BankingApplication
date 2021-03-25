@@ -1,4 +1,15 @@
 "/Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/joshuapare/CLionProjects/BankingApplication
+CMake Warning at /Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/Platform/Darwin-Initialize.cmake:286 (message):
+  Ignoring CMAKE_OSX_SYSROOT value:
+
+   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk
+
+  because the directory does not exist.
+Call Stack (most recent call first):
+  /Users/joshuapare/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/203.7717.62/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/CMakeSystemSpecificInitialize.cmake:21 (include)
+  CMakeLists.txt:2 (project)
+
+
 -- Using c++ standard c++17
 -- CMake version: 3.17.5
 -- Project version: 3.1.1

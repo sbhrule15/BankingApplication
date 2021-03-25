@@ -10,24 +10,24 @@
 
 class SavingsAccount : public Account{
 protected:
-    float interestRate;
+    double interestRate;
 public:
     SavingsAccount(const std::string &name, int id);
-    SavingsAccount(int id, const std::string &name, float balance, float intRate);
+    SavingsAccount(int id, const std::string &name, double balance, double intRate);
 
 public:
     //print functions
     void printAccountDetails();
 
     // getters
-    float getInterestRate() const;
+    double getInterestRate() const;
 
     // setters
-    void setInterestRate(float interestRate);
+    void setInterestRate(double interestRate);
 
     // functions
-    bool deposit(float amt) override;
-    bool withdraw(float amt) override;
+    bool deposit(double amt) override;
+    bool withdraw(double amt) override;
 };
 
 
