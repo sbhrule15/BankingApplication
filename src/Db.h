@@ -33,8 +33,11 @@ namespace db {
     std::vector<SavingsAccount> getAllSavingsAccounts();
 
     // UPDATE
+    bool deposit(int accId, float d);
+    bool withdraw(int accId, float w);
 
     // DESTROY
+    bool deleteAccount(int accId);
 
     //===========TRANSACTIONS============//
     // CREATE
@@ -50,6 +53,7 @@ namespace db {
 
 
     // DESTROY
+
 
 
 }

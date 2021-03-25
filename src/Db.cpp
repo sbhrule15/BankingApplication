@@ -72,7 +72,6 @@ int db::initDB() {
     catch (std::exception &e) {
         std::cout << "exception: " << e.what() << std::endl;
     }
-
     return (0);
 }
 
@@ -86,15 +85,11 @@ CheckingAccount db::createCheckingAccount(const std::string &aName) {
         SQLite::Transaction transaction(db);
 
         // insert account
-        int ia = db.exec("INSERT INTO ACCOUNT (NAME) VALUES ('" + aName + "');");
-        std::cout << "INSERT INTO ACCOUNT query returned " << ia << std::endl;
+        db.exec("INSERT INTO ACCOUNT (NAME) VALUES ('" + aName + "');");
         // insert checking account
-        int ic = db.exec("INSERT INTO CHECKINGACCOUNT(ACCOUNTID) VALUES (last_insert_rowid());");
-        std::cout << "INSERT INTO CHECKING ACCOUNT query returned " << ic << std::endl;
+        db.exec("INSERT INTO CHECKINGACCOUNT(ACCOUNTID) VALUES (last_insert_rowid());");
         // insert transaction
-        int it = db.exec(
-                "INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE) VALUES(last_insert_rowid(), current_timestamp, 0.00, 2);");
-        std::cout << "SELECT CHECKING ACCOUNT query returned " << it << std::endl;
+        db.exec("INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE) VALUES(last_insert_rowid(), current_timestamp, 0.00, 2);");
 
         // Commit transaction
         transaction.commit();
@@ -122,7 +117,6 @@ CheckingAccount db::createCheckingAccount(const std::string &aName) {
             temp.printAccountDetails();
             checkingAccountsVector.push_back(temp);
         }
-
         // return first account object
         return checkingAccountsVector.at(0);
     }
@@ -149,7 +143,9 @@ SavingsAccount db::createSavingsAccount(std::string aName) {
         transaction.commit();
 
         // Select account just made
-        SQLite::Statement query(db,"SELECT * FROM ACCOUNT INNER JOIN SAVINGSACCOUNT S on ACCOUNT.ID = S.ACCOUNTID WHERE ACCOUNT.NAME = '" + aName + "' ;");
+        SQLite::Statement query(db,
+                                "SELECT * FROM ACCOUNT INNER JOIN SAVINGSACCOUNT S on ACCOUNT.ID = S.ACCOUNTID WHERE ACCOUNT.NAME = '" +
+                                aName + "' ;");
         // create vector to store results (in case more than one, return first)
         std::vector<SavingsAccount> savingsAccountsVector;
         // Loop to execute the query step by step, to get rows of result
@@ -173,21 +169,62 @@ SavingsAccount db::createSavingsAccount(std::string aName) {
     }
 }
 
+static int updateAccountQuery(std::string stmt, std::string logstmt) {
+    try {
+        SQLite::Database db("data.db", SQLite::OPEN_READWRITE | SQLite::OPEN_CREATE);
+        SQLite::Transaction transaction(db);
+        // insert account
+        int affected = db.exec(stmt);
+        // log transaction
+        db.exec(logstmt);
+        // Commit transaction
+        transaction.commit();
 
-int db::deleteAccount(int accId) {
+        return affected;
+    }
+    catch (std::exception &e) {
+        std::cout << "exception: " << e.what() << std::endl;
+        return 0;
+    }
+}
+
+bool db::deleteAccount(int accId) {
 
 }
 
-float db::deposit(int accId) {
+bool db::deposit(int accId, float d) {
+    std::string stmt =
+            "UPDATE ACCOUNT"
+            "SET BALANCE = BALANCE + " + std::to_string(d) +
+            "WHERE ID = " + std::to_string(accId) + ";";
+    std::string logstmt =
+            "INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE) "
+            "VALUES("+std::to_string(accId)+", current_timestamp,"+std::to_string(d)+", "+std::to_string(Deposit)+");";
 
+    if (updateAccountQuery(stmt,logstmt) != 0)
+        return true;
+    else
+        return false;
 }
 
-float db::withdraw(int accId) {
+bool db::withdraw(int accId, float w) {
+    std::string stmt =
+            "UPDATE ACCOUNT"
+            "SET BALANCE = BALANCE - " + std::to_string(w) +
+            "WHERE ID = " + std::to_string(accId) +
+            " AND BALANCE > " + std::to_string(w) + ";";
+    std::string logstmt =
+            "INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE) "
+            "VALUES("+std::to_string(accId)+", current_timestamp, "+std::to_string(-w)+", "+std::to_string(Withdrawal)+");";
 
+    if (updateAccountQuery(stmt,logstmt) != 0)
+        return true;
+    else
+        return false;
 }
 
 // Get Accounts Function
-static std::vector<Account> getAccountsQuery(std::string stmt){
+static std::vector<Account> getAccountsQuery(std::string stmt) {
     try {
         // open database
         SQLite::Database db("data.db", SQLite::OPEN_READWRITE);
@@ -235,7 +272,7 @@ Account db::getAccountById(int accId) {
     return getAccountsQuery(stmt).at(0);
 }
 
-std::vector<Account> db::getAccountsByName(std::string name){
+std::vector<Account> db::getAccountsByName(std::string name) {
     std::string stmt =
             "SELECT a.ID, NAME, BALANCE, C.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, S.INTERESTRATE FROM ACCOUNT as a"
             "INNER JOIN CHECKINGACCOUNT C on a.ID = C.ACCOUNTID"
