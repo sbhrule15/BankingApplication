@@ -56,26 +56,29 @@ static T chooseFromAccountMenu(std::map<int,Account> &accts, MenuChoiceOptions m
 
     // iterate through map
     for (auto const& [key, val] : accts) {
-        std::cout << "\t" << menuNum << "." << val.getName();
-        // print additional options if present
-        if (info == WithBalance) {
-            std::cout << std::setprecision(2) << val.getBalance();
-        }
-        // end print
-        std::cout << std::endl;
+        std::cout << "\t" << menuNum << "." << val.getName() +" - $" << std::setprecision (2) << std::fixed << val.getBalance() << std::endl;
 
         // add val to accountChoiceMap with desired data to chose
-        if (mco == convertChoiceToName){
-            accountChoiceMap.emplace(std::make_pair(menuNum, val.getName()));
-        } else if (mco == convertChoiceToAccountId){
+        if (mco == convertChoiceToAccountId){
             accountChoiceMap.emplace(std::make_pair(menuNum, key));
         }
+//      else if (mco == convertChoiceToName){
+//          accountChoiceMap.emplace(std::make_pair(menuNum, val.getName()));
+//      }
 
         menuNum++;
     }
-    std::cout << "\nPlease choose an account:" << std::endl;
-    std::cin >> userSel;
-    std::cout << "\n";
+    while (true) {
+
+        std::cout << "\nPlease choose an account:" << std::endl;
+        std::cin >> userSel;
+        std::cout << "\n";
+        if (accountChoiceMap.count(userSel)){
+            break;
+        } else {
+            std::cout << "That was an invalid option." << std::endl;
+        }
+    }
 
     // get mapped selection value and return
     return accountChoiceMap.at(userSel);
@@ -92,11 +95,11 @@ static void viewDepositMenu(std::map<int,Account> &accounts) {
     while (true) {
         std::cout << "Here are your accounts:\n" << std::endl;
         // list accounts with balance
-        int accountSel = chooseFromAccountMenu<int>(accounts,convertChoiceToAccountId, WithBalance);
-        if (accounts.count(accountSel)) {
+        int accountId = chooseFromAccountMenu<int>(accounts,convertChoiceToAccountId, WithBalance);
+        if (accounts.count(accountId)) {
             std::cout << "\nPlease enter the amount to deposit:" << std::endl;
             std::cin >> depAmt;
-            if (accounts.at(accountSel).deposit(depAmt))
+            if (accounts.at(accountId).deposit(depAmt))
                 std::cout << "\nDeposit successfully processed.\n" << std::endl;
             else
                 std::cout << "\nDeposit was unsuccessful.\n" << std::endl;

@@ -208,7 +208,7 @@ bool db::deposit(int accId, float d) {
     std::string stmt =
             "UPDATE ACCOUNT"
             "SET BALANCE = BALANCE + " + std::to_string(d) +
-            "WHERE ID = " + std::to_string(accId) + ";";
+            " WHERE ID = " + std::to_string(accId) + ";";
     std::string logstmt =
             "INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE) "
             "VALUES("+std::to_string(accId)+", current_timestamp,"+std::to_string(d)+", "+std::to_string(Deposit)+");";
