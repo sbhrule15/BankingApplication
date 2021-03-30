@@ -204,14 +204,14 @@ bool db::deleteAccount(int accId) {
         return false;
 }
 
-bool db::deposit(int accId, float d) {
+bool db::deposit(int accId, double d) {
     std::string stmt =
             "UPDATE ACCOUNT"
-            "SET BALANCE = BALANCE + " + std::to_string(d) +
+            " SET BALANCE = BALANCE + " + std::to_string(d) +
             " WHERE ID = " + std::to_string(accId) + ";";
     std::string logstmt =
-            "INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE) "
-            "VALUES("+std::to_string(accId)+", current_timestamp,"+std::to_string(d)+", "+std::to_string(Deposit)+");";
+            "INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE)"
+            " VALUES("+std::to_string(accId)+", current_timestamp,"+std::to_string(d)+", "+std::to_string(Deposit)+");";
 
     if (updateAccountQuery(stmt,logstmt) != 0)
         return true;
@@ -219,15 +219,15 @@ bool db::deposit(int accId, float d) {
         return false;
 }
 
-bool db::withdraw(int accId, float w) {
+bool db::withdraw(int accId, double w) {
     std::string stmt =
             "UPDATE ACCOUNT"
-            "SET BALANCE = BALANCE - " + std::to_string(w) +
-            "WHERE ID = " + std::to_string(accId) +
+            " SET BALANCE = BALANCE - " + std::to_string(w) +
+            " WHERE ID = " + std::to_string(accId) +
             " AND BALANCE > " + std::to_string(w) + ";";
     std::string logstmt =
-            "INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE) "
-            "VALUES("+std::to_string(accId)+", current_timestamp, "+std::to_string(-w)+", "+std::to_string(Withdrawal)+");";
+            "INSERT INTO TRANSACTIONLOG(ACCOUNTID, TIMESTAMP, AMTCHANGE, TRANSACTIONTYPE)"
+            " VALUES("+std::to_string(accId)+", current_timestamp, "+std::to_string(-w)+", "+std::to_string(Withdrawal)+");";
 
     if (updateAccountQuery(stmt,logstmt) != 0)
         return true;
@@ -236,14 +236,14 @@ bool db::withdraw(int accId, float w) {
 }
 
 // Get Accounts Function
-static std::vector<Account> getAccountsQuery(const std::string& stmt) {
+static std::map<int, std::shared_ptr<Account>> getAccountsQuery(const std::string& stmt) {
     try {
         // open database
         SQLite::Database db("data.db", SQLite::OPEN_READWRITE);
         // select all accounts with join on checking
         SQLite::Statement query(db, stmt);
         // create vector to store results (in case more than one, return first)
-        std::vector<Account> accountsVector;
+        std::map<int, std::shared_ptr<Account>> accountsVector;
 
         while (query.executeStep()) {
             // Get typed column values
@@ -257,13 +257,11 @@ static std::vector<Account> getAccountsQuery(const std::string& stmt) {
 
             // Create temp, print out details and push onto vector
             if (intRate == 0) {
-                CheckingAccount temp(id, name, balance, minBal, maxDep, maxWith);
-                temp.printAccountDetails();
-                accountsVector.push_back(temp);
+                std::shared_ptr<Account> p = std::make_shared<CheckingAccount>(id, name, balance, minBal, maxDep, maxWith);
+                accountsVector.emplace(p->getId(),p);
             } else {
-                SavingsAccount temp(id, name, balance, intRate);
-                temp.printAccountDetails();
-                accountsVector.push_back(temp);
+                std::shared_ptr<Account> p = std::make_shared<SavingsAccount>(id, name, balance, intRate);
+                accountsVector.emplace(p->getId(),p);
             }
         }
         // return first account object
@@ -274,17 +272,17 @@ static std::vector<Account> getAccountsQuery(const std::string& stmt) {
     }
 }
 
-Account db::getAccountById(int accId) {
+std::map<int, std::shared_ptr<Account>> db::getAccountsById(int accId) {
     std::string stmt =
             "SELECT a.ID, NAME, BALANCE, C.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, S.INTERESTRATE FROM ACCOUNT as a"
             "INNER JOIN CHECKINGACCOUNT C on a.ID = C.ACCOUNTID"
             "INNER JOIN SAVINGSACCOUNT S on a.ID = S.ACCOUNTID"
             "WHERE ID = " + std::to_string(accId) + ";";
 
-    return getAccountsQuery(stmt).at(0);
+    return getAccountsQuery(stmt);
 }
 
-std::vector<Account> db::getAccountsByName(const std::string& name) {
+std::map<int, std::shared_ptr<Account>> db::getAccountsByName(const std::string& name) {
     std::string stmt =
             "SELECT a.ID, NAME, BALANCE, C.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, S.INTERESTRATE FROM ACCOUNT as a"
             "LEFT JOIN CHECKINGACCOUNT C on a.ID = C.ACCOUNTID"
@@ -294,7 +292,7 @@ std::vector<Account> db::getAccountsByName(const std::string& name) {
     return getAccountsQuery(stmt);
 }
 
-std::vector<Account> db::getAllAccounts() {
+std::map<int, std::shared_ptr<Account>> db::getAllAccounts() {
     std::string stmt =
             "SELECT a.ID, NAME, BALANCE, C.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, S.INTERESTRATE FROM ACCOUNT as a "
             "LEFT JOIN CHECKINGACCOUNT C on a.ID = C.ACCOUNTID "
@@ -303,14 +301,14 @@ std::vector<Account> db::getAllAccounts() {
     return getAccountsQuery(stmt);
 }
 
-std::vector<CheckingAccount> db::getAllCheckingAccounts() {
+std::map<int, std::shared_ptr<CheckingAccount>> db::getAllCheckingAccounts() {
     try {
         // open database
         SQLite::Database db("data.db", SQLite::OPEN_READWRITE);
         // select all accounts with join on checking
         SQLite::Statement query(db, "SELECT * FROM ACCOUNT LEFT JOIN CHECKINGACCOUNT C on ACCOUNT.ID = C.ACCOUNTID;");
         // create vector to store results (in case more than one, return first)
-        std::vector<CheckingAccount> checkingAccountsVector;
+        std::map<int, std::shared_ptr<CheckingAccount>> checkingAccountsMap;
 
         while (query.executeStep()) {
             // Get typed column values
@@ -322,27 +320,26 @@ std::vector<CheckingAccount> db::getAllCheckingAccounts() {
             double maxWith = query.getColumn(6);
 
             // Create temp, print out details and push onto vector
-            CheckingAccount temp(id, name, balance, minBal, maxDep, maxWith);
-            temp.printAccountDetails();
-            checkingAccountsVector.push_back(temp);
+            std::shared_ptr<CheckingAccount> p = std::make_shared<CheckingAccount>(id, name, balance, minBal, maxDep, maxWith);
+            checkingAccountsMap.emplace(p->getId(),p);
         }
 
         // return account vector
-        return checkingAccountsVector;
+        return checkingAccountsMap;
     }
     catch (std::exception &e) {
         std::cout << "exception: " << e.what() << std::endl;
     }
 }
 
-std::vector<SavingsAccount> db::getAllSavingsAccounts() {
+std::map<int, std::shared_ptr<SavingsAccount>> db::getAllSavingsAccounts() {
     try {
         // open database
         SQLite::Database db("data.db", SQLite::OPEN_READWRITE);
         // select all accounts with join on savings
         SQLite::Statement query(db, "SELECT * FROM ACCOUNT INNER JOIN SAVINGSACCOUNT S on ACCOUNT.ID = S.ACCOUNTID;");
         // create vector to store results (in case more than one, return first)
-        std::vector<SavingsAccount> savingsAccountsVector;
+        std::map<int, std::shared_ptr<SavingsAccount>> savingsAccountsMap;
 
         // Loop to execute the query step by step, to get rows of result
         while (query.executeStep()) {
@@ -353,13 +350,12 @@ std::vector<SavingsAccount> db::getAllSavingsAccounts() {
             double intRate = query.getColumn(4);
 
             // Create temp, print details and push onto vector
-            SavingsAccount temp(id, name, balance, intRate);
-            temp.printAccountDetails();
-            savingsAccountsVector.push_back(temp);
+            std::shared_ptr<SavingsAccount> p = std::make_shared<SavingsAccount>(id, name, balance, intRate);
+            savingsAccountsMap.emplace(p->getId(),p);
         }
 
         // return first account object
-        return savingsAccountsVector;
+        return savingsAccountsMap;
     }
     catch (std::exception &e) {
         std::cout << "exception: " << e.what() << std::endl;

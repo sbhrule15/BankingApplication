@@ -39,12 +39,15 @@ bool CheckingAccount::deposit(double amt) {
 }
 
 bool CheckingAccount::withdraw(double amt) {
-    if (amt > balance || amt > maxWithdraw){
-        return false;
+    if (amt > balance){
+        std::cout << "You do not have enough money in this account to withdraw from." << std::endl;
+    } else if (amt > maxWithdraw){
+        std::cout << "You are trying to withdraw more than the allowed maximum." << std::endl;
     } else {
         balance = balance - amt;
         return true;
     }
+    return false;
 }
 
 double CheckingAccount::getMaxWithdraw() const {

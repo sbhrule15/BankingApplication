@@ -25,8 +25,8 @@ public:
     Account(int id, std::string name, double balance, AccountType accountType);
 
     // virtual functions
-    virtual bool deposit(double amt);
-    virtual bool withdraw(double amt);
+    virtual bool deposit(double amt) = 0;
+    virtual bool withdraw(double amt) = 0;
 
     // getters
     int getAcctNumber() const;

@@ -25,7 +25,7 @@ static void clearCinGuard() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-static bool noAccounts(std::map<int,Account> &accounts) {
+static bool noAccounts(const std::map<int,std::shared_ptr<Account>>& accounts) {
     if (accounts.empty()) {
         return true;
     } else { return false; }
@@ -49,14 +49,14 @@ static int printMenu(std::vector<std::string> options) {
 
 // can return string or id
 template <typename T>
-static T chooseFromAccountMenu(std::map<int,Account> &accts, MenuChoiceOptions mco, AdditionalAccountInfo info) {
+static T chooseFromAccountMenu(const std::map<int,std::shared_ptr<Account>>& accts, MenuChoiceOptions mco, AdditionalAccountInfo info) {
     int userSel;
     std::map<int, T> accountChoiceMap;
     int menuNum = 1;
 
     // iterate through map
     for (auto const& [key, val] : accts) {
-        std::cout << "\t" << menuNum << "." << val.getName() +" - $" << std::setprecision (2) << std::fixed << val.getBalance() << std::endl;
+        std::cout << "\t" << menuNum << "." << val->getName() +" - $" << std::setprecision (2) << std::fixed << val->getBalance() << std::endl;
 
         // add val to accountChoiceMap with desired data to chose
         if (mco == convertChoiceToAccountId){
@@ -77,6 +77,7 @@ static T chooseFromAccountMenu(std::map<int,Account> &accts, MenuChoiceOptions m
             break;
         } else {
             std::cout << "That was an invalid option." << std::endl;
+            clearCinGuard();
         }
     }
 
@@ -85,7 +86,9 @@ static T chooseFromAccountMenu(std::map<int,Account> &accts, MenuChoiceOptions m
 }
 
 // menu functions
-static void viewDepositMenu(std::map<int,Account> &accounts) {
+static void viewDepositMenu() {
+    std::map<int,std::shared_ptr<Account>> accounts = db::getAllAccounts();
+
     float depAmt;
     printMenuHeader("MAKE A DEPOSIT");
     if (noAccounts(accounts)) {
@@ -99,7 +102,7 @@ static void viewDepositMenu(std::map<int,Account> &accounts) {
         if (accounts.count(accountId)) {
             std::cout << "\nPlease enter the amount to deposit:" << std::endl;
             std::cin >> depAmt;
-            if (accounts.at(accountId).deposit(depAmt))
+            if (accounts.at(accountId)->deposit(depAmt))
                 std::cout << "\nDeposit successfully processed.\n" << std::endl;
             else
                 std::cout << "\nDeposit was unsuccessful.\n" << std::endl;
@@ -111,7 +114,9 @@ static void viewDepositMenu(std::map<int,Account> &accounts) {
     }
 }
 
-static void viewWithdrawMenu(std::map<int,Account> &accounts) {
+static void viewWithdrawMenu() {
+    std::map<int,std::shared_ptr<Account>> accounts = db::getAllAccounts();
+
     float witAmt;
     printMenuHeader("MAKE A WITHDRAWAL");
     if (noAccounts(accounts)) {
@@ -120,12 +125,13 @@ static void viewWithdrawMenu(std::map<int,Account> &accounts) {
         return;
     }
     while (true) {
-        std::cout << "Please select an account to make a deposit:" << std::endl;
-        int accountSel = chooseFromAccountMenu<int>(accounts,convertChoiceToAccountId,WithBalance);
-        if (accounts.count(accountSel)) {
+        std::cout << "Here are your accounts:\n" << std::endl;
+        // list accounts with balance
+        int accountId = chooseFromAccountMenu<int>(accounts,convertChoiceToAccountId, WithBalance);
+        if (accounts.count(accountId)) {
             std::cout << "\nPlease enter the amount to withdraw:" << std::endl;
             std::cin >> witAmt;
-            if (accounts.at(accountSel - 1).withdraw(witAmt))
+            if (accounts.at(accountId)->withdraw(witAmt))
                 std::cout << "\nWithdrawal successfully processed.\n" << std::endl;
             else
                 std::cout << "\nWithdrawal was unsuccessful.\n" << std::endl;
@@ -137,12 +143,14 @@ static void viewWithdrawMenu(std::map<int,Account> &accounts) {
     }
 }
 
-static void viewTransactionsMenu(std::map<int,Account> &accounts) {
+static void viewTransactionsMenu() {
     printMenuHeader("VIEW TRANSACTIONS");
     std::cout << "This part of the application is still in production. Please try again later.\n\n" << std::endl;
 }
 
-static void openAccountMenu(std::map<int,Account> &accounts) {
+static void openAccountMenu() {
+    std::map<int,Account> accounts;
+
     printMenuHeader("OPEN AN ACCOUNT");
 
     // new account info
@@ -207,7 +215,9 @@ static void openAccountMenu(std::map<int,Account> &accounts) {
     }
 }
 
-static void closeAccountMenu(std::map<int,Account> &accounts) {
+static void closeAccountMenu() {
+    std::map<int,Account> accounts;
+
     printMenuHeader("CLOSE AN ACCOUNT");
     if (noAccounts(accounts)) {
         std::cout << "\nThere are no accounts to deposit into. Please open an account to deposit money.\n" << std::endl;
@@ -218,11 +228,6 @@ static void closeAccountMenu(std::map<int,Account> &accounts) {
 int main(int argc, char *argv[]) {
     // create tables, if don't exist
     db::initDB();
-    // load all accounts into map for quick find
-    std::map<int, Account> accounts;
-    for (const Account& a : db::getAllAccounts()){
-        accounts.emplace(std::make_pair(a.getId(),a));
-    }
 
     // welcome screen
     printMenuHeader("JOSHUA'S BANKING PROGRAM");
@@ -237,19 +242,19 @@ int main(int argc, char *argv[]) {
 
         switch (usrSel) {
             case MainDeposit:
-                viewDepositMenu(accounts);
+                viewDepositMenu();
                 break;
             case MainWithdraw:
-                viewWithdrawMenu(accounts);
+                viewWithdrawMenu();
                 break;
             case MainTransactions:
-                viewTransactionsMenu(accounts);
+                viewTransactionsMenu();
                 break;
             case MainOpenAccount:
-                openAccountMenu(accounts);
+                openAccountMenu();
                 break;
             case MainCloseAccount:
-                closeAccountMenu(accounts);
+                closeAccountMenu();
                 break;
             case MainQuit:
                 goto exit_program;

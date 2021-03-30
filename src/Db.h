@@ -24,16 +24,16 @@ namespace db {
     SavingsAccount createSavingsAccount(const std::string& aName);
 
     // READ
-    Account getAccountById(int accId);
-    std::vector<Account> getAccountsByName(const std::string& name);
-    std::vector<Account> getAccountsByType(AccountType type);
-    std::vector<Account> getAllAccounts();
-    std::vector<CheckingAccount> getAllCheckingAccounts();
-    std::vector<SavingsAccount> getAllSavingsAccounts();
+    std::map<int, std::shared_ptr<Account>> getAccountsById(int accId);
+    std::map<int, std::shared_ptr<Account>> getAccountsByName(const std::string& name);
+    std::map<int, std::shared_ptr<Account>> getAccountsByType(AccountType type);
+    std::map<int, std::shared_ptr<Account>> getAllAccounts();
+    std::map<int, std::shared_ptr<CheckingAccount>> getAllCheckingAccounts();
+    std::map<int, std::shared_ptr<SavingsAccount>> getAllSavingsAccounts();
 
     // UPDATE
-    bool deposit(int accId, float d);
-    bool withdraw(int accId, float w);
+    bool deposit(int accId, double d);
+    bool withdraw(int accId, double w);
 
     // DESTROY
     bool deleteAccount(int accId);

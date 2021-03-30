@@ -23,11 +23,12 @@ public:
     double getInterestRate() const;
 
     // setters
-    void setInterestRate(double interestRate);
+    void setInterestRate(double ir);
 
     // functions
     bool deposit(double amt) override;
     bool withdraw(double amt) override;
+
 };
 
 
