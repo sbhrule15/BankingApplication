@@ -296,8 +296,8 @@ std::vector<Account> db::getAccountsByName(const std::string& name) {
 
 std::vector<Account> db::getAllAccounts() {
     std::string stmt =
-            "SELECT a.ID, NAME, BALANCE, C.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, S.INTERESTRATE FROM ACCOUNT as a"
-            "INNER JOIN CHECKINGACCOUNT C on a.ID = C.ACCOUNTID"
+            "SELECT a.ID, NAME, BALANCE, C.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, S.INTERESTRATE FROM ACCOUNT as a "
+            "INNER JOIN CHECKINGACCOUNT C on a.ID = C.ACCOUNTID "
             "INNER JOIN SAVINGSACCOUNT S on a.ID = S.ACCOUNTID;";
 
     return getAccountsQuery(stmt);
