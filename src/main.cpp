@@ -11,6 +11,14 @@ enum MainMenu {
     MainDeposit = 1, MainWithdraw, MainTransactions, MainOpenAccount, MainCloseAccount, MainQuit
 };
 
+enum AdditionalAccountInfo {
+    NameOnly, WithBalance
+};
+
+enum MenuChoiceOptions {
+    convertChoiceToAccountId, convertChoiceToName
+};
+
 //utility functions
 static void clearCinGuard() {
     std::cin.clear();
@@ -21,16 +29,6 @@ static bool noAccounts(std::map<int,Account> &accounts) {
     if (accounts.empty()) {
         return true;
     } else { return false; }
-}
-
-static std::vector<std::string> getAccountNames(std::map<int,Account> &accounts) {
-    std::vector<std::string> actstrings;
-    actstrings.reserve(accounts.size());
-
-    for (auto const& [key, val] : accounts)
-        actstrings.push_back(val.getName());
-
-    return actstrings;
 }
 
 // print functions
@@ -49,6 +47,40 @@ static int printMenu(std::vector<std::string> options) {
     return userSel;
 }
 
+// can return string or id
+template <typename T>
+static T chooseFromAccountMenu(std::map<int,Account> &accts, MenuChoiceOptions mco, AdditionalAccountInfo info) {
+    int userSel;
+    std::map<int, T> accountChoiceMap;
+    int menuNum = 1;
+
+    // iterate through map
+    for (auto const& [key, val] : accts) {
+        std::cout << "\t" << menuNum << "." << val.getName();
+        // print additional options if present
+        if (info == WithBalance) {
+            std::cout << std::setprecision(2) << val.getBalance();
+        }
+        // end print
+        std::cout << std::endl;
+
+        // add val to accountChoiceMap with desired data to chose
+        if (mco == convertChoiceToName){
+            accountChoiceMap.emplace(std::make_pair(menuNum, val.getName()));
+        } else if (mco == convertChoiceToAccountId){
+            accountChoiceMap.emplace(std::make_pair(menuNum, key));
+        }
+
+        menuNum++;
+    }
+    std::cout << "\nPlease choose an account:" << std::endl;
+    std::cin >> userSel;
+    std::cout << "\n";
+
+    // get mapped selection value and return
+    return accountChoiceMap.at(userSel);
+}
+
 // menu functions
 static void viewDepositMenu(std::map<int,Account> &accounts) {
     float depAmt;
@@ -58,12 +90,13 @@ static void viewDepositMenu(std::map<int,Account> &accounts) {
         return;
     }
     while (true) {
-        std::cout << "Please select an account to make a deposit:" << std::endl;
-        int accountSel = printMenu(getAccountNames(accounts));
-        if (accountSel <= accounts.size() && accountSel > 0) {
+        std::cout << "Here are your accounts:\n" << std::endl;
+        // list accounts with balance
+        int accountSel = chooseFromAccountMenu<int>(accounts,convertChoiceToAccountId, WithBalance);
+        if (accounts.count(accountSel)) {
             std::cout << "\nPlease enter the amount to deposit:" << std::endl;
             std::cin >> depAmt;
-            if (accounts.at(accountSel - 1).deposit(depAmt))
+            if (accounts.at(accountSel).deposit(depAmt))
                 std::cout << "\nDeposit successfully processed.\n" << std::endl;
             else
                 std::cout << "\nDeposit was unsuccessful.\n" << std::endl;
@@ -85,8 +118,8 @@ static void viewWithdrawMenu(std::map<int,Account> &accounts) {
     }
     while (true) {
         std::cout << "Please select an account to make a deposit:" << std::endl;
-        int accountSel = printMenu(getAccountNames(accounts));
-        if (accountSel <= accounts.size() && accountSel > 0) {
+        int accountSel = chooseFromAccountMenu<int>(accounts,convertChoiceToAccountId,WithBalance);
+        if (accounts.count(accountSel)) {
             std::cout << "\nPlease enter the amount to withdraw:" << std::endl;
             std::cin >> witAmt;
             if (accounts.at(accountSel - 1).withdraw(witAmt))
@@ -184,7 +217,7 @@ int main(int argc, char *argv[]) {
     db::initDB();
     // load all accounts into map for quick find
     std::map<int, Account> accounts;
-    for (Account a : db::getAllAccounts()){
+    for (const Account& a : db::getAllAccounts()){
         accounts.emplace(std::make_pair(a.getId(),a));
     }
 

@@ -287,8 +287,8 @@ Account db::getAccountById(int accId) {
 std::vector<Account> db::getAccountsByName(const std::string& name) {
     std::string stmt =
             "SELECT a.ID, NAME, BALANCE, C.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, S.INTERESTRATE FROM ACCOUNT as a"
-            "INNER JOIN CHECKINGACCOUNT C on a.ID = C.ACCOUNTID"
-            "INNER JOIN SAVINGSACCOUNT S on a.ID = S.ACCOUNTID"
+            "LEFT JOIN CHECKINGACCOUNT C on a.ID = C.ACCOUNTID"
+            "LEFT JOIN SAVINGSACCOUNT S on a.ID = S.ACCOUNTID"
             "WHERE NAME = " + name + ";";
 
     return getAccountsQuery(stmt);
@@ -297,8 +297,8 @@ std::vector<Account> db::getAccountsByName(const std::string& name) {
 std::vector<Account> db::getAllAccounts() {
     std::string stmt =
             "SELECT a.ID, NAME, BALANCE, C.MINBALANCE, MAXDEPOSIT, MAXWITHDRAW, S.INTERESTRATE FROM ACCOUNT as a "
-            "INNER JOIN CHECKINGACCOUNT C on a.ID = C.ACCOUNTID "
-            "INNER JOIN SAVINGSACCOUNT S on a.ID = S.ACCOUNTID;";
+            "LEFT JOIN CHECKINGACCOUNT C on a.ID = C.ACCOUNTID "
+            "LEFT JOIN SAVINGSACCOUNT S on a.ID = S.ACCOUNTID;";
 
     return getAccountsQuery(stmt);
 }
@@ -308,7 +308,7 @@ std::vector<CheckingAccount> db::getAllCheckingAccounts() {
         // open database
         SQLite::Database db("data.db", SQLite::OPEN_READWRITE);
         // select all accounts with join on checking
-        SQLite::Statement query(db, "SELECT * FROM ACCOUNT INNER JOIN CHECKINGACCOUNT C on ACCOUNT.ID = C.ACCOUNTID;");
+        SQLite::Statement query(db, "SELECT * FROM ACCOUNT LEFT JOIN CHECKINGACCOUNT C on ACCOUNT.ID = C.ACCOUNTID;");
         // create vector to store results (in case more than one, return first)
         std::vector<CheckingAccount> checkingAccountsVector;
 
