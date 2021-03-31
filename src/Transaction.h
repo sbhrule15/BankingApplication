@@ -19,15 +19,15 @@ enum TransactionType {
 
 class Transaction {
 protected:
-    int id;
-    int accountId;
-    std::time_t timestamp;
-    float amtChange;
+    int id{};
+    int accountId{};
+    std::string timestamp{};
+    double amtChange{};
     TransactionType transactionType;
 
 public:
-    // constructor
-    Transaction(int id, float amtChange, TransactionType type, int aId);
+    // constructors
+    Transaction(int id, int accountId, std::string timestamp, double amtChange, TransactionType transactionType);
 
     // functions
     void printTransaction();

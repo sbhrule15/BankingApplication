@@ -3,7 +3,7 @@
 //
 
 #include "Account.h"
-
+#include "Db.h"
 #include <utility>
 
 // Constructor
@@ -58,15 +58,19 @@ void Account::setId(int iD) {
 }
 
 bool Account::deposit(double amt) {
-    balance = balance + amt;
-    return true;
+    if (db::deposit(getId(),amt)){
+        balance = balance + amt;
+        return true;
+    }
+
+    return false;
 }
 
 bool Account::withdraw(double amt) {
-    if (amt > balance)
-        return false;
-    else {
+    if (db::withdraw(getId(),amt)){
         balance = balance - amt;
         return true;
     }
+
+    return false;
 }

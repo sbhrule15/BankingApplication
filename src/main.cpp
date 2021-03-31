@@ -7,6 +7,7 @@
 #include "SavingsAccount.h"
 #include "Db.h"
 
+// enums
 enum MainMenu {
     MainDeposit = 1, MainWithdraw, MainTransactions, MainOpenAccount, MainCloseAccount, MainQuit
 };
@@ -25,7 +26,7 @@ static void clearCinGuard() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-static bool noAccounts(std::map<int,Account> &accounts) {
+static bool noAccounts(const std::map<int, std::shared_ptr<Account>> &accounts) {
     if (accounts.empty()) {
         return true;
     } else { return false; }
@@ -48,41 +49,45 @@ static int printMenu(std::vector<std::string> options) {
 }
 
 // can return string or id
-template <typename T>
-static T chooseFromAccountMenu(std::map<int,Account> &accts, MenuChoiceOptions mco, AdditionalAccountInfo info) {
+template<typename T>
+static T printAccountMenu(const std::map<int, std::shared_ptr<Account>> &accts, MenuChoiceOptions mco,
+                          AdditionalAccountInfo info) {
     int userSel;
     std::map<int, T> accountChoiceMap;
     int menuNum = 1;
 
     // iterate through map
-    for (auto const& [key, val] : accts) {
-        std::cout << "\t" << menuNum << "." << val.getName();
-        // print additional options if present
-        if (info == WithBalance) {
-            std::cout << std::setprecision(2) << val.getBalance();
-        }
-        // end print
-        std::cout << std::endl;
+    for (auto const&[key, val] : accts) {
+        std::cout << "\t" << menuNum << "." << val->getName() + " - $" << std::setprecision(2) << std::fixed
+                  << val->getBalance() << std::endl;
 
-        // add val to accountChoiceMap with desired data to chose
-        if (mco == convertChoiceToName){
-            accountChoiceMap.emplace(std::make_pair(menuNum, val.getName()));
-        } else if (mco == convertChoiceToAccountId){
+        // add val to accountChoiceMap with desired data
+        if (mco == convertChoiceToAccountId)
             accountChoiceMap.emplace(std::make_pair(menuNum, key));
-        }
 
         menuNum++;
     }
-    std::cout << "\nPlease choose an account:" << std::endl;
-    std::cin >> userSel;
-    std::cout << "\n";
+    while (true) {
+        std::cout << "\nPlease choose an account:" << std::endl;
+        std::cin >> userSel;
+        std::cout << "\n";
+        if (accountChoiceMap.count(userSel)) {
+            std::cout << "Account Chosen: " << accts.at(accountChoiceMap.at(userSel))->getName() << std::endl;
+            break;
+        } else {
+            std::cout << "That was an invalid option." << std::endl;
+            clearCinGuard();
+        }
+    }
 
     // get mapped selection value and return
     return accountChoiceMap.at(userSel);
 }
 
 // menu functions
-static void viewDepositMenu(std::map<int,Account> &accounts) {
+static void viewDepositMenu() {
+    std::map<int, std::shared_ptr<Account>> accounts = db::getAllAccounts();
+
     float depAmt;
     printMenuHeader("MAKE A DEPOSIT");
     if (noAccounts(accounts)) {
@@ -92,11 +97,11 @@ static void viewDepositMenu(std::map<int,Account> &accounts) {
     while (true) {
         std::cout << "Here are your accounts:\n" << std::endl;
         // list accounts with balance
-        int accountSel = chooseFromAccountMenu<int>(accounts,convertChoiceToAccountId, WithBalance);
-        if (accounts.count(accountSel)) {
+        int accountId = printAccountMenu<int>(accounts, convertChoiceToAccountId, WithBalance);
+        if (accounts.count(accountId)) {
             std::cout << "\nPlease enter the amount to deposit:" << std::endl;
             std::cin >> depAmt;
-            if (accounts.at(accountSel).deposit(depAmt))
+            if (accounts.at(accountId)->deposit(depAmt))
                 std::cout << "\nDeposit successfully processed.\n" << std::endl;
             else
                 std::cout << "\nDeposit was unsuccessful.\n" << std::endl;
@@ -108,7 +113,9 @@ static void viewDepositMenu(std::map<int,Account> &accounts) {
     }
 }
 
-static void viewWithdrawMenu(std::map<int,Account> &accounts) {
+static void viewWithdrawMenu() {
+    std::map<int, std::shared_ptr<Account>> accounts = db::getAllAccounts();
+
     float witAmt;
     printMenuHeader("MAKE A WITHDRAWAL");
     if (noAccounts(accounts)) {
@@ -117,12 +124,13 @@ static void viewWithdrawMenu(std::map<int,Account> &accounts) {
         return;
     }
     while (true) {
-        std::cout << "Please select an account to make a deposit:" << std::endl;
-        int accountSel = chooseFromAccountMenu<int>(accounts,convertChoiceToAccountId,WithBalance);
-        if (accounts.count(accountSel)) {
+        std::cout << "Here are your accounts:\n" << std::endl;
+        // list accounts with balance
+        int accountId = printAccountMenu<int>(accounts, convertChoiceToAccountId, WithBalance);
+        if (accounts.count(accountId)) {
             std::cout << "\nPlease enter the amount to withdraw:" << std::endl;
             std::cin >> witAmt;
-            if (accounts.at(accountSel - 1).withdraw(witAmt))
+            if (accounts.at(accountId)->withdraw(witAmt))
                 std::cout << "\nWithdrawal successfully processed.\n" << std::endl;
             else
                 std::cout << "\nWithdrawal was unsuccessful.\n" << std::endl;
@@ -134,17 +142,65 @@ static void viewWithdrawMenu(std::map<int,Account> &accounts) {
     }
 }
 
-static void viewTransactionsMenu(std::map<int,Account> &accounts) {
+static void viewTransactionsMenu() {
     printMenuHeader("VIEW TRANSACTIONS");
-    std::cout << "This part of the application is still in production. Please try again later.\n\n" << std::endl;
+    std::map<int, std::vector<Transaction>> transactionLog;
+
+    // menu option validator
+    bool awaitingValid{true};
+    int userSel = 0;
+
+    // get account type
+    while (awaitingValid) {
+        std::cout << "Which transactions would you like to see?\n" << std::endl;
+        userSel = printMenu(std::vector<std::string>{"All Transactions by Date", "All Transactions by Account"});
+
+        switch (userSel) {
+            case 1:
+                transactionLog = db::getAllTransactions();
+                std::cout << "\nHere are all of your transactions by date:\n" << std::endl;
+                awaitingValid = false;
+                break;
+            case 2:
+                transactionLog = db::getTransactionsByAccount();
+                std::cout << "\nHere are the transactions associated each account:\n" << std::endl;
+                awaitingValid = false;
+                break;
+            default:
+                std::cout << "That was not a valid option. Please choose one of the given options by number.\n"
+                          << std::endl;
+                clearCinGuard();
+                break;
+        }
+    }
+
+    for (auto [key, val] : transactionLog) {
+        switch (userSel) {
+            case 1:
+                for (auto t : val)
+                    t.printTransaction();
+                break;
+            case 2:
+                printMenuHeader(&"ACCOUNT ID: " [ key]);
+                for (auto t : val)
+                    t.printTransaction();
+                break;
+            default:
+                std::cout << "There was an error. Please try again.";
+                break;
+        }
+    }
 }
 
-static void openAccountMenu(std::map<int,Account> &accounts) {
+static void openAccountMenu() {
+    std::map<int, std::shared_ptr<Account>> accounts = db::getAllAccounts();
+
     printMenuHeader("OPEN AN ACCOUNT");
 
     // new account info
     AccountType newAcctType;
     std::string newAcctName;
+    std::string acctTypeStr;
 
     // menu option validator
     bool awaitingValid{true};
@@ -157,10 +213,12 @@ static void openAccountMenu(std::map<int,Account> &accounts) {
         switch (userSel) {
             case 1:
                 newAcctType = Checking;
+                acctTypeStr = "checking";
                 awaitingValid = false;
                 break;
             case 2:
                 newAcctType = Savings;
+                acctTypeStr = "savings";
                 awaitingValid = false;
                 break;
             default:
@@ -176,35 +234,21 @@ static void openAccountMenu(std::map<int,Account> &accounts) {
     std::cin.ignore();
     getline(std::cin, newAcctName);
 
-    //add to accounts vector
-    if (newAcctType == Checking) {
-        try {
-            // add to db and push returned CheckingAccount object to map with key as id
-            CheckingAccount newCheck = db::createCheckingAccount(newAcctName);
-            accounts.emplace(std::make_pair(newCheck.getId(),newCheck));
-            // confirm message
-            std::cout << "\nNew Checking account " + newAcctName + " created.\n\n" << std::endl;
-
-        } catch(std::exception &e) {
-            std::cout << "There was an error creating your account. Please try again later." << std::endl;
+    // create account and insert into database
+    try {
+        if (db::createAccount(newAcctName, newAcctType))
+            std::cout << "\nNew " << acctTypeStr << " account '" + newAcctName + "' created.\n\n" << std::endl;
+        else {
+            throw;
         }
-    } else if (newAcctType == Savings) {
-        try {
-            // add to db and push returned SavingsAccount object to vector
-            SavingsAccount newSaving = db::createSavingsAccount(newAcctName);
-            accounts.emplace(std::make_pair(newSaving.getId(),newSaving));
-            // confirm message
-            std::cout << "\nNew Savings account " + newAcctName + " created.\n\n" << std::endl;
-
-        } catch(std::exception &e) {
-            std::cout << "There was an error creating your account. Please try again later." << std::endl;
-        }
-    } else {
+    } catch (std::exception &e) {
         std::cout << "There was an error creating your account. Please try again later." << std::endl;
     }
 }
 
-static void closeAccountMenu(std::map<int,Account> &accounts) {
+static void closeAccountMenu() {
+    std::map<int, std::shared_ptr<Account>> accounts = db::getAllAccounts();
+
     printMenuHeader("CLOSE AN ACCOUNT");
     if (noAccounts(accounts)) {
         std::cout << "\nThere are no accounts to deposit into. Please open an account to deposit money.\n" << std::endl;
@@ -215,11 +259,6 @@ static void closeAccountMenu(std::map<int,Account> &accounts) {
 int main(int argc, char *argv[]) {
     // create tables, if don't exist
     db::initDB();
-    // load all accounts into map for quick find
-    std::map<int, Account> accounts;
-    for (const Account& a : db::getAllAccounts()){
-        accounts.emplace(std::make_pair(a.getId(),a));
-    }
 
     // welcome screen
     printMenuHeader("JOSHUA'S BANKING PROGRAM");
@@ -234,19 +273,19 @@ int main(int argc, char *argv[]) {
 
         switch (usrSel) {
             case MainDeposit:
-                viewDepositMenu(accounts);
+                viewDepositMenu();
                 break;
             case MainWithdraw:
-                viewWithdrawMenu(accounts);
+                viewWithdrawMenu();
                 break;
             case MainTransactions:
-                viewTransactionsMenu(accounts);
+                viewTransactionsMenu();
                 break;
             case MainOpenAccount:
-                openAccountMenu(accounts);
+                openAccountMenu();
                 break;
             case MainCloseAccount:
-                closeAccountMenu(accounts);
+                closeAccountMenu();
                 break;
             case MainQuit:
                 goto exit_program;

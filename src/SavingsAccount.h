@@ -17,17 +17,18 @@ public:
 
 public:
     //print functions
-    void printAccountDetails();
+    void printAccountDetails() override;
 
     // getters
-    double getInterestRate() const;
+    [[nodiscard]] double getInterestRate() const;
 
     // setters
-    void setInterestRate(double interestRate);
+    void setInterestRate(double ir);
 
     // functions
     bool deposit(double amt) override;
     bool withdraw(double amt) override;
+
 };
 
 

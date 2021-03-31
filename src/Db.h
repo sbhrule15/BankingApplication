@@ -6,6 +6,8 @@
 #define BANKINGAPPLICATION_DB_H
 
 #include <cstdio>
+#include <map>
+#include <future>
 #include "Account.h"
 #include "Transaction.h"
 #include "CheckingAccount.h"
@@ -17,23 +19,24 @@ namespace db {
 
     //===========GENERAL DB RELATED============//
     int initDB();
+    static std::vector<std::future<void>> a_Futures;
+    static std::vector<std::future<void>> t_Futures;
 
     //===========ACCOUNTS============//
     // CREATE
-    CheckingAccount createCheckingAccount(const std::string& aName);
-    SavingsAccount createSavingsAccount(const std::string& aName);
+    bool createAccount(const std::string& aName, AccountType accountType);
 
     // READ
-    Account getAccountById(int accId);
-    std::vector<Account> getAccountsByName(const std::string& name);
-    std::vector<Account> getAccountsByType(AccountType type);
-    std::vector<Account> getAllAccounts();
-    std::vector<CheckingAccount> getAllCheckingAccounts();
-    std::vector<SavingsAccount> getAllSavingsAccounts();
+    std::map<int, std::shared_ptr<Account>> getAccountsById(int accId);
+    std::map<int, std::shared_ptr<Account>> getAccountsByName(const std::string& name);
+    std::map<int, std::shared_ptr<Account>> getAccountsByType(AccountType type);
+    std::map<int, std::shared_ptr<Account>> getAllAccounts();
+    std::map<int, std::shared_ptr<CheckingAccount>> getAllCheckingAccounts();
+    std::map<int, std::shared_ptr<SavingsAccount>> getAllSavingsAccounts();
 
     // UPDATE
-    bool deposit(int accId, float d);
-    bool withdraw(int accId, float w);
+    bool deposit(int accId, double d);
+    bool withdraw(int accId, double w);
 
     // DESTROY
     bool deleteAccount(int accId);
@@ -43,9 +46,9 @@ namespace db {
     int createTransaction(const char* dbdir, float amtChange, TransactionType transactionType);
 
     // READ
-    std::vector<Transaction> getAllTransactions();
+    std::map<int, std::vector<Transaction>> getAllTransactions();
     Transaction getTransactionById(int transactionId);
-    std::vector<Transaction> getTransactionsByAccount(const int &accountId);
+    std::map<int, std::vector<Transaction>> getTransactionsByAccount();
     std::vector<Transaction> getTransactionsByType(TransactionType transactionType);
 
     // UPDATE

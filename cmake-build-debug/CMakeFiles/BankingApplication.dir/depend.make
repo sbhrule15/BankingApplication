@@ -3,11 +3,16 @@
 
 CMakeFiles/BankingApplication.dir/src/Account.cpp.o: ../src/Account.cpp
 CMakeFiles/BankingApplication.dir/src/Account.cpp.o: ../src/Account.h
+CMakeFiles/BankingApplication.dir/src/Account.cpp.o: ../src/CheckingAccount.h
+CMakeFiles/BankingApplication.dir/src/Account.cpp.o: ../src/Db.h
+CMakeFiles/BankingApplication.dir/src/Account.cpp.o: ../src/SavingsAccount.h
 CMakeFiles/BankingApplication.dir/src/Account.cpp.o: ../src/Transaction.h
 
 CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o: ../src/Account.h
 CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o: ../src/CheckingAccount.cpp
 CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o: ../src/CheckingAccount.h
+CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o: ../src/Db.h
+CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o: ../src/SavingsAccount.h
 CMakeFiles/BankingApplication.dir/src/CheckingAccount.cpp.o: ../src/Transaction.h
 
 CMakeFiles/BankingApplication.dir/src/Db.cpp.o: ../thirdparty/SQLiteCpp/include/SQLiteCpp/Column.h
@@ -24,6 +29,8 @@ CMakeFiles/BankingApplication.dir/src/Db.cpp.o: ../src/SavingsAccount.h
 CMakeFiles/BankingApplication.dir/src/Db.cpp.o: ../src/Transaction.h
 
 CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o: ../src/Account.h
+CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o: ../src/CheckingAccount.h
+CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o: ../src/Db.h
 CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o: ../src/SavingsAccount.cpp
 CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o: ../src/SavingsAccount.h
 CMakeFiles/BankingApplication.dir/src/SavingsAccount.cpp.o: ../src/Transaction.h
