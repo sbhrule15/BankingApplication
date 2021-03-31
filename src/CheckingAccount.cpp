@@ -30,11 +30,9 @@ void CheckingAccount::setMaxDeposit(double maxDep) {
 }
 
 bool CheckingAccount::deposit(double amt) {
-    if (db::deposit(getId(),amt)){
-        balance = balance + amt;
-        return true;
+    if (amt < this->getMaxWithdraw()){
+        return db::deposit(getId(),amt);
     }
-
     return false;
 }
 
@@ -44,8 +42,7 @@ bool CheckingAccount::withdraw(double amt) {
     } else if (amt > maxWithdraw){
         std::cout << "You are trying to withdraw more than the allowed maximum." << std::endl;
     } else {
-        balance = balance - amt;
-        return true;
+        return db::withdraw(getId(),amt);
     }
     return false;
 }

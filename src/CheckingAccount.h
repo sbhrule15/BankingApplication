@@ -25,12 +25,12 @@ public:
     bool withdraw(double amt) override;
 
     // print functions
-    void printAccountDetails();
+    void printAccountDetails() override;
 
     // getters
-    double getMinBalance() const;
-    double getMaxDeposit() const;
-    double getMaxWithdraw() const;
+    [[nodiscard]] double getMinBalance() const;
+    [[nodiscard]] double getMaxDeposit() const;
+    [[nodiscard]] double getMaxWithdraw() const;
 
     // setters
     void setMinBalance(double minBalance);

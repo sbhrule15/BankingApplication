@@ -8,8 +8,8 @@
 #include <iostream>
 
 // constructor
-Transaction::Transaction(int id, float amtChange, TransactionType type, int aId)
-    : id(id), accountId(aId), timestamp(std::time(nullptr)), amtChange(amtChange), transactionType(type) {}
+Transaction::Transaction(int id, int accountId, std::string timestamp, double amtChange, TransactionType transactionType)
+        : id(id), accountId(accountId), timestamp(std::move(timestamp)), amtChange(amtChange), transactionType(transactionType) {}
 
 // functions
 std::string Transaction::getTransactionTypeStr() {
@@ -28,9 +28,9 @@ std::string Transaction::getTransactionTypeStr() {
 void Transaction::printTransaction() {
     std::cout   << "Transaction ID: " << id << "\n"
             << "Timestamp: " << timestamp << "\n"
+            << "Account ID: " << accountId << "\n"
             << "Transaction Type: " << getTransactionTypeStr() << "\n"
             << "Amount Change: " << amtChange << "\n"
+            << "-------------------------------\n"
             << std::endl;
 }
-
-

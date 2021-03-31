@@ -27,14 +27,15 @@ public:
     // virtual functions
     virtual bool deposit(double amt) = 0;
     virtual bool withdraw(double amt) = 0;
+    virtual void printAccountDetails() = 0;
 
     // getters
-    int getAcctNumber() const;
-    const std::string &getName() const;
-    double getBalance() const;
-    AccountType getAccountType() const;
-    std::string getAccountTypeString() const;
-    int getId() const;
+    [[nodiscard]] int getAcctNumber() const;
+    [[nodiscard]] const std::string &getName() const;
+    [[nodiscard]] double getBalance() const;
+    [[nodiscard]] AccountType getAccountType() const;
+    [[nodiscard]] std::string getAccountTypeString() const;
+    [[nodiscard]] int getId() const;
 
     // setters
     void setName(const std::string &name);

@@ -17,10 +17,10 @@ public:
 
 public:
     //print functions
-    void printAccountDetails();
+    void printAccountDetails() override;
 
     // getters
-    double getInterestRate() const;
+    [[nodiscard]] double getInterestRate() const;
 
     // setters
     void setInterestRate(double ir);

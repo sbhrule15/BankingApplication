@@ -6,6 +6,7 @@
 #define BANKINGAPPLICATION_DB_H
 
 #include <cstdio>
+#include <map>
 #include "Account.h"
 #include "Transaction.h"
 #include "CheckingAccount.h"
@@ -20,8 +21,7 @@ namespace db {
 
     //===========ACCOUNTS============//
     // CREATE
-    CheckingAccount createCheckingAccount(const std::string& aName);
-    SavingsAccount createSavingsAccount(const std::string& aName);
+    bool createAccount(const std::string& aName, AccountType accountType);
 
     // READ
     std::map<int, std::shared_ptr<Account>> getAccountsById(int accId);
@@ -43,9 +43,9 @@ namespace db {
     int createTransaction(const char* dbdir, float amtChange, TransactionType transactionType);
 
     // READ
-    std::vector<Transaction> getAllTransactions();
+    std::map<int, Transaction> getAllTransactions();
     Transaction getTransactionById(int transactionId);
-    std::vector<Transaction> getTransactionsByAccount(const int &accountId);
+    std::map<int, Transaction> getTransactionsByAccount(const int &accountId);
     std::vector<Transaction> getTransactionsByType(TransactionType transactionType);
 
     // UPDATE
