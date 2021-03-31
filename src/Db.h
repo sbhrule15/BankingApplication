@@ -7,6 +7,7 @@
 
 #include <cstdio>
 #include <map>
+#include <future>
 #include "Account.h"
 #include "Transaction.h"
 #include "CheckingAccount.h"
@@ -18,6 +19,8 @@ namespace db {
 
     //===========GENERAL DB RELATED============//
     int initDB();
+    static std::vector<std::future<void>> a_Futures;
+    static std::vector<std::future<void>> t_Futures;
 
     //===========ACCOUNTS============//
     // CREATE
@@ -43,9 +46,9 @@ namespace db {
     int createTransaction(const char* dbdir, float amtChange, TransactionType transactionType);
 
     // READ
-    std::map<int, Transaction> getAllTransactions();
+    std::map<int, std::vector<Transaction>> getAllTransactions();
     Transaction getTransactionById(int transactionId);
-    std::map<int, Transaction> getTransactionsByAccount(const int &accountId);
+    std::map<int, std::vector<Transaction>> getTransactionsByAccount();
     std::vector<Transaction> getTransactionsByType(TransactionType transactionType);
 
     // UPDATE

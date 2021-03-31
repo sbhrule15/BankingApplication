@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <future>
 #include <SQLiteCpp/Database.h>
 #include <SQLiteCpp/Transaction.h>
 
@@ -12,7 +13,7 @@
 #include "SavingsAccount.h"
 #include "CheckingAccount.h"
 
-
+#define ASYNC 0
 
 using namespace db;
 
@@ -175,11 +176,32 @@ bool db::withdraw(int accId, double w) {
     return updateAccountQuery(stmt,logstmt) != 0;
 }
 
+static void loadAccounts(std::map<int, std::shared_ptr<Account>> &accountsVector, SQLite::Statement &query){
+    std::shared_ptr<Account> p;
+
+    int id = query.getColumn(0);
+    const char *name = query.getColumn(1);
+    double balance = query.getColumn(2);
+    double minBal = query.getColumn(3);
+    double maxDep = query.getColumn(4);
+    double maxWith = query.getColumn(5);
+    double intRate = query.getColumn(6);
+
+    // Create temp, print out details and push onto vector
+    if (intRate == 0)
+        p = std::make_shared<CheckingAccount>(id, name, balance, minBal, maxDep, maxWith);
+    else
+        p = std::make_shared<SavingsAccount>(id, name, balance, intRate);
+
+    // emplace
+    accountsVector.emplace(p->getId(),p);
+}
+
 // Get Accounts Function
 static std::map<int, std::shared_ptr<Account>> getAccountsQuery(const std::string& stmt) {
     try {
         // open database
-        SQLite::Database db("data.db", SQLite::OPEN_READWRITE);
+        SQLite::Database db("data.db", SQLite::OPEN_READONLY);
         // select all accounts with join on checking
         SQLite::Statement query(db, stmt);
         // create vector to store results (in case more than one, return first)
@@ -187,22 +209,7 @@ static std::map<int, std::shared_ptr<Account>> getAccountsQuery(const std::strin
 
         while (query.executeStep()) {
             // Get typed column values
-            int id = query.getColumn(0);
-            const char *name = query.getColumn(1);
-            double balance = query.getColumn(2);
-            double minBal = query.getColumn(3);
-            double maxDep = query.getColumn(4);
-            double maxWith = query.getColumn(5);
-            double intRate = query.getColumn(6);
-
-            // Create temp, print out details and push onto vector
-            if (intRate == 0) {
-                std::shared_ptr<Account> p = std::make_shared<CheckingAccount>(id, name, balance, minBal, maxDep, maxWith);
-                accountsVector.emplace(p->getId(),p);
-            } else {
-                std::shared_ptr<Account> p = std::make_shared<SavingsAccount>(id, name, balance, intRate);
-                accountsVector.emplace(p->getId(),p);
-            }
+            loadAccounts(accountsVector, query);
         }
         // return first account object
         return accountsVector;
@@ -302,14 +309,14 @@ std::map<int, std::shared_ptr<SavingsAccount>> db::getAllSavingsAccounts() {
     }
 }
 
-static std::map<int, Transaction> getTransactionsQuery(const std::string& stmt) {
+static std::map<int, std::vector<Transaction>> getTransactionsQuery(const std::string& stmt, int mapId) {
     try {
         // open database
         SQLite::Database db("data.db", SQLite::OPEN_READWRITE);
         // select all accounts with join on savings
         SQLite::Statement query(db, stmt);
         // create vector to store results (in case more than one, return first)
-        std::map<int, Transaction> transactions;
+        std::vector<Transaction> transactions;
 
         // Loop to execute the query step by step, to get rows of result
         while (query.executeStep()) {
@@ -321,27 +328,89 @@ static std::map<int, Transaction> getTransactionsQuery(const std::string& stmt) 
             int tt = query.getColumn(4);
 
             // Create temp, print details and push onto vector
-            transactions.emplace(id,Transaction(id, aId, timestamp, amtChange, static_cast<TransactionType>(tt)));
+            transactions.emplace_back(id, aId, timestamp, amtChange, static_cast<TransactionType>(tt));
         }
 
         // return first account object
-        return transactions;
+        return std::map<int, std::vector<Transaction>> {{mapId,transactions}};
     }
     catch (std::exception &e) {
         std::cout << "exception: " << e.what() << std::endl;
     }
 }
 
-std::map<int, Transaction> db::getAllTransactions(){
+std::map<int, std::vector<Transaction>> db::getAllTransactions(){
     std::string stmt = "SELECT * FROM TRANSACTIONLOG;";
 
-    return getTransactionsQuery(stmt);
+    return getTransactionsQuery(stmt, 0);
 }
 
-std::map<int, Transaction> db::getTransactionsByAccount(const int &accountId){
-    std::string stmt =
-            "SELECT * FROM TRANSACTIONLOG"
-            " WHERE ACCOUNTID = "+std::to_string(accountId)+";";
+#if ASYNC
 
-    return getTransactionsQuery(stmt);
+/** This was an attempt at async execution of querying the SQLite database. However, the API does not support
+ * initializing the database in thread safety mode, and thus this function is here for demonstration purposes.
+ * **/
+
+// mutex for locking and unlocking transaction vector
+static std::mutex s_TransactionsMutex;
+
+static void getTransactionQueryAsync(std::map<int, std::vector<Transaction>> &transactionByAccountMap, std::string stmt, int mapId){
+
+    try {
+        // open database
+        SQLite::Database db("data.db", SQLite::OPEN_FULLMUTEX);
+        // select all accounts with join on savings
+        SQLite::Statement query(db, stmt);
+        // create vector to store results (in case more than one, return first)
+        std::vector<Transaction> transactions;
+
+        // Loop to execute the query step by step, to get rows of result
+        while (query.executeStep()) {
+            // Get typed column values
+            int id = query.getColumn(0);
+            int aId = query.getColumn(1);
+            std::string timestamp = query.getColumn(2);
+            double amtChange = query.getColumn(3);
+            int tt = query.getColumn(4);
+
+            // Create temp, print details and push onto vector
+            transactions.emplace_back(id, aId, timestamp, amtChange, static_cast<TransactionType>(tt));
+        }
+        // lock mutex
+        std::lock_guard<std::mutex> lock(s_TransactionsMutex);
+        // modify passed map ref
+        transactionByAccountMap.emplace(std::make_pair(mapId,transactions));
+        // return and unlock mutex
+        return;
+    }
+    catch (std::exception &e) {
+        std::cout << "exception: " << e.what() << std::endl;
+    }
+}
+#endif
+
+std::map<int, std::vector<Transaction>> db::getTransactionsByAccount(){
+    std::map<int, std::shared_ptr<Account>> ids = db::getAllAccounts();
+
+    std::map<int, std::vector<Transaction>> transactionByAccountMap;
+
+    for (const auto &[key, val] : ids)
+    {
+        std::string stmt = "SELECT * FROM TRANSACTIONLOG WHERE ACCOUNTID = "+std::to_string(key)+";";
+
+        /**attempt at async execution - SQLiteCPP API does not allow for thread safety without source code modification.**/
+#if ASYNC
+//        t_Futures.push_back(std::async(std::launch::async,
+//                                       getTransactionQueryAsync,
+//                                       std::ref(transactionByAccountMap),
+//                                       stmt,
+//                                       key));
+#else
+        transactionByAccountMap.emplace(getTransactionsQuery(stmt,key));
+#endif
+    }
+
+
+
+    return transactionByAccountMap;
 }

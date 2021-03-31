@@ -144,26 +144,26 @@ static void viewWithdrawMenu() {
 
 static void viewTransactionsMenu() {
     printMenuHeader("VIEW TRANSACTIONS");
-    std::map<int, Transaction> transactionLog;
+    std::map<int, std::vector<Transaction>> transactionLog;
 
     // menu option validator
     bool awaitingValid{true};
+    int userSel = 0;
 
     // get account type
     while (awaitingValid) {
         std::cout << "Which transactions would you like to see?\n" << std::endl;
-        int userSel = printMenu(std::vector<std::string>{"All Transactions", "By Account"});
+        userSel = printMenu(std::vector<std::string>{"All Transactions by Date", "All Transactions by Account"});
 
         switch (userSel) {
             case 1:
                 transactionLog = db::getAllTransactions();
-                std::cout << "\nHere are all of your transactions:\n" << std::endl;
+                std::cout << "\nHere are all of your transactions by date:\n" << std::endl;
                 awaitingValid = false;
                 break;
             case 2:
-                transactionLog = db::getTransactionsByAccount(printAccountMenu<int>(
-                        db::getAllAccounts(), convertChoiceToAccountId, WithBalance));
-                std::cout << "\nHere are the transactions for this account:\n" << std::endl;
+                transactionLog = db::getTransactionsByAccount();
+                std::cout << "\nHere are the transactions associated each account:\n" << std::endl;
                 awaitingValid = false;
                 break;
             default:
@@ -175,7 +175,20 @@ static void viewTransactionsMenu() {
     }
 
     for (auto [key, val] : transactionLog) {
-        val.printTransaction();
+        switch (userSel) {
+            case 1:
+                for (auto t : val)
+                    t.printTransaction();
+                break;
+            case 2:
+                printMenuHeader(&"ACCOUNT ID: " [ key]);
+                for (auto t : val)
+                    t.printTransaction();
+                break;
+            default:
+                std::cout << "There was an error. Please try again.";
+                break;
+        }
     }
 }
 
