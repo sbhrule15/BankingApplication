@@ -309,7 +309,7 @@ std::map<int, std::shared_ptr<SavingsAccount>> db::getAllSavingsAccounts() {
     }
 }
 
-static std::map<int, std::vector<Transaction>> getTransactionsQuery(const std::string& stmt, int mapId) {
+static std::vector<Transaction> getTransactionsQuery(const std::string& stmt) {
     try {
         // open database
         SQLite::Database db("data.db", SQLite::OPEN_READWRITE);
@@ -331,8 +331,8 @@ static std::map<int, std::vector<Transaction>> getTransactionsQuery(const std::s
             transactions.emplace_back(id, aId, timestamp, amtChange, static_cast<TransactionType>(tt));
         }
 
-        // return first account object
-        return std::map<int, std::vector<Transaction>> {{mapId,transactions}};
+        // return array of transactions
+        return transactions;
     }
     catch (std::exception &e) {
         std::cout << "exception: " << e.what() << std::endl;
@@ -341,8 +341,9 @@ static std::map<int, std::vector<Transaction>> getTransactionsQuery(const std::s
 
 std::map<int, std::vector<Transaction>> db::getAllTransactions(){
     std::string stmt = "SELECT * FROM TRANSACTIONLOG;";
-
-    return getTransactionsQuery(stmt, 0);
+    std::map<int, std::vector<Transaction>> transactionMap;
+    transactionMap.emplace(std::make_pair(0,getTransactionsQuery(stmt)));
+    return transactionMap;
 }
 
 #if ASYNC
@@ -406,7 +407,7 @@ std::map<int, std::vector<Transaction>> db::getTransactionsByAccount(){
 //                                       stmt,
 //                                       key));
 #else
-        transactionByAccountMap.emplace(getTransactionsQuery(stmt,key));
+        transactionByAccountMap.emplace(key, getTransactionsQuery(stmt));
 #endif
     }
 
